@@ -1,6 +1,6 @@
-@import '../../../assets/styles/variables';
+@import '../../../../assets/styles/variables';
 
-dialog1 {
+.dialog1 {
     position: fixed;
     z-index: 1002;
     width: fit-content;
@@ -27,6 +27,7 @@ dialog1 {
     padding: 4%;
     margin-bottom: 0;
     color: $colorFontDialog;
+    margin: auto;
   }
   
   .dialog-content1 img {
