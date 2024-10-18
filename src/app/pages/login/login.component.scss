@@ -35,7 +35,7 @@ body {
     background: $colorBackgroundFormSideLogin;
 }
 
-.lab-connect {
+.lab-connect, .change-password {
     display: flex;
     flex-direction: column;
     width: 350px;
@@ -44,7 +44,7 @@ body {
 }
 
 @media only screen and (max-width: 1366px) {
-    .lab-connect {
+    .lab-connect, .change-password {
         width: 270px;
     }
 }
@@ -267,7 +267,7 @@ body {
     }
 }
 
-#input-email{
+#input-email, #email-password-area{
     background: $colorInputBackground;
     border: 1px solid $colorFormBorderLoginRegister;
     border-radius: 4px;
@@ -281,7 +281,7 @@ body {
 }
 
 @media only screen and (max-width: 1366px) {
-    #input-email {
+    #input-email, #email-password-area {
     width: 270px;
     }
 }
@@ -303,7 +303,7 @@ body {
     background-color: $colorBackgroundSelect;
 }
 
-#input-password{
+#input-password, #newPassword {
     background: $colorInputBackground;
     border: 1px solid $colorFormBorderLoginRegister;
     border-radius: 4px;
@@ -341,24 +341,24 @@ body {
     }
 }
 
-.register-name p, .register-email p, .register-password p, .register-password-confirm p, .register-role p {
+.register-name p, .register-email p, .register-password p, .register-password-confirm p, .register-role p, .new-password p, .email-password p {
     color: $colorFontClearLogin;
     margin-bottom: 0;
     margin-top: 5px;
 }
 
-.register-buttons {
+.register-buttons, .password-buttons {
     display: flex;
     width: 350px;
 }
 
 @media only screen and (max-width: 1366px) {
-    .register-buttons {
+    .register-buttons, .password-buttons {
         width: 270px;
     }
 }
 
-#button-back {
+.button-back {
     background: $colorButtonLoginRegister;
     border-radius: 4px;
     width: 30%;
@@ -372,12 +372,12 @@ body {
     cursor: pointer;
 }
 
-#button-back:hover {
+.button-back:hover {
     background: $colorHover;
     color: $colorFontButtonHover;
 }
 
-#button-register {
+#button-register, #change-password-button {
     background: $colorButtonLoginRegister;
     border-radius: 4px;
     width: 70%;
@@ -392,11 +392,22 @@ body {
     cursor: pointer;
 }
 
-#button-register:hover {
+#button-register:hover, #change-password-button:hover {
     background: $colorHover;
     color: $colorFontButtonHover;
 }
 
-#password-warning, #role-warning {
+.warning {
     color: $colorTextDanger;
+}
+
+.password-area {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    height: 100%; 
+    background: $colorBackgroundFormSideLogin;
+    font-family: "Quicksand", sans-serif;
 }

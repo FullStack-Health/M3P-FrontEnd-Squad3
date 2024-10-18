@@ -7,6 +7,7 @@ import { DialogComponent } from '../../shared/components/dialog/dialog.component
 import { HttpClientModule } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
 import { AuthService } from '../../security/service/auth.service';
+import { ApiService } from '../../shared/services/api.service';
 
 @Component({
   selector: 'app-login',
@@ -20,15 +21,21 @@ export class LoginComponent implements OnInit {
   email: string = '';
   password: string = '';
   showRegisterForm = false;
+  showPasswordArea = false;
   registerForm: FormGroup;
+  changePasswordForm: FormGroup;
 
-  constructor(private router: Router, private titleService: Title, private authService: AuthService, private fb: FormBuilder) {
+  constructor(private router: Router, private titleService: Title, private authService: AuthService, private fb: FormBuilder, private apiService: ApiService) {
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       role: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(9)]],
       confirm: ['', [Validators.required, Validators.minLength(9)]]
+    });
+    this.changePasswordForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      newPassword: ['', [Validators.required, Validators.minLength(9)]]
     });
    }
 
@@ -40,6 +47,10 @@ export class LoginComponent implements OnInit {
 
   toggleRegisterForm() {
     this.showRegisterForm = !this.showRegisterForm;
+  }
+
+  togglePasswordArea() {
+    this.showPasswordArea = !this.showPasswordArea;
   }
 
   login(): void {
@@ -56,9 +67,22 @@ export class LoginComponent implements OnInit {
       });
   }
   
-  forgotPassword() {
-    // implementar lógica 
-  }
+  changePassword(): void {
+    if (this.changePasswordForm.valid) {
+        const { email, newPassword } = this.changePasswordForm.value;
+
+        this.apiService.updatePassword(email, newPassword).subscribe({
+            next: () => {
+                console.log('Password changed successfully!');
+            },
+            error: (err) => {
+                console.error('Error changing password:', err);
+            }
+        });
+    } else {
+        console.log('Invalid form!');
+    }
+}
 
   userPreRegister() {
     // implementar lógica

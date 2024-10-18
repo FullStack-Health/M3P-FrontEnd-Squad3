@@ -6,7 +6,7 @@
     <img id="logo-img" src="../../../assets/images/logo-labmedical.png">
   </div>
 
-  <div class="login-area" *ngIf="!showRegisterForm">
+  <div class="login-area" *ngIf="!showRegisterForm && !showPasswordArea">
     <div class="lab-connect">
       <p id="connect">Conecte-se em <span>LABmedical</span></p>
       <p id="connect-text-below">Entre com os dados da sua conta abaixo</p>
@@ -20,7 +20,7 @@
     <div class="button-login" (click)="login()">
       <button>ENTRAR</button>
     </div>
-    <p id="forgot-pass"><span (click)="forgotPassword()">Esqueceu a senha?</span></p>
+    <p id="forgot-pass"><span (click)="togglePasswordArea()">Esqueceu a senha?</span></p>
     <div class="line-or">
         <div class="line1"></div>
         <div class="text-line">
@@ -53,21 +53,59 @@
                 <option value="admin">Admin</option>
                 <option value="doctor">Médico(a)</option>
             </select>
-            <div *ngIf="registerForm.controls['role'].invalid && (registerForm.controls['role'].dirty || registerForm.controls['role'].touched)" id="role-warning">Selecione um perfil</div>
+            <div *ngIf="registerForm.controls['role'].invalid && (registerForm.controls['role'].dirty || registerForm.controls['role'].touched)" class="warning">Selecione um perfil</div>
         </div>
         <div class="register-password">
           <p>Senha</p>
           <input type="password" id="input-password" formControlName="password">
-          <div *ngIf="registerForm.controls['password'].invalid && (registerForm.controls['password'].dirty || registerForm.controls['password'].touched)" id="password-warning">Senha precisa ter 8 caracteres ou mais</div>
+          <div *ngIf="registerForm.controls['password'].invalid && (registerForm.controls['password'].dirty || registerForm.controls['password'].touched)" class="warning">Senha precisa ter 9 caracteres ou mais</div>
         </div>
         <div class="register-password-confirm">
           <p>Confirmar senha</p>
           <input type="password" id="input-password-confirm" formControlName="confirm">
         </div>
         <div class="register-buttons">
-          <button id="button-back" (click)="toggleRegisterForm()">VOLTAR</button>
+          <button class="button-back" (click)="toggleRegisterForm()">VOLTAR</button>
           <button id="button-register" (click)="userPreRegister()">CRIAR CONTA</button>
         </div>
       </form>  
     </div>
+
+    <div class="password-area" *ngIf="showPasswordArea">
+      <form [formGroup]="changePasswordForm" (ngSubmit)="changePassword()">
+        <div class="change-password">
+          <p id="connect">Recupere o acesso de <span>LABmedical</span></p>
+          <p id="connect-text-below">Informe o e-mail da sua conta e defina uma nova senha</p>
+        </div>
+
+        <div class="email-password">
+          <p>E-mail</p>
+          <input id="email-password-area" formControlName="email" type="email" required>
+
+          <div *ngIf="changePasswordForm.controls['email'].invalid && (changePasswordForm.controls['email'].dirty || changePasswordForm.controls['email'].touched)">
+            <div *ngIf="changePasswordForm.controls['email'].errors?.['required']" class="warning">Email é obrigatório.</div>
+            <!-- <div *ngIf="changePasswordForm.controls['email'].errors?.['email']">Email inválido.</div> -->
+        </div>
+        
+        </div>
+        
+        <div class="new-password">
+          <p>Nova senha</p>
+          <input id="newPassword" formControlName="newPassword" type="password" required>
+          
+          <div *ngIf="changePasswordForm.controls['newPassword'].invalid && (changePasswordForm.controls['newPassword'].dirty || changePasswordForm.controls['newPassword'].touched)">
+            <div *ngIf="changePasswordForm.controls['newPassword'].errors?.['required']" class="warning">Nova senha é obrigatória.</div>
+            <div *ngIf="changePasswordForm.controls['newPassword'].errors?.['minlength']" class="warning">A nova senha deve ter pelo menos 9 caracteres</div>
+        </div>
+
+        </div>
+      
+        <div class="password-buttons">
+          <button class="button-back" (click)="togglePasswordArea()">VOLTAR</button>
+          <button id="change-password-button" type="submit">ALTERAR A SENHA</button>
+        </div>
+      </form>
+
+    </div>
+
 </div>
