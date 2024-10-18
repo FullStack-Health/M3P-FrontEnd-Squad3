@@ -1,13 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from '../../models/user.model';
 import { Observable } from 'rxjs';
+import { User } from '../../models/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'http://localhost:8081';
+  private apiUrl = 'https://acc5343e-2bc7-48bd-8328-985f6db75ffc.mock.pstmn.io';
 
   constructor(private http: HttpClient) { }
 
@@ -17,7 +17,7 @@ export class ApiService {
     const jwtToken = sessionStorage.getItem('jwtToken');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
 
-    return this.http.post<User>(`${this.apiUrl}/users`, user, { headers });
+    return this.http.post<User>(`${this.apiUrl}/user-register`, user, { headers });
   }
 
   updatePassword(email: string, newPassword: string): Observable<void> {

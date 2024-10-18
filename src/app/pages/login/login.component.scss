@@ -299,6 +299,12 @@ body {
     box-sizing: border-box;
 }
 
+@media only screen and (max-width: 1366px) {
+    #select-role {
+    width: 270px;
+    }
+}
+
 #select-role option {
     background-color: $colorBackgroundSelect;
 }
@@ -317,7 +323,7 @@ body {
 }
 
 @media only screen and (max-width: 1366px) {
-    #input-password {
+    #input-password, #newPassword {
     width: 270px;
     }
 }
