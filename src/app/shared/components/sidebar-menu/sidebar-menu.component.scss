@@ -1,0 +1,122 @@
+@import '../../../../assets/styles/variables';
+
+.sidenav-container1 {
+  height: 100vh;
+}
+  
+.sidenav1 {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  background: $colorBackgroundSidebarMenu;
+  height: 100vh;
+  width: auto;
+  position: fixed;
+  padding-top: 15px;
+  border-color: $colorBackgroundSidebarMenu;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.general-menu {
+  flex-grow: 1;
+}
+  
+#logo-sidebar {
+    display: block;
+    margin: auto;
+    width: 100px;
+    margin-bottom: 40px;
+}
+
+.group-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    background: $colorButton;
+    border: none;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+    width: 180px;
+    height: 36px;
+    display: flex;
+    justify-content: flex-start;
+    color: $colorFontButton;
+    padding-top: 2px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+  background: $colorHover;
+  color: $colorFontButtonHover;
+}
+
+#btn-text:hover {
+  font-weight: 500;
+}
+
+button:hover .material-icons, button:hover .material-symbols-outlined {
+  color: $colorHoverIcon;
+}
+
+.material-icons, .material-symbols-outlined {
+    margin-left: 5px;
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 5px;
+    color: $colorIcon;
+  }
+  
+  #btn-text {
+    font-size: 1.2em;
+    margin-left: 5px;
+    margin-top: 3px;
+    padding-top: 3px;
+    font-family: "Dosis", sans-serif;
+    font-weight: 400;
+  }
+
+#exit {
+    display: flex;
+    justify-content: right;
+    margin-right: 10px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+#exit .material-icons{
+    margin-left: 5px;
+    display: flex;
+    margin-top: 5px;
+    color: $colorIconOutsideMenu;
+}
+
+#exit p {
+    font-size: 1.2em;
+    margin-left: 5px;
+    margin-top: 3px;
+    padding-top: 3px;
+    font-family: "Dosis", sans-serif;
+    font-weight: 600;
+}
+
+#exit:hover p, #exit:hover .material-icons {
+    color: $colorHover;
+}
+
+#menu-close {
+    color: $colorIconOutsideMenu;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: right;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+#menu-close:hover {
+    color: $colorHover;
+}

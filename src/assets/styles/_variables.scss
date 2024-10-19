@@ -40,7 +40,15 @@ $colorButtonEditPatientCard: $blueHighOpacity;
 $colorFontBtnEditPatCard: $black;
 $colorBtnSaveFormValid: $green;
 
+// icons
+$colorIcon: $white;
+$colorHoverIcon: $black;
+$colorIconOutsideMenu: $black;
+$colorHoverExitIcon: $redBrand;
+
 // PAGES
+
+$colorPageBackground: $purplePinkGradient;
 
 // login
 $colorFontClearLogin: rgba($white, 0.747);
@@ -63,3 +71,10 @@ $colorInputBackground: $transparent;
 $colorBackgroundDialog: $darkPurple;
 $colorBorderDialog: $redBrand;
 $colorFontDialog: $white;
+
+// sidebar menu
+$colorBackgroundSidebarMenu: $white;
+$colorBorderSidebarMenu: $transparent;
+
+// toolbar
+$colorBackgroundToolbar: $white;
