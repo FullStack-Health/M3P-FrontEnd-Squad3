@@ -1,0 +1,265 @@
+@import '../../../../assets/styles/variables';
+
+* {
+  box-sizing: border-box;
+}
+
+.container1 {
+    margin-left: 200px;
+}
+
+#search {
+    width: 100%;
+    height: 40px;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 1.3rem;
+    border-radius: 4px;
+    border: none;
+    background: $colorSearchBackground;
+    outline: none;
+    transition: box-shadow 0.3s ease-in-out;
+    font-family: "Dosis", sans-serif;
+  }
+
+  @media only screen and (max-width: 1366px) {
+    #search {
+        width: 59vw;
+    }
+}
+  
+  .search-area {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  #search::placeholder{
+    color: $colorSearchPlaceholder;
+  }
+  
+  #btn-search {
+    background: $colorButton;
+    color: $colorFontButton;
+    border-radius: 4px;
+    height: 40px;
+    width: 5vw;
+    margin-left: 1vw;
+    font-family: "Dosis", sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    border: none;
+  }
+
+  @media only screen and (max-width: 1366px) {
+    #btn-search {
+        width: 10.2vw;
+    }
+}
+
+  #btn-search:hover {
+    background: $colorHover;
+    color: $colorFontButtonHover;
+  }
+
+  #btn-clear {
+    background: $colorButton;
+    color: $colorFontButton;
+    border-radius: 4px;
+    height: 40px;
+    width: 5vw;
+    margin-left: 1vw;
+    font-family: "Dosis", sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    border: none;
+  }
+
+  @media only screen and (max-width: 1366px) {
+    #btn-clear {
+        width: 10.2vw;
+    }
+}
+
+  #btn-clear:hover {
+    background: $colorHover;
+    color: $colorFontButtonHover;
+  }
+
+.card-container1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  width: calc(100% - 40px);
+  background-color: $colorAreaBackground;
+  margin: 0 20px;
+  padding: 20px;
+  border-radius: 4px;
+}
+
+@media only screen and (max-width: 1366px) {
+    .card-container1 {
+        width: 81.2vw;
+    }
+}
+
+.patient-card {
+    display: flex;
+    flex-direction: column;
+    width: 19vw;
+    height: 220px;
+    background: $colorGeneralCard;
+    border-radius: 4px;
+}
+
+.photo-and-name {
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: $colorPatCardNameBackground;
+}
+
+.photo-and-name p {
+    margin: 0;
+    padding-top: 13px;
+}
+
+#img-perfil {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+
+#img-perfil img {
+    width: 55px;
+    z-index: 3;
+}
+
+#name {
+    width: 100%;
+    height: 50px;
+    font-size: 1.6rem;
+    font-weight: 500;
+    white-space: nowrap;
+    font-family: "Dosis", sans-serif;
+    font-weight: 500;
+    text-align: left;
+    z-index: 2;
+    overflow: hidden;  
+}
+
+#name p {
+    padding-left: 10px;
+    color: $colorGeneralFont;
+}
+
+.info-content {
+  background: $colorCardContent;
+  margin-top: 5px;
+  margin-left: 17px;
+  padding: 0;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  font-family: "Open Sans", sans-serif;
+}
+
+.card-content1 {
+    text-align: left;
+    display: flex;
+    margin-left: 35px;
+}
+
+.card-content1 p {
+    padding: 0;
+    margin-top: 0;
+}
+
+.age-and-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: auto;
+  margin-bottom: 10px;
+}
+
+.btn-medical-record {
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  width: 100px;
+  height: 35px;
+  background: $colorButton;
+  color: $colorFontButton;
+  font-family: "Dosis", sans-serif;
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin: auto;
+ 
+  margin-right: 10px;
+}
+
+.btn-medical-record:hover {
+    background: $colorHover;
+    color: $colorFontButtonHover;
+    }
+
+#age {
+    font-weight: 700;
+}
+
+#email p {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 98%;
+}
+
+#age, #phone, #email, #insurance {
+    display: block;
+    margin-left: 0;
+}
+
+  .no-results {
+    margin-top: 10px;
+    font-size: 1.4rem;
+    color: $colorPatientNotFound;
+  }
+
+  .pages {
+    margin: 20px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .pages button {
+    background: $colorButton;
+      color: $colorFontButton;
+      border-radius: 4px;
+      height: 40px;
+      width: 85px;
+      font-family: "Dosis", sans-serif;
+      font-weight: 500;
+      font-size: 1rem;
+      border: none;
+      margin-left: 10px;
+      text-transform: uppercase;
+  }
+  
+  .pages button:disabled {
+    background: $colorButtonDisable;
+    color: $colorFontButtonDisable;
+  }
+  
+  .pages button:hover {
+    background: $colorHover;
+    color: $colorFontButtonHover;
+  }
+  
+  .pages button:disabled:hover {
+    background: $colorButtonDisable;
+    color: $colorFontButtonDisable;
+  }
