@@ -22,101 +22,66 @@ body {
 }
 
 #logo-img {
-    width: 200px;
+    width: 12.5rem;
 }
 
-.login-area {
+.login-forgot-signup-area {
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
     width: 50%;
-    height: 100%; 
+    height: 100%;
     background: $colorBackgroundFormSideLogin;
+    font-family: "Quicksand", sans-serif;
 }
 
-.lab-connect, .change-password {
+.size {
+    width: 350px;
+}
+
+.container-text {
     display: flex;
     flex-direction: column;
-    width: 350px;
     font-size: 1.1rem;
-    margin-bottom: 10px;
-}
-
-@media only screen and (max-width: 1366px) {
-    .lab-connect, .change-password {
-        width: 270px;
-    }
-}
-
-#connect {
     color: $colorFontClearLogin;
-    font-family: "Quicksand", sans-serif;
 }
 
-#connect span {
+.container-text-title {
+    display: flex;
+    align-items: center;
+}
+
+.title {
+    margin-left: 0.5rem;
     color: $colorLabMedicalBrand;
-    font-weight: 800;
 }
 
-#connect-text-below {
+.text-below-title {
     color: $colorFontMidLogin;
-    font-family: "Quicksand", sans-serif;
     font-size: 0.8rem;
     margin-top: -10px;
 }
 
-#email{
+.inputs {
     background: $colorInputBackground;
     border: 1px solid $colorFormBorderLoginRegister;
     border-radius: 4px;
-    width: 350px;
     height: 50px;
     color: $colorFontInput;
     padding-left: 15px;
     font-size: 1rem;
     margin-bottom: 20px;
-    font-family: "Quicksand", sans-serif;
     box-sizing: border-box;
 }
 
-@media only screen and (max-width: 1366px) {
-        #email {
-        width: 270px;
-    }
-}
-
-#email::placeholder {
+.inputs::placeholder {
     color: $colorInputPlaceholder;
 }
 
-#password{
-    background: $colorInputBackground;
-    border: 1px solid $colorFormBorderLoginRegister;
-    border-radius: 4px;
-    width: 350px;
-    height: 50px;
-    color: $colorFontInput;
-    padding-left: 15px;
-    font-size: 1rem;
-    font-family: "Quicksand", sans-serif;
-    box-sizing: border-box;
-}
-
-@media only screen and (max-width: 1366px) {
-        #password {
-        width: 270px;
-    }
-}
-
-#password::placeholder {
-    color: $colorInputPlaceholder;
-}
-
-.button-login button {
+.buttons {
     background: $colorButtonLoginRegister;
     border-radius: 4px;
-    width: 350px;
     height: 50px;
     color: $colorFontButton;
     margin-top: 20px;
@@ -127,293 +92,86 @@ body {
     cursor: pointer;
 }
 
-@media only screen and (max-width: 1366px) {
-    .button-login button {
-        width: 270px;
-    }
-}
-
-.button-login button:hover {
+.buttons:hover {
     background: $colorHover;
     color: $colorFontButtonHover;
     font-weight: 500;
 }
 
-#forgot-pass {
-    margin-top: 20px;
-    color: $colorFontMidLogin;
-    font-family: "Quicksand", sans-serif;
-    font-size: 0.9rem;
-    cursor: pointer;
+.container-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-#forgot-pass:hover {
+.container-forgot-and-signup {
+    color: $colorFontMidLogin;
+    font-size: 0.9rem;
+}
+
+.forgot-and-signup {
+    color: $colorFontClearLogin;
+}
+
+.forgot-and-signup:hover {
+    cursor: pointer;
     color: $colorHover;
 }
 
-.line-or{
+.container-line {
     display: flex;
-    width: 350px;
     justify-content: center;
 }
 
-@media only screen and (max-width: 1366px) {
-    .line-or {
-        width: 270px;
-    }
-}
-
-.line1 {
+.line {
     width: 150px;
     height: 1px;
     background: $colorFormBorderLoginRegister;
-    text-align: left;
     margin-top: 27px;
-    margin-right: 15px;
 }
 
 .text-line p {
-    color: $colorFormBorderLoginRegister;
-    font-family: "Quicksand", sans-serif;
-}
-
-.line2 {
-    width: 150px;
-    height: 1px;
-    background: $colorFormBorderLoginRegister;
-    text-align: right;
-    margin-top: 27px;  
     margin-left: 15px;
-}
-
-.signup {
-    margin-top: 10px;
-}
-
-.signup p {
-    color: $colorFontMidLogin;
-    font-size: 0.9rem;  
-    font-family: "Quicksand", sans-serif;
-}
-
-.signup p span {
-    color: $colorFontClearLogin;
-}
-
-.signup p span:hover {
-    cursor: pointer;
-    color: $colorHover;
-}
-
-.register-area {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    width: 50%;
-    height: 100%; 
-    background: $colorBackgroundFormSideLogin;
-    font-family: "Quicksand", sans-serif;
-}
-
-.lab-register-area {
-    display: flex;
-    flex-direction: column;
-    width: 350px;
-    font-size: 1.1rem;
-    margin-bottom: 20px;
-}
-
-@media only screen and (max-width: 1366px) {
-    .lab-register-area {
-        width: 270px;
-    }
-}
-
-#lab-register {
-    color: $colorFontClearLogin;
-    font-family: "Quicksand", sans-serif;
-}
-
-#lab-register span {
-    color: $colorLabMedicalBrand;
-    font-weight: 800;
-}
-
-#lab-register-text {
-    color: $colorFontMidLogin;
-    font-family: "Quicksand", sans-serif;
-    font-size: 0.8rem;
-    margin-top: -10px;
-    margin-bottom: -5px;
-}
-
-#input-name{
-    background: $colorInputBackground;
-    border: 1px solid $colorFormBorderLoginRegister;
-    border-radius: 4px;
-    width: 350px;
-    height: 50px;
-    color: $colorFontInput;
-    padding-left: 15px;
-    font-size: 1rem;
-    font-family: "Quicksand", sans-serif;
-    box-sizing: border-box;
-}
-
-@media only screen and (max-width: 1366px) {
-    #input-name {
-    width: 270px;
-    }
-}
-
-#input-email, #email-password-area{
-    background: $colorInputBackground;
-    border: 1px solid $colorFormBorderLoginRegister;
-    border-radius: 4px;
-    width: 350px;
-    height: 50px;
-    color: $colorFontInput;
-    padding-left: 15px;
-    font-size: 1rem;
-    font-family: "Quicksand", sans-serif;
-    box-sizing: border-box;
-}
-
-@media only screen and (max-width: 1366px) {
-    #input-email, #email-password-area {
-    width: 270px;
-    }
-}
-
-#select-role {
-    background: $colorInputBackground;
-    border: 1px solid $colorFormBorderLoginRegister;
-    border-radius: 4px;
-    width: 350px;
-    height: 50px;
-    color: $colorFontInput;
-    padding-left: 15px;
-    font-size: 1rem;
-    font-family: "Quicksand", sans-serif;
-    box-sizing: border-box;
-}
-
-@media only screen and (max-width: 1366px) {
-    #select-role {
-    width: 270px;
-    }
+    margin-right: 15px;
+    color: $colorFormBorderLoginRegister;
 }
 
 #select-role option {
     background-color: $colorBackgroundSelect;
 }
 
-#input-password, #newPassword {
-    background: $colorInputBackground;
-    border: 1px solid $colorFormBorderLoginRegister;
-    border-radius: 4px;
-    width: 350px;
-    height: 50px;
-    color: $colorFontInput;
-    padding-left: 15px;
-    font-size: 1rem;
-    font-family: "Quicksand", sans-serif;
-    box-sizing: border-box;
+.container-inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-@media only screen and (max-width: 1366px) {
-    #input-password, #newPassword {
-    width: 270px;
-    }
+.container-label-input {
+    display: flex;
+    flex-direction: column;
 }
 
-#input-password-confirm {
-    background: $colorInputBackground;
-    border: 1px solid $colorFormBorderLoginRegister;
-    border-radius: 4px;
-    width: 350px;
-    height: 50px;
-    color: $colorFontInput;
-    padding-left: 15px;
-    font-size: 1rem;
-    font-family: "Quicksand", sans-serif;
-    box-sizing: border-box;
-}
-
-@media only screen and (max-width: 1366px) {
-    #input-password-confirm {
-    width: 270px;
-    }
-}
-
-.register-name p, .register-email p, .register-password p, .register-password-confirm p, .register-role p, .new-password p, .email-password p {
+label {
     color: $colorFontClearLogin;
     margin-bottom: 0;
     margin-top: 5px;
 }
 
-.register-buttons, .password-buttons {
-    display: flex;
-    width: 350px;
-}
-
-@media only screen and (max-width: 1366px) {
-    .register-buttons, .password-buttons {
-        width: 270px;
-    }
-}
-
 .button-back {
-    background: $colorButtonLoginRegister;
-    border-radius: 4px;
     width: 30%;
-    height: 50px;
-    color: $colorFontButton;
-    margin-top: 20px;
-    border-style: none;
-    font-size: 1rem;
-    font-family: "Dosis", sans-serif;
-    font-weight: 400;
-    cursor: pointer;
 }
 
-.button-back:hover {
-    background: $colorHover;
-    color: $colorFontButtonHover;
-}
-
-#button-register, #change-password-button {
-    background: $colorButtonLoginRegister;
-    border-radius: 4px;
+.forgot-and-signup-button {
     width: 70%;
-    height: 50px;
-    color: $colorFontButton;
-    margin-top: 20px;
-    border-style: none;
-    font-size: 1rem;
-    font-family: "Dosis", sans-serif;
-    font-weight: 400;
     margin-left: 10px;
-    cursor: pointer;
-}
-
-#button-register:hover, #change-password-button:hover {
-    background: $colorHover;
-    color: $colorFontButtonHover;
 }
 
 .warning {
     color: $colorTextDanger;
 }
 
-.password-area {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    width: 50%;
-    height: 100%; 
-    background: $colorBackgroundFormSideLogin;
-    font-family: "Quicksand", sans-serif;
+@media only screen and (max-width: 1366px) {
+    .size {
+        width: 270px;
+    }
 }
