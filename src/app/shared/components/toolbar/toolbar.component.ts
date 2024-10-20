@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, RouterLink } from '@angular/router';
-import { AuthService } from '../../../security/service/auth.service';
+import { AuthService } from '../../../security/auth.service';
 
 @Component({
   selector: 'app-toolbar',

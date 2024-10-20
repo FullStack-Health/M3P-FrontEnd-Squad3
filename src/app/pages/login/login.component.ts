@@ -6,7 +6,7 @@ import { Title } from '@angular/platform-browser';
 import { Router, RouterModule } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
 import { User } from '../../models/user.model';
-import { AuthService } from '../../security/service/auth.service';
+import { AuthService } from '../../security/auth.service';
 import { DialogComponent } from '../../shared/components/dialog/dialog.component';
 import { ApiService } from '../../shared/services/api.service';
 
