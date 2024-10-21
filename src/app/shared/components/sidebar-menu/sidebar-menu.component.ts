@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
@@ -14,9 +14,26 @@ export class SidebarMenuComponent {
 
   constructor(private router: Router) { }
 
+  ngOnInit(): void {
+    this.checkWindowSize();
+  }
+
   cleanLoggedUser() {
     sessionStorage.setItem('jwtToken', '');
     this.router.navigate(['']);
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any): void {
+    this.checkWindowSize();
+  }
+
+  private checkWindowSize(): void {
+    if(window.innerWidth < 768) {
+      this.openClose = false;
+    } else {
+      this.openClose = true;
+    }
   }
 
   openCloseMenu() {
