@@ -1,11 +1,15 @@
 <div class="sidenav-container1">
     <!-- <div class="sidenav1" mode="side" [(opened)]="showSidebar"> -->
-    <div class="sidenav1">
 
-      <i class="material-icons" id="menu-close">menu_open</i>
-      <img src="../../../../assets/images/logo-labmedical.png" alt="Logomarca" id="logo-sidebar">
-  
-        <div class="general-menu">  
+    <i *ngIf="!openClose" (click)="openCloseMenu()" class="material-icons menu-close" id="menu-close">menu_open</i>
+
+    <div [ngClass]="{'ng-enter': openClose, 'ng-leave': !openClose}" class="sidenav1">
+
+        <i class="material-icons menu-close" id="menu-close" (click)="openCloseMenu()">menu_open</i>
+
+        <img src="../../../../assets/images/logo-labmedical.png" alt="Logomarca" id="logo-sidebar">
+
+        <div class="general-menu">
             <div class="group-menu">
 
                 <button class="menu-button" [routerLink]="['/home']">
@@ -20,13 +24,13 @@
                     <i class="material-icons">assignment</i>
                     <span id="btn-text">PRONTUÁRIOS</span>
                 </button>
-                
+
                 <button class="menu-button" [routerLink]="['/registro-paciente']">
                     <!-- <mat-icon>person_add</mat-icon> -->
                     <i class="material-icons">person_add</i>
                     <span id="btn-text">NOVO PACIENTE</span>
                 </button>
-                
+
                 <button class="menu-button" [routerLink]="['/registro-consulta']">
                     <!-- <mat-icon>calendar_today</mat-icon> -->
                     <i class="material-icons">calendar_today</i>
@@ -51,9 +55,9 @@
                     <span id="btn-text">USUÁRIOS</span>
                 </button>
 
-            </div>  
-        </div> 
-        
+            </div>
+        </div>
+
         <div id="exit" (click)="cleanLoggedUser()">
             <p>SAIR</p>
             <i class="material-icons">logout</i>
