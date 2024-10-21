@@ -11,7 +11,7 @@ import { ShareMenuStatusService } from '../../services/share-menu-status.service
   styleUrl: './sidebar-menu.component.scss'
 })
 export class SidebarMenuComponent {
-  openClose: boolean = true;
+  menuTrueFalse: boolean = true;
 
   constructor(private router: Router, private shareMenuStatusService: ShareMenuStatusService) { }
 
@@ -31,21 +31,16 @@ export class SidebarMenuComponent {
 
   private checkWindowSize(): void {
     if(window.innerWidth < 768) {
-      this.openClose = false;
-      this.shareMenuStatusService.setMenuTrueFalse(this.openClose);
+      this.menuTrueFalse = false;
+      this.shareMenuStatusService.setMenuTrueFalse(this.menuTrueFalse);
     } else {
-      this.openClose = true;
-      this.shareMenuStatusService.setMenuTrueFalse(this.openClose);
+      this.menuTrueFalse = true;
+      this.shareMenuStatusService.setMenuTrueFalse(this.menuTrueFalse);
     }
   }
 
   openCloseMenu() {
-    this.openClose = !this.openClose
-    this.shareMenuStatusService.setMenuTrueFalse(this.openClose);
+    this.menuTrueFalse = !this.menuTrueFalse
+    this.shareMenuStatusService.setMenuTrueFalse(this.menuTrueFalse);
   }
-
-  changeMenuStatus(value: boolean) {
-    this.shareMenuStatusService.setMenuTrueFalse(this.openClose);
-  }
-
 }

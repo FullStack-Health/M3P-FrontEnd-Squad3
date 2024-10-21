@@ -1,9 +1,9 @@
 <div class="sidenav-container1">
     <!-- <div class="sidenav1" mode="side" [(opened)]="showSidebar"> -->
 
-    <i *ngIf="!openClose" (click)="openCloseMenu()" class="material-icons menu-close" id="menu-close">menu_open</i>
+    <i *ngIf="!menuTrueFalse" (click)="openCloseMenu()" class="material-icons menu-close" id="menu-close">menu_open</i>
 
-    <div [ngClass]="{'ng-enter': openClose, 'ng-leave': !openClose}" class="sidenav1">
+    <div [ngClass]="{'ng-enter': menuTrueFalse, 'ng-leave': !menuTrueFalse}" class="sidenav1">
 
         <i class="material-icons menu-close" id="menu-close" (click)="openCloseMenu()">menu_open</i>
 
