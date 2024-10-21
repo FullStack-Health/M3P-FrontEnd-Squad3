@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { ShareMenuStatusService } from '../../services/share-menu-status.service';
 
 @Component({
   selector: 'app-sidebar-menu',
@@ -10,9 +11,9 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './sidebar-menu.component.scss'
 })
 export class SidebarMenuComponent {
-  openClose: boolean = true;
+  menuTrueFalse: boolean = true;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private shareMenuStatusService: ShareMenuStatusService) { }
 
   ngOnInit(): void {
     this.checkWindowSize();
@@ -30,14 +31,16 @@ export class SidebarMenuComponent {
 
   private checkWindowSize(): void {
     if(window.innerWidth < 768) {
-      this.openClose = false;
+      this.menuTrueFalse = false;
+      this.shareMenuStatusService.setMenuTrueFalse(this.menuTrueFalse);
     } else {
-      this.openClose = true;
+      this.menuTrueFalse = true;
+      this.shareMenuStatusService.setMenuTrueFalse(this.menuTrueFalse);
     }
   }
 
   openCloseMenu() {
-    this.openClose = !this.openClose
+    this.menuTrueFalse = !this.menuTrueFalse
+    this.shareMenuStatusService.setMenuTrueFalse(this.menuTrueFalse);
   }
-
 }
