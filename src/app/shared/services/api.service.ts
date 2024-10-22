@@ -6,6 +6,7 @@ import { DashboardStats } from '../../models/dashboard-stats.interface';
 import { PatientCard } from '../../models/patient-card.model';
 import { Page } from '../../models/page.interface';
 import { ListPatients } from '../../models/list-patients.model';
+import { Patient } from '../../models/patient.model';
 
 @Injectable({
   providedIn: 'root'
@@ -84,4 +85,26 @@ export class ApiService {
     return this.http.get<Page<ListPatients>>(`${this.apiUrl}/patients/medical-record-list`, { headers, params });
   }
 
+  // patient endpoint
+
+  savePatient(patient: Patient): Observable<Patient> {
+    const jwtToken = sessionStorage.getItem('jwtToken');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
+
+    return this.http.post<Patient>(`${this.apiUrl}/patients`, patient, { headers });
+  }
+
+  editPatient(id: string, patient: Patient): Observable<Patient> {
+    const jwtToken = sessionStorage.getItem('jwtToken');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
+
+    return this.http.put<Patient>(`${this.apiUrl}/patients/${id}`, patient, { headers });
+  }
+
+  getPatient(id: string): Observable<Patient> {
+    const jwtToken = sessionStorage.getItem('jwtToken');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
+
+    return this.http.get<Patient>(`${this.apiUrl}/patients/${id}`, { headers });
+  }
 }
