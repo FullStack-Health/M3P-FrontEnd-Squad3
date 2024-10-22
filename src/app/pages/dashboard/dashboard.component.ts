@@ -3,7 +3,7 @@ import { SidebarMenuComponent } from '../../shared/components/sidebar-menu/sideb
 import { ToolbarComponent } from '../../shared/components/toolbar/toolbar.component';
 import { Title } from '@angular/platform-browser';
 import { StatsRoleDoctorComponent } from './statistics/stats-role-doctor/stats-role-doctor.component';
-import { AuthService } from '../../security/service/auth.service';
+import { AuthService } from '../../security/auth.service';
 import { CommonModule } from '@angular/common';
 import { StatsRoleAdminComponent } from './statistics/stats-role-admin/stats-role-admin.component';
 import { PatientCardComponent } from './patient-card/patient-card.component';

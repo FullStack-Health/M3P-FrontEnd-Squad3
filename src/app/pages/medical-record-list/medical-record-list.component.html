@@ -1,0 +1,55 @@
+<div style="display: flex; flex-direction: column; height: 100vh;">
+    <app-toolbar></app-toolbar>
+
+    <div style="display: flex; flex-grow: 1">
+      <app-sidebar-menu></app-sidebar-menu>
+    
+    <div class="container-list" style="flex-grow: 1"> 
+   
+        <div class="search-area">
+                <label for="search"></label>
+                <input type="text" id="search" name="search" [(ngModel)]="searchTerm" placeholder="Digite o nome do paciente">
+                    <button id="btn-search1" (click)="search()">BUSCAR</button>
+                    <button id="btn-clear1" (click)="clearSearch()">LIMPAR</button>
+        </div>
+
+        <div class="container-list-area">
+            <div class="list-area">
+
+                    <div class="patient-card1 header-area">
+                        <div id="header-reg">Registro</div>
+                        <div id="header-pat-name">Nome do paciente</div>
+                        <div id="header-phone">Telefone</div>
+                        <div id="header-ins">Convênio</div>
+                    </div>
+
+                    <div *ngIf="noResults" class="no-results">
+                        Nenhum paciente encontrado.
+                    </div>
+                    
+                    <div *ngFor="let patient of medicalRecordPatientsList" class="patient-card1">
+                        <div class="card-content1" id="id">{{ patient.id }}</div>
+                        <div class="card-content1" id="name">{{ patient.name | shortenName }}</div>
+                        <div class="card-content1" id="phone">{{ patient.phone }}</div>
+                        <div class="card-content1" id="insurance">{{ patient.healthInsurance }}</div>
+                        <div class="edit-patient">
+                            <button (click)="editPatient(patient.id)">EDITAR</button>
+                        </div>
+                        
+                    </div>
+            </div>
+        </div>
+       
+        <div class="pages">
+            <button (click)="goToPreviousPage()" [disabled]="isPreviousDisabled()">Retornar</button>
+            <button (click)="goToNextPage()" [disabled]="isNextDisabled()">Seguinte</button>
+        </div>
+          
+    </div>
+
+    </div>
+</div>
+
+<router-outlet></router-outlet>
+
+
