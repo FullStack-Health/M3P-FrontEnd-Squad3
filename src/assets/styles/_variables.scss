@@ -22,6 +22,14 @@ $black: #000000;
 
 // SHARED
 
+// forms
+$colorFormBorder: $pinkPurple;
+$colorLabelForms: $black;
+$colorTitleSectionForm: $black;
+$colorBackgroundDisable: $purpleHighOpacity;
+$colorFontDisable: $black;
+$colorTextDangerForm: $red;
+
 // fonts
 $colorGeneralFont: $black;
 $colorTitleToolbar: $black;
@@ -95,6 +103,8 @@ $colorBtnTopicFont: $black;
 $colorBackgroundDialog: $darkPurple;
 $colorBorderDialog: $redBrand;
 $colorFontDialog: $white;
+$colorBtnDialog: $lightPurple;
+$colorFontBtnDialog: $black;
 
 // sidebar menu
 $colorBackgroundSidebarMenu: #6DB7B8;
