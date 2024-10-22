@@ -28,6 +28,52 @@ export class PatientCardComponent implements OnInit {
   hasMorePages: boolean = false;
   noResults: boolean = false;
 
+  dashboardPatientsCardPlaceHolder = [{
+    "id": "USR123456789",
+    "name": "João da Silva",
+    "birthdate": "1990-04-12",
+    "gender": "Masculino",
+    "phone": "(11) 9 8765-4321",
+    "email": "joao.silva@example.com",
+    "healthInsurance": "Unimed"
+  },
+  {
+    "id": "USR987654321",
+    "name": "Maria Oliveira",
+    "birthdate": "1985-09-23",
+    "gender": "Feminino",
+    "phone": "(21) 9 6543-2109",
+    "email": "maria.oliveira@example.com",
+    "healthInsurance": "Bradesco Saúde"
+  },
+  {
+    "id": "USR456123789",
+    "name": "Carlos Pereira",
+    "birthdate": "1978-11-02",
+    "gender": "Masculino",
+    "phone": "(31) 9 1122-3344",
+    "email": "carlos.pereira@example.com",
+    "healthInsurance": "Amil"
+  },
+  {
+    "id": "USR321654987",
+    "name": "Ana Fernandes",
+    "birthdate": "1995-06-30",
+    "gender": "Feminino",
+    "phone": "(41) 9 2233-4455",
+    "email": "ana.fernandes@example.com",
+    "healthInsurance": "SulAmérica"
+  },
+  {
+    "id": "USR789123456",
+    "name": "Pedro Souza",
+    "birthdate": "1988-01-19",
+    "gender": "Masculino",
+    "phone": "(51) 9 3344-5566",
+    "email": "pedro.souza@example.com",
+    "healthInsurance": "Porto Seguro"
+  }];
+
   constructor(private apiService: ApiService, private router: Router) { }
 
   ngOnInit() {
