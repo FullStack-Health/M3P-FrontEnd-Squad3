@@ -7,6 +7,7 @@ import { PatientCard } from '../../models/patient-card.model';
 import { Page } from '../../models/page.interface';
 import { ListPatients } from '../../models/list-patients.model';
 import { Patient } from '../../models/patient.model';
+import { PatientRecord } from '../../models/patient-record.model';
 
 @Injectable({
   providedIn: 'root'
@@ -106,5 +107,21 @@ export class ApiService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
 
     return this.http.get<Patient>(`${this.apiUrl}/patients/${id}`, { headers });
+  }
+
+  // medical record {id} endpoint
+
+  getPatientById(id: string): Observable<PatientRecord> {
+    const jwtToken = sessionStorage.getItem('jwtToken');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
+
+    return this.http.get<PatientRecord>(`${this.apiUrl}/patients/${id}/medical-record`, { headers });
+  }
+
+  getAppointmentsAndExamsByPatientId(id: string): Observable<PatientRecord[]> {
+    const jwtToken = sessionStorage.getItem('jwtToken');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
+
+    return this.http.get<PatientRecord[]>(`${this.apiUrl}/patients/${id}/medical-record`, { headers });
   }
 }
