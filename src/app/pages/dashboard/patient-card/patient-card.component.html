@@ -12,13 +12,11 @@
 
     <div class="card-container1">
 
-        <!--
         <div *ngIf="noResults" class="no-results">
             <p>Nenhum paciente encontrado.</p>
         </div>
-        -->
-        <!-- NÃO ESQUECER DE TIRAR O PLACEHOLDER -->
-        <div *ngFor="let patient of dashboardPatientsCardPlaceHolder" class="patient-card">
+
+        <div *ngFor="let patient of dashboardPatientsCard" class="patient-card">
 
             <div class="photo-and-name">
                 <div id="img-perfil">

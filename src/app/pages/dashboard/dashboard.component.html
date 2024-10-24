@@ -4,7 +4,6 @@
     <div class="app-sidebar-menu">
         <app-sidebar-menu></app-sidebar-menu>
 
-        <!--
         <div class="dashboard-content">
             <div class="app-stats-role-doctor" *ngIf="userRole === 'ROLE_MEDICO'">
                 <app-stats-role-doctor></app-stats-role-doctor>
@@ -16,20 +15,5 @@
                 <app-patient-card></app-patient-card>
             </div>
         </div> 
-        -->
-
-        <div class="dashboard-content">
-            <div class="app-stats-role-doctor">
-                <app-stats-role-doctor></app-stats-role-doctor>
-            </div>
-            <div class="app-stats-role-admin" *ngIf="userRole === 'ROLE_ADMIN'">
-                <app-stats-role-admin></app-stats-role-admin>
-            </div>
-            <div class="patient-card">
-                <app-patient-card></app-patient-card>
-            </div>
-        </div>
-
     </div>
-
 </div>
