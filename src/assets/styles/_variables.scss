@@ -22,6 +22,14 @@ $black: #000000;
 
 // SHARED
 
+// forms
+$colorFormBorder: $pinkPurple;
+$colorLabelForms: $black;
+$colorTitleSectionForm: $black;
+$colorBackgroundDisable: $purpleHighOpacity;
+$colorFontDisable: $black;
+$colorTextDangerForm: $red;
+
 // fonts
 $colorGeneralFont: $black;
 $colorTitleToolbar: $black;
@@ -52,7 +60,6 @@ $colorPageBackground: #DAE9EC;
 $colorAreaBackground: #f5f5f5de;
 
 // dashboard
-
 $colorGeneralCard: $whiteLowOpacity;
 $colorCardContent: $whiteLowOpacity;
 $colorPatCardNameBackground: $blueHighOpacity;
@@ -75,12 +82,29 @@ $colorBackgroundSelect: $black;
 $colorInputPlaceholder: $whiteHighOpacity;
 $colorInputBackground: $transparent;
 
+// medical record
+$colorInterleavedList1: $purpleWhite;
+$colorInterleavedList2: $transparent;
+$colorMedRecListHover: $redMediumOpacity;
+$colorFontHeaderForm: $white;
+$colorFontHeaderArea: $black;
+$colorContainerList: $whiteLowOpacity;
+$colorHeaderArea: $purpleWhite;
+$colorInfoBackground: $lightPurple;
+$colorInfoBackgroundLabel: $transparent;
+$colorInfoBackgroundPatient: $white;
+$colorBorderLabelMedicalRecord: $transparent;
+$colorBtnTopicBackground: $whiteLowOpacity;
+$colorBtnTopicFont: $black;
+
 // COMPONENTS
 
 // dialog
 $colorBackgroundDialog: $darkPurple;
 $colorBorderDialog: $redBrand;
 $colorFontDialog: $white;
+$colorBtnDialog: $lightPurple;
+$colorFontBtnDialog: $black;
 
 // sidebar menu
 $colorBackgroundSidebarMenu: #6DB7B8;
