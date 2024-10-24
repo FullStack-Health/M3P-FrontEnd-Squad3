@@ -108,6 +108,6 @@ export class PatientCardComponent implements OnInit {
   }
   
   medicalRecord(id: string) {
-    this.router.navigate(['/lista-prontuarios', id]);
+    this.router.navigate(['/prontuario', id]);
   }
 }
