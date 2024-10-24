@@ -1,52 +1,55 @@
-<div class="container1">
+<div [ngClass]="{'sidebar-open': !menuTrueFalse}" class="container1">
 
     <div class="search-area">
         <label for="search"></label>
-        <input type="text" id="search" name="search" [(ngModel)]="searchTerm" placeholder="Busque pelo nome, telefone ou e-mail">
-        <button id="btn-search" (click)="search()">BUSCAR</button>
-        <button id="btn-clear" (click)="clearSearch()">LIMPAR</button>
+        <input type="text" id="search" name="search" [(ngModel)]="searchTerm"
+            placeholder="Busque pelo nome, telefone ou e-mail">
+        <div class="btn-container">
+            <button id="btn-search" (click)="search()">BUSCAR</button>
+            <button id="btn-clear" (click)="clearSearch()">LIMPAR</button>
+        </div>
     </div>
-    
+
     <div class="card-container1">
-    
+
         <div *ngIf="noResults" class="no-results">
             <p>Nenhum paciente encontrado.</p>
         </div>
-    
-        <div *ngFor="let patient of dashboardPatientsCard" class="patient-card">
-            
-                <div class="photo-and-name">
-                    <div id="img-perfil">
-                        <img *ngIf="patient.gender === 'Masculino'" src="../../../assets/images/pat-male.png">
-                        <img *ngIf="patient.gender === 'Feminino'" src="../../../assets/images/pat-female.png">
-                    </div>
-                    <div id="name">
-                            <p>{{ patient.name | shortenName }}</p>
-                    </div>
-                </div>
-    
-                <div class="info-content">
 
-                    <div class="age-and-btn">
-                        <div class="card-age-btn" id="age">
-                            <p>{{ patient.birthdate | age }} anos</p>
-                        </div>
-                        <button class="btn-medical-record"(click)="medicalRecord(patient.id)">PRONTUÁRIO</button>
-                    </div>
-                
-                    <div class="card-content1" id="phone">
-                        <p><strong>Telefone: </strong>{{ patient.phone }}</p>
-                    </div>
-                    <div class="card-content1" id="email">
-                        <p><strong>E-mail: </strong>{{ patient.email }}</p>
-                    </div>
-                    <div class="card-content1" id="insurance">
-                        <p><strong>Convênio: </strong>{{ patient.healthInsurance }}</p>
-                    </div>
+        <div *ngFor="let patient of dashboardPatientsCard" class="patient-card">
+
+            <div class="photo-and-name">
+                <div id="img-perfil">
+                    <img *ngIf="patient.gender === 'Masculino'" src="../../../assets/images/pat-male.webp">
+                    <img *ngIf="patient.gender === 'Feminino'" src="../../../assets/images/pat-female.webp">
+                </div>
+                <div id="name">
+                    <p>{{ patient.name | shortenName }}</p>
+                </div>
             </div>
-             
+
+            <div class="info-content">
+
+                <div class="age-and-btn">
+                    <div class="card-age-btn" id="age">
+                        <p>{{ patient.birthdate | age }} anos</p>
+                    </div>
+                    <button class="btn-medical-record" (click)="medicalRecord(patient.id)">PRONTUÁRIO</button>
+                </div>
+
+                <div class="card-content1" id="phone">
+                    <p><strong>Telefone: </strong>{{ patient.phone }}</p>
+                </div>
+                <div class="card-content1" id="email">
+                    <p><strong>E-mail: </strong>{{ patient.email }}</p>
+                </div>
+                <div class="card-content1" id="insurance">
+                    <p><strong>Convênio: </strong>{{ patient.healthInsurance }}</p>
+                </div>
+            </div>
+
         </div>
-    
+
     </div>
 
     <div class="pages">
@@ -55,4 +58,3 @@
     </div>
 
 </div>
-
