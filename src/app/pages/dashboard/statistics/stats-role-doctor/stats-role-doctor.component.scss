@@ -23,7 +23,8 @@
     margin-top: 20px;
     padding: 15px;
     border-radius: 4px;
-    background: $colorAreaBackground;
+    background: $colorAreaBackground;  
+    @include border-shadow();
     transition: width 0.3s ease, margin-left 0.3s ease;
   }
   
@@ -38,7 +39,8 @@
     height: 190px;
     margin: 0 10px;
     border-radius: 4px;
-    background: $colorGeneralCard; 
+    background: $colorGeneralCard;
+    @include border-shadow();
 }
 
 .icon-num {

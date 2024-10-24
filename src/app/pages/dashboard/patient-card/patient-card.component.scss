@@ -5,157 +5,136 @@
 }
 
 .container1 {
-    margin-left: 200px;
+  width: calc(100% - 200px);
+  margin-left: 200px;
 }
 
 #search {
-    width: 100%;
-    height: 40px;
-    padding-left: 15px;
-    padding-right: 15px;
-    font-size: 1.3rem;
-    border-radius: 4px;
-    border: none;
-    background: $colorSearchBackground;
-    outline: none;
-    transition: box-shadow 0.3s ease-in-out;
-    font-family: "Dosis", sans-serif;
-  }
-
-  @media only screen and (max-width: 1366px) {
-    #search {
-        width: 59vw;
-    }
-}
-  
-  .search-area {
-    margin: 20px;
-    display: flex;
-    justify-content: center;
-  }
-  
-  #search::placeholder{
-    color: $colorSearchPlaceholder;
-  }
-  
-  #btn-search {
-    background: $colorButton;
-    color: $colorFontButton;
-    border-radius: 4px;
-    height: 40px;
-    width: 5vw;
-    margin-left: 1vw;
-    font-family: "Dosis", sans-serif;
-    font-weight: 500;
-    font-size: 1rem;
-    border: none;
-  }
-
-  @media only screen and (max-width: 1366px) {
-    #btn-search {
-        width: 10.2vw;
-    }
+  width: 100%;
+  height: 40px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 1.3rem;
+  border-radius: 4px;
+  border: none;
+  background: $colorSearchBackground;
+  outline: none;
+  transition: box-shadow 0.3s ease-in-out;
+  font-family: "Dosis", sans-serif;
+  @include border-shadow();
 }
 
-  #btn-search:hover {
-    background: $colorHover;
-    color: $colorFontButtonHover;
-  }
-
-  #btn-clear {
-    background: $colorButton;
-    color: $colorFontButton;
-    border-radius: 4px;
-    height: 40px;
-    width: 5vw;
-    margin-left: 1vw;
-    font-family: "Dosis", sans-serif;
-    font-weight: 500;
-    font-size: 1rem;
-    border: none;
-  }
-
-  @media only screen and (max-width: 1366px) {
-    #btn-clear {
-        width: 10.2vw;
-    }
+.search-area {
+  margin: 20px;
+  display: flex;
+  justify-content: center;
 }
 
-  #btn-clear:hover {
-    background: $colorHover;
-    color: $colorFontButtonHover;
-  }
+#search::placeholder {
+  color: $colorSearchPlaceholder;
+}
+
+#btn-search {
+  background: $colorButton;
+  color: $colorFontButton;
+  border-radius: 4px;
+  height: 40px;
+  width: 5vw;
+  margin-left: 1vw;
+  font-family: "Dosis", sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  border: none;
+}
+
+#btn-search:hover {
+  background: $colorHover;
+  color: $colorFontButtonHover;
+}
+
+#btn-clear {
+  background: $colorButton;
+  color: $colorFontButton;
+  border-radius: 4px;
+  height: 40px;
+  width: 5vw;
+  margin-left: 1vw;
+  font-family: "Dosis", sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  border: none;
+}
+
+#btn-clear:hover {
+  background: $colorHover;
+  color: $colorFontButtonHover;
+}
 
 .card-container1 {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 5%;
   width: calc(100% - 40px);
+  margin-left: 20px;
   background-color: $colorAreaBackground;
-  margin: 0 20px;
   padding: 20px;
   border-radius: 4px;
-}
-
-@media only screen and (max-width: 1366px) {
-    .card-container1 {
-        width: 81.2vw;
-    }
+  @include border-shadow();
 }
 
 .patient-card {
-    display: flex;
-    flex-direction: column;
-    width: 19vw;
-    height: 220px;
-    background: $colorGeneralCard;
-    border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 220px;
+  margin-bottom: 30px;
+  background: $colorGeneralCard;
+  border-radius: 4px;
+  @include border-shadow();
 }
 
 .photo-and-name {
-    display: flex;
-    flex-direction: row;
-    height: 50px;
-    padding-left: 5px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    background-color: $colorPatCardNameBackground;
+  display: flex;
+  flex-direction: row;
+  height: 50px;
+  padding-left: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: $colorPatCardNameBackground;
 }
 
 .photo-and-name p {
-    margin: 0;
-    padding-top: 13px;
+  margin: 0;
+  padding-top: 13px;
 }
 
 #img-perfil {
-    display: flex;
-    justify-content: center;
-    margin: auto;
+  display: flex;
+  justify-content: center;
+  margin: auto;
 }
 
 #img-perfil img {
-    width: 55px;
-    z-index: 3;
+  width: 55px;
+  z-index: 3;
 }
 
 #name {
-    width: 100%;
-    height: 50px;
-    font-size: 1.6rem;
-    font-weight: 500;
-    white-space: nowrap;
-    font-family: "Dosis", sans-serif;
-    font-weight: 500;
-    text-align: left;
-    z-index: 2;
-    overflow: hidden;  
+  width: 100%;
+  height: 50px;
+  font-size: 1.6rem;
+  font-weight: 500;
+  white-space: nowrap;
+  font-family: "Dosis", sans-serif;
+  font-weight: 500;
+  text-align: left;
+  z-index: 2;
+  overflow: hidden;
 }
 
 #name p {
-    padding-left: 10px;
-    color: $colorGeneralFont;
+  padding-left: 10px;
+  color: $colorGeneralFont;
 }
 
 .info-content {
@@ -169,14 +148,14 @@
 }
 
 .card-content1 {
-    text-align: left;
-    display: flex;
-    margin-left: 35px;
+  text-align: left;
+  display: flex;
+  margin-left: 35px;
 }
 
 .card-content1 p {
-    padding: 0;
-    margin-top: 0;
+  padding: 0;
+  margin-top: 0;
 }
 
 .age-and-btn {
@@ -199,67 +178,70 @@
   font-weight: 500;
   letter-spacing: 1px;
   margin: auto;
- 
+
   margin-right: 10px;
 }
 
 .btn-medical-record:hover {
-    background: $colorHover;
-    color: $colorFontButtonHover;
-    }
+  background: $colorHover;
+  color: $colorFontButtonHover;
+}
 
 #age {
-    font-weight: 700;
+  font-weight: 700;
 }
 
 #email p {
-    overflow: hidden;
-    white-space: nowrap;
-    width: 98%;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 98%;
 }
 
-#age, #phone, #email, #insurance {
-    display: block;
-    margin-left: 0;
+#age,
+#phone,
+#email,
+#insurance {
+  display: block;
+  margin-left: 0;
 }
 
-  .no-results {
-    margin-top: 10px;
-    font-size: 1.4rem;
-    color: $colorPatientNotFound;
-  }
+.no-results {
+  margin-top: 10px;
+  font-size: 1.4rem;
+  color: $colorPatientNotFound;
+}
 
-  .pages {
-    margin: 20px;
-    display: flex;
-    justify-content: flex-end;
-  }
-  
-  .pages button {
-    background: $colorButton;
-      color: $colorFontButton;
-      border-radius: 4px;
-      height: 40px;
-      width: 85px;
-      font-family: "Dosis", sans-serif;
-      font-weight: 500;
-      font-size: 1rem;
-      border: none;
-      margin-left: 10px;
-      text-transform: uppercase;
-  }
-  
-  .pages button:disabled {
-    background: $colorButtonDisable;
-    color: $colorFontButtonDisable;
-  }
-  
-  .pages button:hover {
-    background: $colorHover;
-    color: $colorFontButtonHover;
-  }
-  
-  .pages button:disabled:hover {
-    background: $colorButtonDisable;
-    color: $colorFontButtonDisable;
-  }
+.pages {
+  margin: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.pages button {
+  background: $colorButton;
+  color: $colorFontButton;
+  border-radius: 4px;
+  height: 40px;
+  width: 85px;
+  font-family: "Dosis", sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  border: none;
+  margin-left: 10px;
+  text-transform: uppercase;
+}
+
+.pages button:disabled {
+  background: $colorButtonDisable;
+  color: $colorFontButtonDisable;
+}
+
+.pages button:hover {
+  background: $colorHover;
+  color: $colorFontButtonHover;
+}
+
+.pages button:disabled:hover {
+  background: $colorButtonDisable;
+  color: $colorFontButtonDisable;
+}
