@@ -10,6 +10,7 @@ import { ListPatients } from '../../models/list-patients.model';
 import { Title } from '@angular/platform-browser';
 import { Page } from '../../models/page.interface';
 import { ShortenNamePipe } from '../../shared/pipes/shorten-name.pipe';
+import { ShareMenuStatusService } from '../../shared/services/share-menu-status.service';
 
 @Component({
   selector: 'app-medical-record-list',
@@ -28,12 +29,68 @@ export class MedicalRecordListComponent implements OnInit {
   pageSize: number = 10;
   hasMorePages: boolean = false;
   noResults: boolean = false;
+  menuTrueFalse: boolean | undefined;
 
-  constructor(private titleService: Title, private apiService: ApiService, private router: Router) { }
+  medicalRecordPatientsListPlaceHolder = [{
+    "id": "USR123456789",
+    "name": "João da Silva",
+    "birthdate": "1990-04-12",
+    "gender": "Masculino",
+    "phone": "(11) 9 8765-4321",
+    "email": "joao.silva@example.com",
+    "healthInsurance": "Unimed"
+  },
+  {
+    "id": "USR987654321",
+    "name": "Maria Oliveira",
+    "birthdate": "1985-09-23",
+    "gender": "Feminino",
+    "phone": "(21) 9 6543-2109",
+    "email": "maria.oliveira@example.com",
+    "healthInsurance": "Bradesco Saúde"
+  },
+  {
+    "id": "USR456123789",
+    "name": "Carlos Pereira",
+    "birthdate": "1978-11-02",
+    "gender": "Masculino",
+    "phone": "(31) 9 1122-3344",
+    "email": "carlos.pereira@example.com",
+    "healthInsurance": "Amil"
+  },
+  {
+    "id": "USR321654987",
+    "name": "Ana Fernandes",
+    "birthdate": "1995-06-30",
+    "gender": "Feminino",
+    "phone": "(41) 9 2233-4455",
+    "email": "ana.fernandes@example.com",
+    "healthInsurance": "SulAmérica"
+  },
+  {
+    "id": "USR789123456",
+    "name": "Pedro Souza",
+    "birthdate": "1988-01-19",
+    "gender": "Masculino",
+    "phone": "(51) 9 3344-5566",
+    "email": "pedro.souza@example.com",
+    "healthInsurance": "Porto Seguro"
+  }];
+
+  constructor(
+    private titleService: Title, 
+    private apiService: ApiService, 
+    private router: Router,
+    private shareMenuStatusService: ShareMenuStatusService
+  ) { }
 
   ngOnInit(): void {
     this.titleService.setTitle('Lista de prontuários');
     this.getPatients(this.currentPage);
+
+    this.shareMenuStatusService.menuTrueFalse$.subscribe(value => {
+      this.menuTrueFalse = value;
+    });
   }
 
   getPatients(page: number): void {

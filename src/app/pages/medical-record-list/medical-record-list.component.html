@@ -4,7 +4,7 @@
     <div style="display: flex; flex-grow: 1">
       <app-sidebar-menu></app-sidebar-menu>
     
-    <div class="container-list" style="flex-grow: 1"> 
+    <div [ngClass]="{'sidebar-open': !menuTrueFalse}" class="container-list" style="flex-grow: 1"> 
    
         <div class="search-area">
                 <label for="search"></label>
@@ -23,11 +23,15 @@
                         <div id="header-ins">Convênio</div>
                     </div>
 
-                    <div *ngIf="noResults" class="no-results">
-                        Nenhum paciente encontrado.
-                    </div>
+                    <!--
+                        <div *ngIf="noResults" class="no-results">
+                            Nenhum paciente encontrado.
+                        </div>
+                    -->
+
+                    <!-- remover placeholders-->
                     
-                    <div *ngFor="let patient of medicalRecordPatientsList" class="patient-card1">
+                    <div *ngFor="let patient of medicalRecordPatientsListPlaceHolder" class="patient-card1">
                         <div class="card-content1" id="id">{{ patient.id }}</div>
                         <div class="card-content1" id="name">{{ patient.name | shortenName }}</div>
                         <div class="card-content1" id="phone">{{ patient.phone }}</div>
