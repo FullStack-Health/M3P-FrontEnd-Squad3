@@ -16,23 +16,23 @@
 .stats {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     width: calc(100% - 200px);
     margin-left: 200px;
     margin-top: 20px;
     padding: 15px;
     border-radius: 4px;
-    background: $colorAreaBackground;  
+    background: $colorAreaBackground;
     @include border-shadow();
     transition: width 0.3s ease, margin-left 0.3s ease;
-  }
-  
-  .sidebar-open {
+}
+
+.sidebar-open {
     width: 100%;
     margin-left: 0px;
     transition: width 0.27s ease, margin-left 0.27s ease;
-  }
+}
 
 .card-stat {
     width: 20%;
@@ -66,7 +66,7 @@
 }
 
 .label {
-    font-size: 1.8rem; 
+    font-size: 1.8rem;
     margin-left: 10px;
     margin-top: 10px;
     text-align: center;
@@ -74,10 +74,55 @@
     font-weight: 500;
 }
 
-@media only screen and (max-width: 767px) {
-    .stats {
-        width: 100%;
-        margin-left: 0px;
+@media only screen and (max-width: 1023px) {
+    .card-stat {
+        min-width: 140px;
+    }
+
+    .icon-num {
+        margin-top: 0px;
+    }
+
+    .label {
+        font-size: 1.3rem;
+    }
+
+    .num {
+        font-size: 2rem;
+    }
+
+    .patients {
+        width: 75px;
+        height: 75px;
     }
 }
 
+@media only screen and (max-width: 767px) {
+    .stats {
+        padding: 0px;
+    }
+
+    .card-stat {
+        min-width: 130px;
+        margin-right: 5px;
+        margin-left: 5px;
+        height: 160px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .container1 {
+        height: auto;
+    }
+
+    .stats {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card-stat {
+        min-width: 190px;
+        height: 160px;
+        margin: 10px auto;
+    }
+}

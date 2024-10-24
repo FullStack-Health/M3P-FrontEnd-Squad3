@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AgePipe } from '../../../shared/pipes/age.pipe';
 import { ShortenNamePipe } from '../../../shared/pipes/shorten-name.pipe';
+import { ShareMenuStatusService } from '../../../shared/services/share-menu-status.service';
 
 @Component({
   selector: 'app-patient-card',
@@ -27,6 +28,7 @@ export class PatientCardComponent implements OnInit {
   pageSize: number = 12;
   hasMorePages: boolean = false;
   noResults: boolean = false;
+  menuTrueFalse: boolean | undefined;
 
   dashboardPatientsCardPlaceHolder = [{
     "id": "USR123456789",
@@ -74,10 +76,14 @@ export class PatientCardComponent implements OnInit {
     "healthInsurance": "Porto Seguro"
   }];
 
-  constructor(private apiService: ApiService, private router: Router) { }
+  constructor(private apiService: ApiService, private router: Router, private shareMenuStatusService: ShareMenuStatusService) { }
 
   ngOnInit() {
     this.getPatients(this.currentPage);
+
+    this.shareMenuStatusService.menuTrueFalse$.subscribe(value => {
+      this.menuTrueFalse = value;
+    });
   }
 
   getPatients(page: number): void {
@@ -89,37 +95,37 @@ export class PatientCardComponent implements OnInit {
 
     if (searchTerm) {
       if (/\d/.test(searchTerm)) {
-          phone = searchTerm.replace(/[^\d]/g, '');
+        phone = searchTerm.replace(/[^\d]/g, '');
       } else if (searchTerm.includes('@')) {
-          email = searchTerm;
+        email = searchTerm;
       } else {
-          name = searchTerm;
+        name = searchTerm;
       }
     }
 
     this.apiService.getPatientCard(page, this.pageSize, name, phone, email).subscribe({
-        next: (response: Page<PatientCard>) => {
-            this.patientsList = response.content;
-            this.dashboardPatientsCard = this.patientsList;
+      next: (response: Page<PatientCard>) => {
+        this.patientsList = response.content;
+        this.dashboardPatientsCard = this.patientsList;
 
-            if (this.patientsList.length === 0) {
-                this.noResults = true;
-                this.dashboardPatientsCard = [];
-            } else {
-                this.noResults = false;
-            }
-
-            this.totalPages = response.totalPages;
-            this.hasMorePages = this.currentPage < this.totalPages - 1;
-            console.log('Patients loaded successfully:', this.dashboardPatientsCard);
-        },
-        error: (error: HttpErrorResponse) => {
-            console.error('Error loading patients:', error);
-            this.noResults = true;
-            this.dashboardPatientsCard = [];
+        if (this.patientsList.length === 0) {
+          this.noResults = true;
+          this.dashboardPatientsCard = [];
+        } else {
+          this.noResults = false;
         }
+
+        this.totalPages = response.totalPages;
+        this.hasMorePages = this.currentPage < this.totalPages - 1;
+        console.log('Patients loaded successfully:', this.dashboardPatientsCard);
+      },
+      error: (error: HttpErrorResponse) => {
+        console.error('Error loading patients:', error);
+        this.noResults = true;
+        this.dashboardPatientsCard = [];
+      }
     });
-}
+  }
 
   goToPreviousPage(): void {
     if (this.currentPage > 0) {
@@ -146,13 +152,13 @@ export class PatientCardComponent implements OnInit {
   search(): void {
     this.currentPage = 0;
     this.getPatients(this.currentPage);
-}
+  }
 
   clearSearch(): void {
-      this.searchTerm = '';
-      this.getPatients(this.currentPage);
+    this.searchTerm = '';
+    this.getPatients(this.currentPage);
   }
-  
+
   medicalRecord(id: string) {
     this.router.navigate(['/lista-prontuarios', id]);
   }

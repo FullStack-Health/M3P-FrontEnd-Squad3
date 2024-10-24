@@ -8,6 +8,7 @@
   right: 0;
   width: calc(100% - 200px);
   min-height: 65px;
+  z-index: 4;
   overflow-x: hidden;
   background: $colorBackgroundToolbar;
   border-bottom-left-radius: 4px;

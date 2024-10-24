@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { ApiService } from '../../../../shared/services/api.service';
 import { DashboardStats } from '../../../../models/dashboard-stats.interface';
 import { HttpClientModule } from '@angular/common/http';
+import { ShareMenuStatusService } from '../../../../shared/services/share-menu-status.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-stats-role-admin',
   standalone: true,
-  imports: [HttpClientModule],
+  imports: [HttpClientModule, CommonModule],
   templateUrl: './stats-role-admin.component.html',
   styleUrl: './stats-role-admin.component.scss'
 })
@@ -15,13 +17,18 @@ export class StatsRoleAdminComponent {
   countAppointments: number = 0;
   countExams: number = 0;
   countUsers: number = 0;
+  menuTrueFalse: boolean | undefined;
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService, private shareMenuStatusService: ShareMenuStatusService) { }
 
   ngOnInit(): void {
     this.getStats();
+
+    this.shareMenuStatusService.menuTrueFalse$.subscribe(value => {
+      this.menuTrueFalse = value;
+    });
   }
-    
+
   getStats(): void {
     this.apiService.getDashboardStats().subscribe({
       next: (stats: DashboardStats) => {

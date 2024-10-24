@@ -7,6 +7,13 @@
 .container1 {
   width: calc(100% - 200px);
   margin-left: 200px;
+  transition: width 0.3s ease, margin-left 0.3s ease;
+}
+
+.sidebar-open {
+  width: 100%;
+  margin-left: 0px;
+  transition: width 0.27s ease, margin-left 0.27s ease;
 }
 
 #search {
@@ -32,6 +39,10 @@
 
 #search::placeholder {
   color: $colorSearchPlaceholder;
+}
+
+.btn-container {
+  display: flex;
 }
 
 #btn-search {
@@ -87,7 +98,7 @@
   flex-direction: column;
   width: 100%;
   height: 220px;
-  margin-bottom: 30px;
+  margin: 15px 0px;
   background: $colorGeneralCard;
   border-radius: 4px;
   @include border-shadow();
@@ -193,8 +204,8 @@
 
 #email p {
   overflow: hidden;
-  white-space: nowrap;
   width: 98%;
+  word-break: break-all;
 }
 
 #age,
@@ -244,4 +255,70 @@
 .pages button:disabled:hover {
   background: $colorButtonDisable;
   color: $colorFontButtonDisable;
+}
+
+@media only screen and (max-width: 1279px) {
+  .card-container1 {
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 2%;
+  }
+
+
+  #btn-search,
+  #btn-clear {
+    width: 65px;
+  }
+}
+
+@media only screen and (max-width: 1023px) {
+  .container1 {
+    font-size: 0.9rem;
+  }
+
+  .info-content {
+    margin-left: 8px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .card-container1 {
+    padding: 10px;
+  }
+
+  #img-perfil img {
+    width: 45px;
+    z-index: 3;
+  }
+
+  #name p {
+    font-size: 1.3rem;
+    padding-left: 5px;
+  }
+
+  .btn-medical-record {
+    margin-left: 15px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .card-container1 {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .search-area {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .btn-container {
+    margin-top: 10px;
+  }
+}
+
+@media only screen and (max-width: 380px) {
+  #search::placeholder {
+    font-size: 1rem;
+    color: #000000a6;
+  }
 }
