@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { SidebarMenuComponent } from '../../shared/components/sidebar-menu/sidebar-menu.component';
 import { ToolbarComponent } from '../../shared/components/toolbar/toolbar.component';
 import { HttpClientModule, HttpErrorResponse } from '@angular/common/http';
@@ -30,9 +30,10 @@ export class MedicalRecordListComponent implements OnInit {
   hasMorePages: boolean = false;
   noResults: boolean = false;
   menuTrueFalse: boolean | undefined;
+  isScreenLarge: boolean | undefined;
 
   medicalRecordPatientsListPlaceHolder = [{
-    "id": "USR123456789",
+    "id": "1",
     "name": "João da Silva",
     "birthdate": "1990-04-12",
     "gender": "Masculino",
@@ -41,7 +42,7 @@ export class MedicalRecordListComponent implements OnInit {
     "healthInsurance": "Unimed"
   },
   {
-    "id": "USR987654321",
+    "id": "2",
     "name": "Maria Oliveira",
     "birthdate": "1985-09-23",
     "gender": "Feminino",
@@ -50,7 +51,7 @@ export class MedicalRecordListComponent implements OnInit {
     "healthInsurance": "Bradesco Saúde"
   },
   {
-    "id": "USR456123789",
+    "id": "3",
     "name": "Carlos Pereira",
     "birthdate": "1978-11-02",
     "gender": "Masculino",
@@ -59,7 +60,7 @@ export class MedicalRecordListComponent implements OnInit {
     "healthInsurance": "Amil"
   },
   {
-    "id": "USR321654987",
+    "id": "4",
     "name": "Ana Fernandes",
     "birthdate": "1995-06-30",
     "gender": "Feminino",
@@ -68,7 +69,7 @@ export class MedicalRecordListComponent implements OnInit {
     "healthInsurance": "SulAmérica"
   },
   {
-    "id": "USR789123456",
+    "id": "5",
     "name": "Pedro Souza",
     "birthdate": "1988-01-19",
     "gender": "Masculino",
@@ -91,6 +92,8 @@ export class MedicalRecordListComponent implements OnInit {
     this.shareMenuStatusService.menuTrueFalse$.subscribe(value => {
       this.menuTrueFalse = value;
     });
+
+    this.checkWindowSize();
   }
 
   getPatients(page: number): void {
@@ -167,6 +170,19 @@ export class MedicalRecordListComponent implements OnInit {
   
   editPatient(id: string) {
     this.router.navigate(['/cadastro-paciente', id]);
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any): void {
+    this.checkWindowSize();
+  }
+
+  private checkWindowSize(): void {
+    if(window.innerWidth > 555) {
+      this.isScreenLarge = true;
+    } else {
+      this.isScreenLarge = false;
+    }
   }
 
 }

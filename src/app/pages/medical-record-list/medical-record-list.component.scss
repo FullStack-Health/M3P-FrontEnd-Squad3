@@ -43,28 +43,20 @@
   outline: none;
   transition: box-shadow 0.3s ease-in-out;
   font-family: "Dosis", sans-serif;
+  @include border-shadow();
 }
 
 #search::placeholder {
   color: $colorSearchPlaceholder;
 }
 
-@media only screen and (max-width: 1366px) {
-  #search {
-    flex-grow: 1;
-  }
-}
-
-#search::placeholder {
-  color: $colorSearchPlaceholder;
-}
-
-#btn-search1 {
+.btns {
   background: $colorButton;
   color: $colorFontButton;
   border-radius: 4px;
   height: 40px;
   width: 5vw;
+  min-width: 58px;
   margin-left: 10px;
   font-family: "Dosis", sans-serif;
   font-weight: 500;
@@ -72,64 +64,29 @@
   border: none;
 }
 
-@media only screen and (max-width: 1366px) {
-  #btn-search1 {
-    width: 10.2vw;
-  }
-}
-
-#btn-search1:hover {
+.btns:hover {
   background: $colorHover;
   color: $colorFontButtonHover;
-}
-
-#btn-clear1 {
-  background: $colorButton;
-  color: $colorFontButton;
-  border-radius: 4px;
-  height: 40px;
-  width: 5vw;
-  margin-left: 10px;
-  font-family: "Dosis", sans-serif;
-  font-weight: 500;
-  font-size: 1rem;
-  border: none;
-}
-
-@media only screen and (max-width: 1366px) {
-  #btn-clear1 {
-    width: 10.2vw;
-  }
-}
-
-#btn-clear1:hover {
-  background: $colorHover;
-  color: $colorFontButtonHover;
-}
-
-.container-list-area {
-  display: flex;
-  width: 100%;
-  background-color: $colorContainerList;
-  border-radius: 4px;
-  padding-bottom: 2%;
-  padding-top: 2%;
 }
 
 .list-area {
-  width: 96%;
-  margin: auto;
+  width: 100%;
   border-radius: 4px;
   overflow: hidden;
   color: $colorFontHeaderForm;
+  background-color: $colorContainerList;
   font-family: "Dosis", sans-serif;
   font-weight: 500;
   font-size: 1.8rem;
+  @include border-shadow();
 }
 
 .patient-card1 {
   display: grid;
   grid-template-columns: 2fr 2fr 2fr 2fr 0.5fr;
+  margin: 20px;
+  padding-right: 1%;
+  @include border-shadow();
 }
 
 .header-area {
@@ -137,26 +94,6 @@
   height: 60px;
   border-radius: 4px;
   color: $colorFontHeaderArea;
-}
-
-.patient-card1:not(.header-area):nth-child(odd) {
-  background: $colorInterleavedList1;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.patient-card1:not(.header-area):nth-child(odd):hover {
-  background: $colorMedRecListHover;
-}
-
-.patient-card1:not(.header-area):nth-child(even) {
-  background: $colorInterleavedList2;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-.patient-card1:not(.header-area):nth-child(even):hover {
-  background: $colorMedRecListHover;
 }
 
 .card-content1 {
@@ -175,12 +112,6 @@
   padding-left: 100px;
 }
 
-// #header-file {
-//   padding-right: 100px;
-//   display: flex;
-//   justify-content: center;
-// }
-
 #header-reg,
 #header-pat-name,
 #header-ins,
@@ -198,6 +129,10 @@
   align-items: center;
 }
 
+.space-btn {
+  width: 45.48px;
+}
+
 .edit-patient {
   margin: auto;
 }
@@ -207,9 +142,10 @@
   color: $colorFontButton;
   border-style: none;
   border-radius: 4px;
-  width: 70px;
+  width: 100%;
+  padding: 5px;
   height: 30px;
-  font-size: 1rem;
+  font-size: 0.8rem;
 
 }
 
@@ -260,4 +196,93 @@
   margin-top: 20px;
   color: $colorPatientNotFound;
   font-size: 1.4rem;
+}
+
+@media only screen and (max-width: 1279px) {
+  .btns {
+    font-size: 0.9rem;
+  }
+
+  .header-area {
+    font-size: 1.3rem;
+  }
+
+  #header-reg,
+  #id {
+    padding-left: 70px;
+  }
+}
+
+@media only screen and (max-width: 1023px) {
+  .patient-card1 {
+    margin: 10px;
+  }
+
+  .header-area {
+    font-size: 1.2rem;
+  }
+
+  #header-reg,
+  #id {
+    padding-left: 25px;
+  }
+
+
+  .card-content1 {
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (max-width: 879px) {
+  .patient-card1 {
+    grid-template-columns: 2fr 3fr 3fr 3fr 0.5fr;
+  }
+
+  #header-reg,
+  #id {
+    padding-left: 10px;
+  }
+
+  .card-content1 {
+    font-size: 0.9rem;
+  }
+}
+
+@media only screen and (max-width: 555px) {
+  #search {
+    margin-bottom: 20px;
+  }
+
+  .search-area {
+    flex-direction: column;
+  }
+
+  .patient-card1 {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .containers {
+    color: $colorFontHeaderArea;
+    display: flex;
+    align-items: baseline;
+    height: 40px;
+    padding-left: 10px;
+    font-size: 1.2rem;
+  }
+
+  .card-content1 {
+    margin-left: 0.5rem;
+    font-size: 1.1rem;
+  }
+
+  .edit-patient button {
+    margin-bottom: 10px;
+  }
+}
+
+@media only screen and (max-width: 481px) {
+  .container-list {
+    margin-top: 91px;
+  }
 }
