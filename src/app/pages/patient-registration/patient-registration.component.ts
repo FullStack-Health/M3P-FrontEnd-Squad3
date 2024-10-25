@@ -18,6 +18,7 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Patient } from '../../models/patient.model';
 import { DataTransformService } from '../../shared/services/data-transform.service';
+import { ShareMenuStatusService } from '../../shared/services/share-menu-status.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -43,8 +44,18 @@ export class PatientRegistrationComponent implements OnInit {
   saveDisabled: boolean = false;
   isEditing: boolean = false;
   patRegistration: FormGroup;
+  menuTrueFalse: boolean | undefined;
   
-  constructor(private apiService: ApiService, private titleService: Title, private addressService: AddressService, private fb: FormBuilder, private activatedRoute: ActivatedRoute, private router: Router, private dataTransformService: DataTransformService) { this.isEditing = !!this.activatedRoute.snapshot.paramMap.get('id'),
+  constructor(
+    private apiService: ApiService, 
+    private titleService: Title, 
+    private addressService: AddressService, 
+    private fb: FormBuilder, 
+    private activatedRoute: ActivatedRoute, 
+    private router: Router, 
+    private dataTransformService: DataTransformService, 
+    private shareMenuStatusService: ShareMenuStatusService
+  ) { this.isEditing = !!this.activatedRoute.snapshot.paramMap.get('id'),
     this.patRegistration = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(64)]],
       gender: ['', Validators.required],
@@ -84,6 +95,10 @@ export class PatientRegistrationComponent implements OnInit {
     this.patientId = this.activatedRoute.snapshot.paramMap.get('id');
     this.monitorZipcodeChanges();
     this.getPatientData();
+
+    this.shareMenuStatusService.menuTrueFalse$.subscribe(value => {
+      this.menuTrueFalse = value;
+    });
   }
 
   searchZipcode(zipcode: string) {
