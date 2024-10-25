@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Appointment } from '../../models/appointment.model';
 import { DashboardStats } from '../../models/dashboard-stats.interface';
 import { ListPatients } from '../../models/list-patients.model';
@@ -108,14 +108,19 @@ export class ApiService {
     return this.http.get<Page<PatientCard>>(`${this.apiUrl}/patients`, { headers, params });
   }
 
-  getPatients(searchTerm: string, searchField: string): Observable<Patient[]> {
+  getPatients(searchTerm: string, searchField: string, page: number, size: number): Observable<Patient[]> {
     const jwtToken = sessionStorage.getItem('jwtToken');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
 
-    let params = new HttpParams().set(searchTerm, searchField);
-  
-    return this.http.get<Patient[]>(`${this.apiUrl}/patients?name=${searchTerm}&id=null`, { headers, params });
-  }
+    let params = new HttpParams()
+        .set('name', searchTerm)
+        .set('id', 'null')
+        .set('page', page.toString())
+        .set('size', size.toString());
+
+    return this.http.get<Patient[]>(`${this.apiUrl}/patients`, { headers, params })
+        .pipe(tap((response: any) => console.log('Patients response:', response)));
+}
 
   // medical record {id} endpoint
 
