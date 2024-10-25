@@ -15,9 +15,9 @@ select {
 }
 
 .sidebar-open {
-    width: 100%;
-    margin-left: 20px;
-    transition: width 0.27s ease, margin-left 0.27s ease;
+  width: 100%;
+  margin-left: 20px;
+  transition: width 0.27s ease, margin-left 0.27s ease;
 }
 
 #button-group1 {
@@ -54,9 +54,7 @@ select {
   color: $colorFontButtonDisable;
 }
 
-.form-area3,
-.form-area4,
-.form-area5 {
+.forms {
   background: $colorAreaBackground;
   border-radius: 4px;
   padding: 1%;
@@ -80,9 +78,7 @@ h4 {
 
 .row1 {
   display: flex;
-  flex-direction: row;
   width: 100%;
-  // gap: 10px;
   margin-top: 10px;
 }
 
@@ -90,17 +86,6 @@ h4 {
   display: flex;
   flex-direction: column;
   flex: 1;
-
-  input,
-  select {
-    width: 100%;
-    padding: 1%;
-    border-radius: 4px;
-    border: 2px solid $colorFormBorder;
-    height: 42px;
-  }
-
-  ;
 }
 
 .row1 .form-field1 {
@@ -128,13 +113,21 @@ h4 {
 
 input,
 select {
+  width: 100%;
+  height: 42px;
+  margin: 0px;
+  padding: 0px;
+  border-radius: 4px;
+  border: 2px solid #ccc;
   font-family: "Dosis", sans-serif;
-  padding-top: 2px;
   border-radius: 4px;
   font-size: 1.3rem;
 }
 
 label {
+  display: flex;
+  height: 50px;
+  align-items: end;
   font-family: "Dosis", sans-serif;
   font-size: 1.3rem;
   font-weight: 500;
@@ -177,4 +170,52 @@ input:disabled {
   left: 50%;
   animation: checkmark 1s;
   z-index: 9999;
+}
+
+@media only screen and (max-width: 767px) {
+  .form-container1 {
+    width: 100%;
+    margin-left: 20px;
+    transition: none;
+  }
+  
+  .sidebar-open {
+    transition: none;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+
+  label, input,
+  select {
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .form-container1 {
+    margin-top: 111px;
+  }
+
+  #button-group1 button {
+    width: 75px;
+  }
+
+  .forms {
+    align-items: center;
+  }
+
+.row1 {
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-field1 {
+  margin: 0px !important;
+}
+
+label, input,
+select {
+  width: 80vw;
+}
 }
