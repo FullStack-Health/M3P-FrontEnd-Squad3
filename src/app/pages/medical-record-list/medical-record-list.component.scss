@@ -50,6 +50,10 @@
   color: $colorSearchPlaceholder;
 }
 
+.container-btn {
+  display: flex;
+}
+
 .btns {
   background: $colorButton;
   color: $colorFontButton;
@@ -194,6 +198,7 @@
   display: flex;
   justify-content: center;
   margin-top: 20px;
+  margin-bottom: 20px;
   color: $colorPatientNotFound;
   font-size: 1.4rem;
 }
@@ -245,6 +250,12 @@
 
   .card-content1 {
     font-size: 0.9rem;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .container-list {
+    width: 100%;
   }
 }
 

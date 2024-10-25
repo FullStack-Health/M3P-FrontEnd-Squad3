@@ -10,7 +10,7 @@
                 <label for="search"></label>
                 <input type="text" id="search" name="search" [(ngModel)]="searchTerm"
                     placeholder="Digite o nome do paciente">
-                <div>
+                <div class="container-btn">
                     <button class="btns" id="btn-search1" (click)="search()">BUSCAR</button>
                     <button class="btns" id="btn-clear1" (click)="clearSearch()">LIMPAR</button>
                 </div>
@@ -25,16 +25,12 @@
                     <div id="header-ins">Convênio</div>
                     <div class="space-btn"></div>
                 </div>
+                
+                <div *ngIf="noResults" class="no-results">
+                    Nenhum paciente encontrado.
+                </div>
 
-                <!--
-                        <div *ngIf="noResults" class="no-results">
-                            Nenhum paciente encontrado.
-                        </div>
-                    -->
-
-                <!-- remover placeholders-->
-
-                <div *ngFor="let patient of medicalRecordPatientsListPlaceHolder" class="patient-card1">
+                <div *ngFor="let patient of medicalRecordPatientsList" class="patient-card1">
                     <div class="card-content1" id="id">{{ patient.id }}</div>
                     <div class="card-content1" id="name">{{ patient.name | shortenName }}</div>
                     <div class="card-content1" id="phone">{{ patient.phone }}</div>
@@ -48,15 +44,11 @@
 
             <div *ngIf="!isScreenLarge" class="list-area">
 
-                <!--
-                        <div *ngIf="noResults" class="no-results">
-                            Nenhum paciente encontrado.
-                        </div>
-                    -->
+                <div *ngIf="noResults" class="no-results">
+                    Nenhum paciente encontrado.
+                </div>
 
-                <!-- remover placeholders-->
-
-                <div *ngFor="let patient of medicalRecordPatientsListPlaceHolder" class="patient-card1">
+                <div *ngFor="let patient of medicalRecordPatientsList" class="patient-card1">
 
                     <div class="containers" id="header-reg">Registro: <div class="card-content1" id="id">{{
                             patient.id }}</div>
