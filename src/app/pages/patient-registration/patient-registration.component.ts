@@ -18,6 +18,7 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Patient } from '../../models/patient.model';
 import { DataTransformService } from '../../shared/services/data-transform.service';
+import { ShareMenuStatusService } from '../../shared/services/share-menu-status.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -43,8 +44,19 @@ export class PatientRegistrationComponent implements OnInit {
   saveDisabled: boolean = false;
   isEditing: boolean = false;
   patRegistration: FormGroup;
-  
-  constructor(private apiService: ApiService, private titleService: Title, private addressService: AddressService, private fb: FormBuilder, private activatedRoute: ActivatedRoute, private router: Router, private dataTransformService: DataTransformService) { this.isEditing = !!this.activatedRoute.snapshot.paramMap.get('id'),
+  menuTrueFalse: boolean | undefined;
+
+  constructor(
+    private apiService: ApiService,
+    private titleService: Title,
+    private addressService: AddressService,
+    private fb: FormBuilder,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private dataTransformService: DataTransformService,
+    private shareMenuStatusService: ShareMenuStatusService
+  ) {
+    this.isEditing = !!this.activatedRoute.snapshot.paramMap.get('id'),
     this.patRegistration = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(64)]],
       gender: ['', Validators.required],
@@ -60,7 +72,7 @@ export class PatientRegistrationComponent implements OnInit {
       emergContNumber: ['', Validators.required],
       listOfAllergies: [''],
       careList: [''],
-      healthInsurance: ['',Validators.required],
+      healthInsurance: ['', Validators.required],
       healthInsuranceNumber: [''],
       healthInsuranceVal: [''],
       zipcode: ['', Validators.required],
@@ -76,7 +88,7 @@ export class PatientRegistrationComponent implements OnInit {
 
   @ViewChild(DialogComponent) dialog!: DialogComponent;
   @ViewChild(ConfirmDialogComponent) confirmDialog!: ConfirmDialogComponent;
-  
+
   matcher = new MyErrorStateMatcher()
 
   ngOnInit() {
@@ -84,6 +96,10 @@ export class PatientRegistrationComponent implements OnInit {
     this.patientId = this.activatedRoute.snapshot.paramMap.get('id');
     this.monitorZipcodeChanges();
     this.getPatientData();
+
+    this.shareMenuStatusService.menuTrueFalse$.subscribe(value => {
+      this.menuTrueFalse = value;
+    });
   }
 
   searchZipcode(zipcode: string) {
@@ -110,37 +126,37 @@ export class PatientRegistrationComponent implements OnInit {
 
   patientRegister() {
     if (this.patRegistration.valid) {
-  
+
       const cpf = this.patRegistration.value.cpf.replace(/\D/g, '');
       const formattedCpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
 
       const newPatient: Patient = {
-          name: this.patRegistration.value.name,
-          gender: this.patRegistration.value.gender,
-          birthdate: this.patRegistration.value.birthdate,
-          cpf: formattedCpf,
-          rg: this.patRegistration.value.rg,
-          issOrg: this.patRegistration.value.issOrg,
-          maritalStatus: this.patRegistration.value.maritalStatus,
-          phone: this.dataTransformService.formatPhone(this.patRegistration.value.phone),
-          email: this.patRegistration.value.email,
-          placeOfBirth: this.patRegistration.value.placeOfBirth,
-          emergCont: this.patRegistration.value.emergCont,
-          emergContNumber: this.dataTransformService.formatPhone(this.patRegistration.value.emergContNumber),
-          listOfAllergies: this.patRegistration.value.listOfAllergies,
-          careList: this.patRegistration.value.careList,
-          healthInsurance: this.patRegistration.value.healthInsurance,
-          healthInsuranceNumber: this.patRegistration.value.healthInsuranceNumber,
-          healthInsuranceVal: this.patRegistration.value.healthInsuranceVal ?
+        name: this.patRegistration.value.name,
+        gender: this.patRegistration.value.gender,
+        birthdate: this.patRegistration.value.birthdate,
+        cpf: formattedCpf,
+        rg: this.patRegistration.value.rg,
+        issOrg: this.patRegistration.value.issOrg,
+        maritalStatus: this.patRegistration.value.maritalStatus,
+        phone: this.dataTransformService.formatPhone(this.patRegistration.value.phone),
+        email: this.patRegistration.value.email,
+        placeOfBirth: this.patRegistration.value.placeOfBirth,
+        emergCont: this.patRegistration.value.emergCont,
+        emergContNumber: this.dataTransformService.formatPhone(this.patRegistration.value.emergContNumber),
+        listOfAllergies: this.patRegistration.value.listOfAllergies,
+        careList: this.patRegistration.value.careList,
+        healthInsurance: this.patRegistration.value.healthInsurance,
+        healthInsuranceNumber: this.patRegistration.value.healthInsuranceNumber,
+        healthInsuranceVal: this.patRegistration.value.healthInsuranceVal ?
           this.patRegistration.value.healthInsuranceVal : null,
-          zipcode: this.patRegistration.value.zipcode,
-          street: this.patRegistration.value.street,
-          addressNumber: this.patRegistration.value.addressNumber,
-          complement: this.patRegistration.value.complement,
-          referencePoint: this.patRegistration.value.referencePoint,
-          neighborhood: this.patRegistration.value.neighborhood,
-          city: this.patRegistration.value.city,
-          state: this.patRegistration.value.state,
+        zipcode: this.patRegistration.value.zipcode,
+        street: this.patRegistration.value.street,
+        addressNumber: this.patRegistration.value.addressNumber,
+        complement: this.patRegistration.value.complement,
+        referencePoint: this.patRegistration.value.referencePoint,
+        neighborhood: this.patRegistration.value.neighborhood,
+        city: this.patRegistration.value.city,
+        state: this.patRegistration.value.state,
       };
 
       this.apiService.savePatient(newPatient).subscribe({
@@ -148,7 +164,7 @@ export class PatientRegistrationComponent implements OnInit {
           console.log('Patient saved successfully:', response);
           this.showMessage = true;
           this.patRegistration.reset();
-      
+
           setTimeout(() => {
             this.showMessage = false;
           }, 1000);
@@ -157,7 +173,7 @@ export class PatientRegistrationComponent implements OnInit {
           console.error('Error saving patient:', error);
         }
       });
-      
+
     } else {
       this.dialog.openDialog('Preencha todos os campos obrigatórios corretamente.');
     }
@@ -168,37 +184,37 @@ export class PatientRegistrationComponent implements OnInit {
     this.saveDisabled = false;
 
     if (this.patRegistration.valid) {
-    
+
       const cpf = this.patRegistration.value.cpf.replace(/\D/g, '');
       const formattedCpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
 
       const newPatient: Patient = {
-          name: this.patRegistration.value.name,
-          gender: this.patRegistration.value.gender,
-          birthdate: this.patRegistration.value.birthdate,
-          cpf: formattedCpf,
-          rg: this.patRegistration.value.rg,
-          issOrg: this.patRegistration.value.issOrg,
-          maritalStatus: this.patRegistration.value.maritalStatus,
-          phone: this.patRegistration.value.phone,
-          email: this.patRegistration.value.email,
-          placeOfBirth: this.patRegistration.value.placeOfBirth,
-          emergCont: this.patRegistration.value.emergCont,
-          emergContNumber: this.patRegistration.value.emergContNumber,
-          listOfAllergies: this.patRegistration.value.listOfAllergies,
-          careList: this.patRegistration.value.careList,
-          healthInsurance: this.patRegistration.value.healthInsurance,
-          healthInsuranceNumber: this.patRegistration.value.healthInsuranceNumber,
-          healthInsuranceVal: this.patRegistration.value.healthInsuranceVal ?
+        name: this.patRegistration.value.name,
+        gender: this.patRegistration.value.gender,
+        birthdate: this.patRegistration.value.birthdate,
+        cpf: formattedCpf,
+        rg: this.patRegistration.value.rg,
+        issOrg: this.patRegistration.value.issOrg,
+        maritalStatus: this.patRegistration.value.maritalStatus,
+        phone: this.patRegistration.value.phone,
+        email: this.patRegistration.value.email,
+        placeOfBirth: this.patRegistration.value.placeOfBirth,
+        emergCont: this.patRegistration.value.emergCont,
+        emergContNumber: this.patRegistration.value.emergContNumber,
+        listOfAllergies: this.patRegistration.value.listOfAllergies,
+        careList: this.patRegistration.value.careList,
+        healthInsurance: this.patRegistration.value.healthInsurance,
+        healthInsuranceNumber: this.patRegistration.value.healthInsuranceNumber,
+        healthInsuranceVal: this.patRegistration.value.healthInsuranceVal ?
           this.patRegistration.value.healthInsuranceVal : null,
-          zipcode: this.patRegistration.value.zipcode,
-          street: this.patRegistration.value.street,
-          addressNumber: this.patRegistration.value.addressNumber,
-          complement: this.patRegistration.value.complement,
-          referencePoint: this.patRegistration.value.referencePoint,
-          neighborhood: this.patRegistration.value.neighborhood,
-          city: this.patRegistration.value.city,
-          state: this.patRegistration.value.state,
+        zipcode: this.patRegistration.value.zipcode,
+        street: this.patRegistration.value.street,
+        addressNumber: this.patRegistration.value.addressNumber,
+        complement: this.patRegistration.value.complement,
+        referencePoint: this.patRegistration.value.referencePoint,
+        neighborhood: this.patRegistration.value.neighborhood,
+        city: this.patRegistration.value.city,
+        state: this.patRegistration.value.state,
       };
 
       this.apiService.editPatient(this.patientId, newPatient).subscribe({
@@ -207,14 +223,14 @@ export class PatientRegistrationComponent implements OnInit {
           this.showMessage = true;
           this.patRegistration.disable();
           this.saveDisabled = true;
-      
+
           setTimeout(() => {
             this.showMessage = false;
           }, 1000);
         },
         error: (error) => {
           console.error('Error updating patient:', error);
-        
+
         }
       });
     } else {
@@ -222,7 +238,7 @@ export class PatientRegistrationComponent implements OnInit {
     }
   }
 
-  editPatient(){
+  editPatient() {
     this.patRegistration.enable();
     this.saveDisabled = false;
   }
@@ -230,7 +246,7 @@ export class PatientRegistrationComponent implements OnInit {
   deletePatient(id: string) {
     // implementar lógica após criação dos components e models para exam e appointment (paciente não pode ser excluído se tiver exames ou consultas)
   }
-  
+
   getPatientData() {
     if (this.patientId) {
       this.apiService.getPatient(this.patientId).subscribe({
@@ -272,7 +288,7 @@ export class PatientRegistrationComponent implements OnInit {
       });
     }
   }
-  
+
 
 }
 
