@@ -178,7 +178,7 @@ input:disabled {
     margin-left: 20px;
     transition: none;
   }
-  
+
   .sidebar-open {
     transition: none;
   }
@@ -186,7 +186,8 @@ input:disabled {
 
 @media only screen and (max-width: 600px) {
 
-  label, input,
+  label,
+  input,
   select {
     font-size: 1rem;
   }
@@ -205,17 +206,18 @@ input:disabled {
     align-items: center;
   }
 
-.row1 {
-  flex-direction: column;
-  align-items: center;
-}
+  .row1 {
+    flex-direction: column;
+    align-items: center;
+  }
 
-.form-field1 {
-  margin: 0px !important;
-}
+  .form-field1 {
+    margin: 0px !important;
+  }
 
-label, input,
-select {
-  width: 80vw;
-}
+  label,
+  input,
+  select {
+    width: 80vw;
+  }
 }
