@@ -19,6 +19,7 @@ import { TimeFormatPipe } from '../../shared/pipes/time-format.pipe';
 import { TimelineModule } from 'primeng/timeline';
 import { CardModule } from 'primeng/card';
 import { AgePipe } from "../../shared/pipes/age.pipe";
+import { ShareMenuStatusService } from '../../shared/services/share-menu-status.service';
 
 
 @Component({
@@ -104,8 +105,15 @@ export class MedicalRecordComponent implements OnInit {
     docUrl: "www.labsp/doc",
     result: 'Alterações mínimas'
   }];
+  menuTrueFalse: boolean | undefined;
 
-  constructor(private titleService: Title, private activatedRoute: ActivatedRoute, private apiService: ApiService, private router: Router) { }
+  constructor(
+    private titleService: Title, 
+    private activatedRoute: ActivatedRoute, 
+    private apiService: ApiService, 
+    private router: Router,
+    private shareMenuStatusService: ShareMenuStatusService
+  ) { }
 
   ngOnInit() {
     this.titleService.setTitle('Prontuário de paciente');
@@ -283,6 +291,10 @@ export class MedicalRecordComponent implements OnInit {
       result: '',
     }
     */
+
+    this.shareMenuStatusService.menuTrueFalse$.subscribe(value => {
+      this.menuTrueFalse = value;
+    });
   }
 
   getPatient(id: string) {
