@@ -5,145 +5,166 @@
     margin-bottom: 50px;
     margin-right: 20px;
     margin-left: 220px;
+    width: calc(100% - 200px);
+    transition: width 0.3s ease, margin-left 0.3s ease;
+}
+
+.sidebar-open {
     width: 100%;
+    margin-left: 20px;
+    transition: width 0.27s ease, margin-left 0.27s ease;
 }
 
-.patient-title {
-    background: $colorGeneralCard;
-    border-radius: 4px;
-    height: 50px;
-    margin-bottom: 20px;
-    vertical-align: middle;   
+::ng-deep div.slider-content {
+    @include border-shadow();
 }
 
-.patient-title h2 {
-    font-size: 1.7rem;
-    color: $colorTitleToolbar;
-    padding-left: 15px;
-    font-family: "Dosis", sans-serif;
-    padding-top: 7px;
+::ng-deep .topics button {
+    @include border-shadow();
 }
 
-.content {
-    width: 100%;
+.container-edit-btn {
+    display: flex;
+    justify-content: end;
 }
 
-#edit-exam, #edit-appoint, #edit-patient {
+.edit-btn {
     background: $colorButton;
     color: $colorFontButton;
     border-radius: 4px;
     height: 35px;
     width: 75px;
+    margin: 15px;
     border: none;
     font-family: "Dosis", sans-serif;
-    margin-bottom: 15px;
 }
 
-#edit-exam:hover, #edit-appoint:hover, #edit-patient:hover {
+.edit-btn:hover {
     background: $colorHover;
     color: $colorFontButtonHover;
 }
 
-mat-divider {
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
-
 .content-container {
     display: flex;
-    padding-top: 20px;
-    justify-content: left;
-    flex-direction: row;
-    // border: 2px #b779ff solid;
-    border-radius: 4px;
-    padding: 20px;
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-.content-container:last-child {
-    margin-bottom: 0;
-}
-
-.content-label {
-    width: fit-content;
-    text-wrap: nowrap;
-}
-
-.content-label p {
-    text-align: right;
-    margin-right: 15px;
-    margin-bottom: 6px;
-    padding: 2px;
-    padding-left: 30px;
-    margin-right: 0px;
-    font-family: "Dosis", sans-serif;
-    font-size: 1.3rem;
-    font-weight: 500;
-    color: $colorLabelForms;
-    background-color: $colorInfoBackgroundLabel;
-    border: 2px solid $colorBorderLabelMedicalRecord;
-}
-
-.content-patient p {
-    background-color: $colorInfoBackgroundPatient;
-    border-radius: 4px;
-    margin-bottom: 6px;
-    border: 2px solid $colorFormBorder;
-    padding: 2px;
-    padding-left: 4px;
-    padding-right: 4px;
-    font-family: "Dosis", sans-serif;
-    font-size: 1.3rem;
-    font-weight: 400;
-    color: $colorGeneralFont;
-}
-
-.content-appointment p {
-    background-color: $colorInfoBackgroundPatient;
-    border-radius: 4px;
-    margin-bottom: 6px;
-    border: 2px solid $colorFormBorder;
-    padding: 2px;
-    padding-left: 4px;
-    padding-right: 4px;
-    font-family: "Dosis", sans-serif;
-    font-size: 1.3rem;
-    font-weight: 400;
-    color: $colorGeneralFont;
+    flex-direction: column;
+    padding: 0.5rem;
+    @include border-shadow ();
 }
 
 .content-patient {
-    width: 100%;
+    margin: 1rem;
 }
 
-.content-appointment {
+.content-patient p {
     display: flex;
-    flex-direction: column;
-    width: 100%;
+    flex-wrap: wrap;
+    margin: 1rem;
+    border-bottom: 1px solid black;
 }
 
-.edit-button {
+.content-patient strong {
+    margin-right: 0.5rem;
+}
+
+.containerCards {
+    margin-top: 1rem;
+    border-bottom: 4px solid #4A7A8C;
+    padding-bottom: 5px;
+}
+
+p-card h2 {
     display: flex;
-    justify-content: left;
+    flex-wrap: wrap;    
 }
 
-.content-exam p {
-    background-color: $colorInfoBackgroundPatient;
+p-card span {
+    margin-right: 0.5rem;
+}
+
+.image {
+    padding: 0.5rem;
+}
+
+/* Card das informações */
+::ng-deep .p-card-body {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #d9d9d948;
     border-radius: 4px;
-    margin-bottom: 6px;
-    border: 2px solid $colorFormBorder;
-    padding: 2px;
-    padding-left: 4px;
-    padding-right: 4px;
-    font-family: "Dosis", sans-serif;
-    font-size: 1.3rem;
-    font-weight: 400;
-    color: $colorGeneralFont;
+    @include border-shadow();
 }
 
-.content-exam {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+/* Linha do timeline */
+.p-timeline-event-connector {
+    width: 4px;
+    height: 100%;
+    background-color: #4A7A8C;
+}
+
+/* Elemento padrão do timeline que você não quer que apareça */
+::ng-deep .p-timeline-event-opposite {
+    display: none;
+}
+
+@media only screen and (max-width: 767px) {
+    .container1 {
+        width: 100%;
+        margin-left: 20px;
+        transition: none;
+    }
+
+    .sidebar-open {
+        transition: none;
+    }
+
+    ::ng-deep .topics button {
+        width: 120px !important;
+    }
+
+    .containerCards {
+        font-size: 1rem;
+    }
+}
+
+@media only screen and (max-width: 481px) {
+    .container1 {
+        margin-top: 111px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    ::ng-deep .topics button {
+        width: 90px !important;
+        font-size: 1rem !important;
+    }
+
+    ::ng-deep .slider-content {
+        padding: 5px !important;
+    }
+
+    .image {
+        padding-left: 0px;
+    }
+
+    ::ng-deep .p-timeline-event-content {
+        padding: 0px !important;
+    }
+
+    ::ng-deep div.p-card-body {
+        padding: 10px !important;
+    }
+
+    .content-patient p {
+        font-size: 1rem;
+    }
+
+    p-card span {
+        margin-right: 0px;
+    }
+}
+
+@media only screen and (max-width: 470px) {
+    .content-patient {
+        margin: 0px;
+    }
 }

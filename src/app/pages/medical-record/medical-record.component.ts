@@ -16,12 +16,17 @@ import { AppointmentRecord } from '../../models/appointment-record.model';
 import { ExamRecord } from '../../models/exam-record.model';
 import { DateFormatPipe } from '../../shared/pipes/date-format.pipe';
 import { TimeFormatPipe } from '../../shared/pipes/time-format.pipe';
+import { TimelineModule } from 'primeng/timeline';
+import { CardModule } from 'primeng/card';
+import { AgePipe } from "../../shared/pipes/age.pipe";
+import { ShareMenuStatusService } from '../../shared/services/share-menu-status.service';
+import { ShortenNamePipe } from "../../shared/pipes/shorten-name.pipe";
 
 
 @Component({
   selector: 'app-medical-record',
   standalone: true,
-  imports: [SidebarMenuComponent, ToolbarComponent, HttpClientModule, MatTabsModule, MatDividerModule, CommonModule, RouterLink, MatButton, MatButtonModule, SliderComponent, DateFormatPipe, TimeFormatPipe],
+  imports: [SidebarMenuComponent, ToolbarComponent, HttpClientModule, MatTabsModule, MatDividerModule, CommonModule, RouterLink, MatButton, MatButtonModule, SliderComponent, DateFormatPipe, TimeFormatPipe, TimelineModule, CardModule, AgePipe, ShortenNamePipe],
   providers: [ApiService],
   templateUrl: './medical-record.component.html',
   styleUrl: './medical-record.component.scss'
@@ -34,12 +39,19 @@ export class MedicalRecordComponent implements OnInit {
   patientsList: any = [];
   appointmentsList: AppointmentRecord[] = [];
   examsList: ExamRecord[] = [];
+  menuTrueFalse: boolean | undefined;
 
-  constructor(private titleService: Title, private activatedRoute: ActivatedRoute, private apiService: ApiService, private router: Router) { }
+  constructor(
+    private titleService: Title,
+    private activatedRoute: ActivatedRoute,
+    private apiService: ApiService,
+    private router: Router,
+    private shareMenuStatusService: ShareMenuStatusService
+  ) { }
 
   ngOnInit() {
     this.titleService.setTitle('Prontuário de paciente');
-  
+
     this.patientID = this.activatedRoute.snapshot.paramMap.get('id');
     console.log(this.patientID, 'esse é o id do paciente');
 
@@ -48,13 +60,32 @@ export class MedicalRecordComponent implements OnInit {
     this.getExams(this.patientID);
 
     this.patient = {
-      id: '',
+      id: undefined,
       name: '',
+      gender: '',
+      birthdate: '',
+      cpf: '',
+      rg: '',
+      issOrg: '',
+      maritalStatus: '',
+      phone: '',
+      email: '',
+      placeOfBirth: '',
       emergCont: '',
       emergContNumber: '',
-      listOfAllergies: null,
-      careList: null,
+      listOfAllergies: undefined,
+      careList: undefined,
       healthInsurance: '',
+      healthInsuranceNumber: undefined,
+      healthInsuranceVal: undefined,
+      zipcode: '',
+      street: undefined,
+      addressNumber: undefined,
+      complement: undefined,
+      referencePoint: undefined,
+      neighborhood: undefined,
+      city: '',
+      state: '',
       appointments: [],
       exams: []
     };
@@ -76,13 +107,17 @@ export class MedicalRecordComponent implements OnInit {
       examId: '',
       patientName: '',
       exam: '',
-      examDate: '', 
-      examTime: '', 
-      examType: '', 
-      lab: '', 
+      examDate: '',
+      examTime: '',
+      examType: '',
+      lab: '',
       docUrl: null,
       result: '',
     }
+
+    this.shareMenuStatusService.menuTrueFalse$.subscribe(value => {
+      this.menuTrueFalse = value;
+    });
   }
 
   getPatient(id: string) {
