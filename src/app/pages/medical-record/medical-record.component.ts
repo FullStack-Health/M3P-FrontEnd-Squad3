@@ -20,12 +20,13 @@ import { TimelineModule } from 'primeng/timeline';
 import { CardModule } from 'primeng/card';
 import { AgePipe } from "../../shared/pipes/age.pipe";
 import { ShareMenuStatusService } from '../../shared/services/share-menu-status.service';
+import { ShortenNamePipe } from "../../shared/pipes/shorten-name.pipe";
 
 
 @Component({
   selector: 'app-medical-record',
   standalone: true,
-  imports: [SidebarMenuComponent, ToolbarComponent, HttpClientModule, MatTabsModule, MatDividerModule, CommonModule, RouterLink, MatButton, MatButtonModule, SliderComponent, DateFormatPipe, TimeFormatPipe, TimelineModule, CardModule, AgePipe],
+  imports: [SidebarMenuComponent, ToolbarComponent, HttpClientModule, MatTabsModule, MatDividerModule, CommonModule, RouterLink, MatButton, MatButtonModule, SliderComponent, DateFormatPipe, TimeFormatPipe, TimelineModule, CardModule, AgePipe, ShortenNamePipe],
   providers: [ApiService],
   templateUrl: './medical-record.component.html',
   styleUrl: './medical-record.component.scss'

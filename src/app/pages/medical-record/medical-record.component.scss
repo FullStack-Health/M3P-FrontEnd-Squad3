@@ -7,13 +7,13 @@
     margin-left: 220px;
     width: calc(100% - 200px);
     transition: width 0.3s ease, margin-left 0.3s ease;
-    }
-    
-    .sidebar-open {
-      width: 100%;
-      margin-left: 20px;
-      transition: width 0.27s ease, margin-left 0.27s ease;
-    }
+}
+
+.sidebar-open {
+    width: 100%;
+    margin-left: 20px;
+    transition: width 0.27s ease, margin-left 0.27s ease;
+}
 
 ::ng-deep div.slider-content {
     @include border-shadow();
@@ -56,14 +56,29 @@
 }
 
 .content-patient p {
+    display: flex;
+    flex-wrap: wrap;
     margin: 1rem;
     border-bottom: 1px solid black;
+}
+
+.content-patient strong {
+    margin-right: 0.5rem;
 }
 
 .containerCards {
     margin-top: 1rem;
     border-bottom: 4px solid #4A7A8C;
     padding-bottom: 5px;
+}
+
+p-card h2 {
+    display: flex;
+    flex-wrap: wrap;    
+}
+
+p-card span {
+    margin-right: 0.5rem;
 }
 
 .image {
@@ -89,4 +104,67 @@
 /* Elemento padrão do timeline que você não quer que apareça */
 ::ng-deep .p-timeline-event-opposite {
     display: none;
+}
+
+@media only screen and (max-width: 767px) {
+    .container1 {
+        width: 100%;
+        margin-left: 20px;
+        transition: none;
+    }
+
+    .sidebar-open {
+        transition: none;
+    }
+
+    ::ng-deep .topics button {
+        width: 120px !important;
+    }
+
+    .containerCards {
+        font-size: 1rem;
+    }
+}
+
+@media only screen and (max-width: 481px) {
+    .container1 {
+        margin-top: 111px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    ::ng-deep .topics button {
+        width: 90px !important;
+        font-size: 1rem !important;
+    }
+
+    ::ng-deep .slider-content {
+        padding: 5px !important;
+    }
+
+    .image {
+        padding-left: 0px;
+    }
+
+    ::ng-deep .p-timeline-event-content {
+        padding: 0px !important;
+    }
+
+    ::ng-deep div.p-card-body {
+        padding: 10px !important;
+    }
+
+    .content-patient p {
+        font-size: 1rem;
+    }
+
+    p-card span {
+        margin-right: 0px;
+    }
+}
+
+@media only screen and (max-width: 470px) {
+    .content-patient {
+        margin: 0px;
+    }
 }

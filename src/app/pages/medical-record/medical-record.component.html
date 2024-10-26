@@ -39,7 +39,7 @@
             <p><strong>Estado Civil: </strong>{{ patient.maritalStatus }}</p>
             <p><strong>Telefone: </strong>{{ patient.phone }}</p>
             <p><strong>E-mail: </strong>{{ patient.email }}</p>
-            <p><strong>Contato de emergência: </strong>{{ patient.emergCont }} - {{ patient.emergContNumber }}</p>
+            <p><strong>Contato de emergência: </strong>{{ patient.emergCont | shortenName }} - {{ patient.emergContNumber }}</p>
             <p><strong>Alergias: </strong>{{ patient.listOfAllergies || 'N/A' }}</p>
             <p><strong>Cuidados específicos: </strong>{{ patient.careList || 'N/A' }}</p>
 
@@ -79,7 +79,7 @@
               </ng-template>
               <ng-template pTemplate="content" let-appointment>
                 <p-card>
-                  <h2>Data: {{ appointment.consultDate | dateFormat }}, Horário: {{ appointment.consultTime}} </h2>
+                  <h2><span>Data: {{ appointment.consultDate | dateFormat }}, </span><span>Horário: {{ appointment.consultTime}} </span></h2>
                   <p><strong>Motivo da Consulta: </strong>{{ appointment.reason }}</p>
                   <p><strong>Descrição do problema: </strong>{{ appointment.problemDescrip }}</p>
                   <p *ngIf="appointment.prescMed"><strong>Medicação receitada: </strong>{{ appointment.prescMed }}</p>
