@@ -1,9 +1,10 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './pages/login/login.component';
+import { AppointmentRegistrationComponent } from './pages/appointment-registration/appointment-registration.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { LoginComponent } from './pages/login/login.component';
 import { MedicalRecordListComponent } from './pages/medical-record-list/medical-record-list.component';
-import { PatientRegistrationComponent } from './pages/patient-registration/patient-registration.component';
 import { MedicalRecordComponent } from './pages/medical-record/medical-record.component';
+import { PatientRegistrationComponent } from './pages/patient-registration/patient-registration.component';
 
 export const routes: Routes = [
     { path: '', component: LoginComponent },
@@ -16,6 +17,7 @@ export const routes: Routes = [
         children: [
           { path: ':id', component: MedicalRecordComponent }
         ]
-    }
+    },
+    { path: 'registro-consulta', component: AppointmentRegistrationComponent}
     
 ];

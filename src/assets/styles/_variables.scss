@@ -22,6 +22,22 @@ $black: #000000;
 
 // SHARED
 
+// general
+$colorPageBackground: $purplePinkGradient;
+$colorBrand: $white;
+$colorSearchBackground: $whiteLowOpacity;
+$colorSearchPlaceholder: $blackHighOpacity;
+$colorGeneralCard: $white;
+$colorAreaBackground: $whiteLowOpacity;
+$colorBackgroundSidebarMenu: $white;
+$colorBorderSidebarMenu: $transparent;
+$colorBackgroundToolbar: $white;
+$colorPatCardNameBackground: $blueHighOpacity;
+$colorCardContent: $whiteMediumOpacity;
+$colorPatientResult: $black;
+$colorPatientResultHover: $redBrand;
+$colorPatientNotFound: $redBrand;
+
 // forms
 $colorFormBorder: $pinkPurple;
 $colorLabelForms: $black;
