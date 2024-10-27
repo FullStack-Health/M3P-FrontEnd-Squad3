@@ -40,6 +40,7 @@ select {
   background: $colorSearchBackground;
   outline: none;
   transition: box-shadow 0.3s ease-in-out;
+  @include border-shadow();
 }
 
 #search::placeholder {
@@ -172,16 +173,15 @@ select {
 .form-area3 {
   background: $colorAreaBackground;
   border-radius: 4px;
-  //  padding: 1%;
   padding-top: 20px;
   padding-bottom: 20px;
   margin-top: 20px;
   margin-bottom: 20px;
-  //  margin-right: 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 100%;
+  @include border-shadow();
 }
 
 .row1 {
@@ -205,7 +205,7 @@ select {
   select {
     width: 100%;
     border-radius: 4px;
-    border: 2px solid $colorFormBorder;
+    border: 2px solid #ccc;
     height: 35px;
   }
 }
@@ -225,14 +225,14 @@ textarea {
   padding-left: 10px;
   padding-top: 2px;
   font-size: 1.2rem;
-  border: 2px solid $colorFormBorder;
+  border: 2px solid #ccc;
   border-radius: 4px;
 }
 
 select:disabled,
 input:disabled,
 textarea:disabled {
-  background: $colorBackgroundDisable;
+  background: rgb(182, 182, 182);
   color: $colorFontDisable;
 }
 
@@ -241,10 +241,6 @@ label {
   font-size: 1.3rem;
   font-weight: 500;
   color: $colorLabelForms;
-}
-
-mat-error {
-  color: $colorTextDangerForm;
 }
 
 .idPatient {
@@ -284,4 +280,5 @@ mat-error {
 mat-error {
   font-family: "Dosis", sans-serif;
   font-size: 1.1rem;
+  color: $colorTextDangerForm;
 }
