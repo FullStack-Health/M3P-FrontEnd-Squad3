@@ -9,6 +9,7 @@ import { PatientCard } from '../../models/patient-card.model';
 import { PatientRecord } from '../../models/patient-record.model';
 import { Patient } from '../../models/patient.model';
 import { User } from '../../models/user.model';
+import { Exam } from '../../models/exam.model';
 
 @Injectable({
   providedIn: 'root'
@@ -166,5 +167,35 @@ export class ApiService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
 
     return this.http.delete<Appointment>(`${this.apiUrl}/appointments/${id}`, { headers });
+  }
+
+  // exam endpoint
+
+  saveExam(exam: Exam): Observable<Exam> {
+    const jwtToken = sessionStorage.getItem('jwtToken');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
+
+    return this.http.post<Exam>(`${this.apiUrl}/exams`, exam, { headers });
+  }
+
+  editExam(id: string, exam: Exam): Observable<Exam> {
+    const jwtToken = sessionStorage.getItem('jwtToken');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
+
+    return this.http.put<Exam>(`${this.apiUrl}/exams/${id}`, exam, { headers });
+  }
+
+  getExam(id: string): Observable<Exam> {
+    const jwtToken = sessionStorage.getItem('jwtToken');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
+
+    return this.http.get<Exam>(`${this.apiUrl}/exams/${id}`, { headers });
+  }
+
+  deleteExam(id: string): Observable<Exam> {
+    const jwtToken = sessionStorage.getItem('jwtToken');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
+
+    return this.http.delete<Exam>(`${this.apiUrl}/exams/${id}`, { headers });
   }
 }
