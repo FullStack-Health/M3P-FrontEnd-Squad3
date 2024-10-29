@@ -1,11 +1,15 @@
 @import '../../../assets/styles/variables';
 
-body {
+input,
+select {
   box-sizing: border-box;
 }
 
 .form-container1 {
+  display: flex;
+  flex-direction: column;
   width: calc(100% - 200px);
+  min-width: 50%;
   margin-top: 85px;
   margin-left: 220px;
   margin-right: 20px;
@@ -18,12 +22,39 @@ body {
   transition: width 0.27s ease, margin-left 0.27s ease;
 }
 
-#button-group1 {
+#search-and-btn {
   display: flex;
-  margin-left: auto;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  margin-right: 20px;
 }
 
-#button-group1 button {
+#search {
+  width: 100%;
+  height: 40px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 1.3rem;
+  border-radius: 4px;
+  border: none;
+  background: $colorSearchBackground;
+  outline: none;
+  transition: box-shadow 0.3s ease-in-out;
+  @include border-shadow();
+}
+
+#search::placeholder {
+  color: $colorSearchPlaceholder;
+}
+
+.button-group1 {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button-group1 button {
   font-family: "Dosis", sans-serif;
   font-weight: 500;
   font-size: 1rem;
@@ -37,22 +68,22 @@ body {
   width: 85px;
 }
 
-#button-group1 button:disabled {
+.button-group1 button:disabled {
   background: $colorButtonDisable;
   color: $colorFontButtonDisable;
 }
 
-#button-group1 button:hover {
+.button-group1 button:hover {
   background: $colorHover;
   color: $colorFontButtonHover;
 }
 
-#button-group1 button:disabled:hover {
+.button-group1 button:disabled:hover {
   background: $colorButtonDisable;
   color: $colorFontButtonDisable;
 }
 
-#button-group1 .btn-save-valid {
+.button-group1 .btn-save-valid {
   background-color: $colorBtnSaveFormValid;
 }
 
@@ -146,9 +177,8 @@ body {
   flex-direction: column;
   justify-content: center;
   width: auto;
-  margin-bottom: 20px;
   margin-top: 20px;
-  padding: 1%;
+  margin-bottom: 20px;
   padding-top: 20px;
   padding-bottom: 20px;
   border-radius: 4px;
@@ -159,33 +189,30 @@ body {
 .row1 {
   display: flex;
   flex-direction: row;
-  width: 100%;
+  width: auto;
   gap: 10px;
   margin-top: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 .form-field1 {
   display: flex;
   flex-direction: column;
   width: 100%;
-  flex: 1;
-
-  input,
-  select {
-    width: 100%;
-    border-radius: 4px;
-    border: 2px solid $colorFormBorder;
-    height: 35px;
-  }
 }
 
 input,
 select {
   font-family: "Dosis", sans-serif;
+  height: 35px;
   padding-left: 10px;
+  padding-right: 10px;
   padding-top: 2px;
   border-radius: 4px;
   font-size: 1.2rem;
+  border-radius: 4px;
+  border: 2px solid #ccc;
 }
 
 textarea {
@@ -193,14 +220,14 @@ textarea {
   padding-left: 10px;
   padding-top: 2px;
   font-size: 1.2rem;
-  border: 2px solid $colorFormBorder;
+  border: 2px solid #ccc;
   border-radius: 4px;
 }
 
 select:disabled,
 input:disabled,
 textarea:disabled {
-  background: $colorBackgroundDisable;
+  background: rgb(182, 182, 182);
   color: $colorFontDisable;
 }
 
@@ -211,10 +238,6 @@ label {
   color: $colorLabelForms;
 }
 
-mat-error {
-  color: $colorTextDangerForm;
-}
-
 .idPatient {
   flex: 1;
 }
@@ -222,32 +245,6 @@ mat-error {
 .name {
   flex: 3;
 }
-
-#search-and-btn {
-  display: flex;
-  flex-direction: row;
-  width: calc(100% - 200px);
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-#search {
-  width: 100%;
-  height: 40px;
-  padding-left: 15px;
-  padding-right: 15px;
-  font-size: 1.3rem;
-  border-radius: 4px;
-  border: none;
-  background: $colorSearchBackground;
-  outline: none;
-  transition: box-shadow 0.3s ease-in-out;
-}
-
-#search::placeholder {
-  color: $colorSearchPlaceholder;
-}
-
 
 @keyframes checkmark {
   0% {
@@ -273,4 +270,10 @@ mat-error {
   left: 50%;
   animation: checkmark 1s;
   z-index: 9999;
+}
+
+mat-error {
+  font-family: "Dosis", sans-serif;
+  font-size: 1.1rem;
+  color: $colorTextDangerForm;
 }

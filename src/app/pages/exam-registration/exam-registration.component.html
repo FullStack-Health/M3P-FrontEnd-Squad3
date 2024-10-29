@@ -17,7 +17,7 @@
                 <input *ngIf="!isEditing" type="text" id="search" name="search" placeholder="Digite o nome do paciente"
                     matInput [formControl]="patientSearchControl">
 
-                <div id="button-group1">
+                <div class="button-group1">
                     <button id="btn-search" *ngIf="!isEditing" (click)="onSearch()">Buscar</button>
                     <button id="btn-save-d" [disabled]="saveDisabled" *ngIf="isEditing"
                         (click)="saveEditExam()">Salvar</button>
@@ -93,15 +93,13 @@
                         </div>
                     </div>
                     <div class="row1">
-                        <div class="row1">
-                            <div class="form-field1 examType">
-                                <label for="examType">Tipo do exame*</label>
-                                <input matInput formControlName="examType" name="examType">
-                                <mat-error
-                                    *ngIf="examRegistration.get('examType')?.invalid && (examRegistration.get('examType')?.dirty || examRegistration.get('examType')?.touched)">
-                                    Tipo do exame é obrigatório e deve ter entre 4 e 32 caracteres
-                                </mat-error>
-                            </div>
+                        <div class="form-field1 examType">
+                            <label for="examType">Tipo do exame*</label>
+                            <input matInput formControlName="examType" name="examType">
+                            <mat-error
+                                *ngIf="examRegistration.get('examType')?.invalid && (examRegistration.get('examType')?.dirty || examRegistration.get('examType')?.touched)">
+                                Tipo do exame é obrigatório e deve ter entre 4 e 32 caracteres
+                            </mat-error>
                         </div>
                     </div>
 
