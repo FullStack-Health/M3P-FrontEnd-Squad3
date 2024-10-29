@@ -1,0 +1,86 @@
+<div style="display: flex; flex-direction: column; height: 100vh;">
+    <app-toolbar></app-toolbar>
+
+    <div style="display: flex; flex-grow: 1;">
+        <app-sidebar-menu></app-sidebar-menu>
+
+        <div [ngClass]="{'sidebar-open': !menuTrueFalse}" class="container-list" style="flex-grow: 1">
+
+            <div class="search-area">
+                <label for="search"></label>
+                <input type="text" id="search" name="search" [(ngModel)]="searchTerm"
+                    placeholder="Digite o login do usuário">
+                <div class="container-btn">
+                    <button class="btns" id="btn-search1" (click)="search()">BUSCAR</button>
+                    <button class="btns" id="btn-clear1" (click)="clearSearch()">LIMPAR</button>
+                </div>
+            </div>
+
+            <div *ngIf="isScreenLarge" class="list-area">
+
+                <div class="user-card1 header-area">
+                    <div id="header-reg">Registro</div>
+                    <div id="header-login">Login</div>
+                    <div id="header-role">Perfil</div>
+                    <div id="header-pass">Senha</div>
+                    <div class="space-btn"></div>
+                </div>
+
+                <div *ngIf="noResults" class="no-results">
+                    Nenhum usuário encontrado.
+                </div>
+
+                <div *ngFor="let user of usersList" class="user-card1">
+                    <div class="card-content1" id="id">{{ user.userId }}</div>
+                    <div class="card-content1" id="email">{{ user.email }}</div>
+                    <div class="card-content1" id="role">{{ user.roleName | roleTransform }}</div>
+                    <div class="card-content1" id="password">{{ user.password }}</div>
+                    <div class="edit-user">
+                        <button (click)="editUser(user.userId)">EDITAR</button>
+                    </div>
+
+                </div>
+            </div>
+
+            <div *ngIf="!isScreenLarge" class="list-area">
+
+                <div *ngIf="noResults" class="no-results">
+                    Nenhum usuário encontrado.
+                </div>
+
+                <div *ngFor="let user of usersList" class="user-card1">
+
+                    <div class="containers" id="header-reg">Registro: <div class="card-content1" id="id">{{
+                            user.id }}</div>
+                    </div>
+
+                    <div class="containers" id="header-login">Login: <div class="card-content1" id="email">{{
+                            user.email }}</div>
+                    </div>
+
+                    <div class="containers" id="header-role">Perfil: <div class="card-content1" id="role">{{
+                            user.role }}</div>
+                    </div>
+
+                    <div class="containers" id="header-pass">Senha: <div class="card-content1" id="password">{{
+                            user.password }}</div>
+                    </div>
+
+                    <div class="edit-user">
+                        <button (click)="editUser(user.userId)">EDITAR</button>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="pages">
+                <button (click)="goToPreviousPage()" [disabled]="isPreviousDisabled()">Retornar</button>
+                <button (click)="goToNextPage()" [disabled]="isNextDisabled()">Seguinte</button>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<router-outlet></router-outlet>

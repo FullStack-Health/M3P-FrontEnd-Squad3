@@ -10,6 +10,7 @@ import { PatientRecord } from '../../models/patient-record.model';
 import { Patient } from '../../models/patient.model';
 import { User } from '../../models/user.model';
 import { Exam } from '../../models/exam.model';
+import { ListUsers } from '../../models/list-users.model';
 
 @Injectable({
   providedIn: 'root'
@@ -58,6 +59,28 @@ export class ApiService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
 
     return this.http.delete<User>(`${this.apiUrl}/users/${id}`, { headers });
+  }
+
+  listUsers(page: number, size: number, email?: string, id?: string): Observable<Page<ListUsers>> {
+    const jwtToken = sessionStorage.getItem('jwtToken');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
+
+    let params = new HttpParams().set('page', page.toString()).set('size', size.toString());
+
+    if (email) {
+      params = params.set('email', email);
+    }
+    if (id) {
+      params = params.set('userId', id);
+    }
+
+    if (email || id) {
+      params = params.set('fullName', '');
+    }
+    
+    console.log("Sending request with params:", params.toString());
+
+    return this.http.get<Page<ListUsers>>(`${this.apiUrl}/users`, { headers, params });
   }
 
   // dashboard endpoint
