@@ -5,6 +5,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { MedicalRecordListComponent } from './pages/medical-record-list/medical-record-list.component';
 import { MedicalRecordComponent } from './pages/medical-record/medical-record.component';
 import { PatientRegistrationComponent } from './pages/patient-registration/patient-registration.component';
+import { UserListComponent } from './pages/user-list/user-list.component';
 
 export const routes: Routes = [
     { path: '', component: LoginComponent },
@@ -18,6 +19,6 @@ export const routes: Routes = [
           { path: ':id', component: MedicalRecordComponent }
         ]
     },
-    { path: 'registro-consulta', component: AppointmentRegistrationComponent}
-    
+    { path: 'registro-consulta', component: AppointmentRegistrationComponent },
+    { path: 'lista-usuarios', component: UserListComponent }
 ];
