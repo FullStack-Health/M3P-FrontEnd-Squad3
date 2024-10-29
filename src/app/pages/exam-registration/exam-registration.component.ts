@@ -20,6 +20,7 @@ import { SidebarMenuComponent } from '../../shared/components/sidebar-menu/sideb
 import { ToolbarComponent } from '../../shared/components/toolbar/toolbar.component';
 import { ApiService } from '../../shared/services/api.service';
 import { Exam } from '../../models/exam.model';
+import { ShareMenuStatusService } from '../../shared/services/share-menu-status.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -50,20 +51,29 @@ export class ExamRegistrationComponent implements OnInit {
   pageSize: number = 10;
   totalPatients: number = 0;
   noResults: boolean = false;
+  menuTrueFalse: boolean | undefined;
 
-  constructor(private dataTransformService: DataTransformService, private titleService: Title, private fb: FormBuilder, private apiService: ApiService, private activatedRoute: ActivatedRoute, private router: Router) { 
+  constructor(
+    private dataTransformService: DataTransformService,
+    private titleService: Title,
+    private fb: FormBuilder,
+    private apiService: ApiService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private shareMenuStatusService: ShareMenuStatusService
+  ) {
     this.isEditing = !!this.activatedRoute.snapshot.paramMap.get('id'),
-    this.examRegistration = this.fb.group({
-      idPatient: [{value: '', disabled: true}, Validators.required],
-      name: [{value: '', disabled: true},Validators.required],
-      exam: ['',[Validators.required, Validators.minLength(8), Validators.maxLength(64)]],
-      examDate: ['',Validators.required],
-      examTime: ['',Validators.required],
-      examType: ['',[Validators.required, Validators.minLength(4), Validators.maxLength(32)]],
-      lab: ['',[Validators.required, Validators.minLength(4), Validators.maxLength(32)]],
-      docUrl: ['',],
-      result: ['',[Validators.required, Validators.minLength(16), Validators.maxLength(1024)]],
-    });
+      this.examRegistration = this.fb.group({
+        idPatient: [{ value: '', disabled: true }, Validators.required],
+        name: [{ value: '', disabled: true }, Validators.required],
+        exam: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(64)]],
+        examDate: ['', Validators.required],
+        examTime: ['', Validators.required],
+        examType: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(32)]],
+        lab: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(32)]],
+        docUrl: ['',],
+        result: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(1024)]],
+      });
   }
 
   @ViewChild(DialogComponent) dialog!: DialogComponent;
@@ -79,15 +89,19 @@ export class ExamRegistrationComponent implements OnInit {
 
   ngOnInit() {
     this.titleService.setTitle('Registro de Exame');
-    this.examId = this.activatedRoute.snapshot.paramMap.get('id');   
+    this.examId = this.activatedRoute.snapshot.paramMap.get('id');
     this.getExamData();
+
+    this.shareMenuStatusService.menuTrueFalse$.subscribe(value => {
+      this.menuTrueFalse = value;
+    });
   }
 
   setCurrentTimeAndDate() {
     const currentDate = this.setDate(new Date());
     const dateString = moment(currentDate).format('YYYY-MM-DD');
     const timeString = moment(currentDate).format('HH:mm');
-      
+
     this.examRegistration.patchValue({
       examDate: dateString,
       examTime: timeString,
@@ -98,17 +112,17 @@ export class ExamRegistrationComponent implements OnInit {
     this.apiService.getPatients(searchTerm, 'name', page, size).subscribe({
       next: (response: any) => {
         this.filteredPatients = response.content;
-        this.totalPatients = response.totalElements; 
-        
+        this.totalPatients = response.totalElements;
+
         if (this.totalPatients === 0) {
           this.noResults = true;
           console.log(this.noResults);
-          this.filteredPatients = []; 
+          this.filteredPatients = [];
         } else {
-          this.noResults = false; 
+          this.noResults = false;
         }
-  
-        this.totalPages = Math.ceil(this.totalPatients / this.pageSize); 
+
+        this.totalPages = Math.ceil(this.totalPatients / this.pageSize);
         console.log('Successfully loaded patients:', this.filteredPatients);
       },
       error: (error) => {
@@ -125,7 +139,7 @@ export class ExamRegistrationComponent implements OnInit {
   onSearch() {
     const searchTerm = this.patientSearchControl.value?.trim();
     console.log('Searching for:', searchTerm);
-    
+
     if (searchTerm && searchTerm.length > 0) {
       this.getPatientsBySearchTerm(searchTerm, this.currentPage, this.pageSize);
     } else {
@@ -145,7 +159,7 @@ export class ExamRegistrationComponent implements OnInit {
       }
     }
   }
-  
+
   previousPage() {
     if (this.currentPage > 0) {
       this.currentPage--;
@@ -183,24 +197,24 @@ export class ExamRegistrationComponent implements OnInit {
     }
 
     if (this.examRegistration.valid) {
-        
-        const newExam: Exam = {
-          id: this.examRegistration.getRawValue().idPatient,
-          exam: this.examRegistration.value.exam,
-          examDate: this.dataTransformService.formatDate(this.examRegistration.value.examDate),
-          examTime: this.examRegistration.value.examTime,
-          examType: this.examRegistration.value.examType,
-          lab: this.examRegistration.value.lab,
-          docUrl: this.examRegistration.value.docUrl,
-          result: this.examRegistration.value.result,
-        }
 
-        this.apiService.saveExam(newExam).subscribe({
-          next: (response) => {
-            console.log('Exam saved successfully:', response);
-            this.showMessage = true;
-            this.examRegistration.reset();
-            this.setCurrentTimeAndDate();
+      const newExam: Exam = {
+        id: this.examRegistration.getRawValue().idPatient,
+        exam: this.examRegistration.value.exam,
+        examDate: this.dataTransformService.formatDate(this.examRegistration.value.examDate),
+        examTime: this.examRegistration.value.examTime,
+        examType: this.examRegistration.value.examType,
+        lab: this.examRegistration.value.lab,
+        docUrl: this.examRegistration.value.docUrl,
+        result: this.examRegistration.value.result,
+      }
+
+      this.apiService.saveExam(newExam).subscribe({
+        next: (response) => {
+          console.log('Exam saved successfully:', response);
+          this.showMessage = true;
+          this.examRegistration.reset();
+          this.setCurrentTimeAndDate();
 
           setTimeout(() => {
             this.showMessage = false;
@@ -210,7 +224,7 @@ export class ExamRegistrationComponent implements OnInit {
           console.error('Error saving exam:', error);
         }
       });
-      
+
     } else {
       this.dialog.openDialog('Preencha todos os campos obrigatórios corretamente.');
     }
@@ -230,9 +244,9 @@ export class ExamRegistrationComponent implements OnInit {
             lab: exam.lab,
             docUrl: exam.docUrl,
             result: exam.result
-        });
-        
-      },
+          });
+
+        },
         error: (error) => {
           console.error('Error when fetching exam data:', error);
         },
@@ -268,14 +282,14 @@ export class ExamRegistrationComponent implements OnInit {
           this.showMessage = true;
           this.examRegistration.disable();
           this.saveDisabled = true;
-      
+
           setTimeout(() => {
             this.showMessage = false;
           }, 1000);
         },
         error: (error) => {
           console.error('Error updating exam:', error);
-        
+
         }
       });
     } else {
@@ -283,39 +297,39 @@ export class ExamRegistrationComponent implements OnInit {
     }
   }
 
-  editExam(){
+  editExam() {
     this.examRegistration.enable();
     this.saveDisabled = false;
   }
 
   deleteExam(id: string) {
     this.confirmDialog.openDialog("Tem certeza que deseja excluir o exame? Essa ação não pode ser desfeita.");
-  
+
     const subscription = this.confirmDialog.confirm.subscribe(result => {
       if (result) {
         this.apiService.deleteExam(id).subscribe({
           next: () => {
-            this.router.navigate(['/lista-prontuarios']); 
-            subscription.unsubscribe(); 
+            this.router.navigate(['/lista-prontuarios']);
+            subscription.unsubscribe();
           },
           error: (error) => {
-            console.error('Error deleting exam:', error); 
+            console.error('Error deleting exam:', error);
           }
         });
       } else {
-        subscription.unsubscribe(); 
+        subscription.unsubscribe();
       }
     });
   }
-  
-  
+
+
 
 }
-  
-  
-  
 
-  
-  
+
+
+
+
+
 
 
