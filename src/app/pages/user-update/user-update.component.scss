@@ -1,0 +1,137 @@
+@import '../../../assets/styles/variables';
+
+input,
+select {
+  box-sizing: border-box;
+}
+
+.form-container1 {
+    margin-top: 85px;
+    width: 100%;
+    margin-left: 220px;
+    margin-right: 20px;
+   }
+
+  .sidebar-open {
+    width: 100%;
+    margin-left: 20px;
+    transition: width 0.27s ease, margin-left 0.27s ease;
+  }
+
+ #button-group1 {
+  display: flex;
+  justify-content: right;
+ }
+ 
+ #button-group1 button {
+  font-family: "Dosis", sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  text-transform: uppercase;
+  margin-left: 10px;
+  background: $colorButton;
+  border: none;
+  border-radius: 4px;
+  color: $colorFontButton;
+  height: 40px;
+  width: 85px;
+ }
+ 
+ #button-group1 button:disabled {
+  background: $colorButtonDisable;
+  color: $colorFontButtonDisable;
+ }
+ 
+ #button-group1 button:hover {
+  background: $colorHover;
+  color: $colorFontButtonHover;
+ }
+ 
+ #button-group1 button:disabled:hover {
+  background: $colorButtonDisable;
+  color: $colorFontButtonDisable;
+ }
+
+ h4 {
+    font-size: 1.7rem;
+    color: $colorTitleSectionForm;
+    font-family: "Dosis", sans-serif;
+    text-align: left;
+    padding-bottom: 7px;
+   }
+
+.form-area3 {
+ background: $colorAreaBackground;
+ border-radius: 4px;
+ padding: 20px;
+ margin-top: 20px;
+ margin-bottom: 20px;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ width: 100%;
+}
+
+.row1 {
+  display: flex;
+  margin: auto;
+  width: 100%;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.form-field1, .form-field1-roleName, .form-field1-confirm, .form-field1-id {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+   input, select {
+    width: 100%;
+    border-radius: 4px;
+    border: 2px solid $colorFormBorder;
+    height: 35px;
+    font-family: "Dosis", sans-serif;
+    font-size: 1.2rem;
+   }
+}
+
+select:disabled, input:disabled, textarea:disabled {
+  background: $colorBackgroundDisable;
+  color: $colorFontDisable;
+}
+
+label {
+  font-family: "Dosis", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: $colorLabelForms;
+}
+
+mat-error {
+    color: $colorTextDangerForm;
+    font-family: "Dosis", sans-serif;
+    font-size: 1.1rem;
+}
+
+@keyframes checkmark {
+  0% {
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.checkmark {
+  position: fixed; 
+  top: 40%; 
+  left: 50%; 
+  animation: checkmark 1s;
+  z-index: 9999; 
+}
+

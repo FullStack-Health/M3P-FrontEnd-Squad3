@@ -1,0 +1,109 @@
+<div *ngIf="showMessage" class="checkmark">
+    <img src="../../../assets/images/check-save.png">
+</div>
+
+<app-dialog></app-dialog>
+<app-confirm-dialog></app-confirm-dialog>
+
+<div style="display: flex; flex-direction: column; height: 100vh;">
+    <app-toolbar></app-toolbar>
+
+    <div style="display: flex; flex-grow: 1;">
+        <app-sidebar-menu></app-sidebar-menu>
+
+
+        <div class="form-container1">
+
+                <div id="button-group1">       
+                    <button id="btn-save-d" (click)="saveEditUser()">Salvar</button>
+                    <button id="btn-edit" (click)="editUser()">Editar</button>
+                    <button id="btn-del" (click)="deleteUser(userId)">Deletar</button>
+                </div>  
+
+                <div class="form-area2" [formGroup]="userForm">
+                    <div class="form-area3">
+                        
+                        <div class="row1" id="role">
+                            <div class="form-field1-roleName">
+                                <label for="roleName">Perfil do usuário*</label>
+                                <input matInput [value]="userForm.get('roleName')?.value | roleTransform" formControlName="roleName" readonly>
+
+                            </div>
+                        </div>
+                        <div class="row1" id="id">
+                            <div class="form-field1-id">
+                                <label for="id">ID*</label>
+                                <input matInput formControlName="userId" name="userId" readonly>
+                            </div>
+                        </div>
+
+                        <div class="row1">
+                            <div class="form-field1 name">
+                                <label for="name">Nome completo*</label>
+                                <input matInput formControlName="name" name="name">
+                                <mat-error *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched">
+                                    Obrigatório
+                                </mat-error>
+                            </div>
+                        </div>
+
+                        <div class="row1">
+                            <div class="form-field1 email">
+                                <label for="email">E-mail*</label>
+                                <input matInput type="email" formControlName="email" name="email">
+                                <mat-error *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
+                                    Obrigatório
+                                </mat-error>
+                            </div>
+                        </div>
+
+                        <div class="row1">
+                            <div class="form-field1 birthDate">
+                                <label for="birthDate">Data de Nascimento*</label>
+                                <input type="date" name="birthDate" formControlName="birthdate">
+                                <mat-error *ngIf="userForm.get('birthdate')?.invalid && userForm.get('birthdate')?.touched">
+                                    Obrigatório
+                                </mat-error>
+                            </div>
+                        </div>
+
+                        <div class="row1">
+                            <div class="form-field1 cpf">
+                                <label for="cpf">CPF*</label>
+                                <input matInput formControlName="cpf" mask="000.000.000-00" id="cpf-form-field" name="cpf">
+                                <mat-error *ngIf="userForm.get('cpf')?.invalid && userForm.get('cpf')?.touched">
+                                    Obrigatório
+                                </mat-error>
+                            </div>
+                        </div>
+
+                        <div class="row1">
+                            <div class="form-field1 phone">
+                                <label for="phone">Telefone*</label>
+                                <input matInput type="phone" formControlName="phone" id="phone-form-field" name="phone">
+                                <mat-error *ngIf="userForm.get('phone')?.invalid && userForm.get('phone')?.touched">
+                                    Obrigatório
+                                </mat-error>
+                            </div>
+                        </div>
+                        </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+  
+  
+  
+            
+            
+            
+
+
+ 
+
+
+

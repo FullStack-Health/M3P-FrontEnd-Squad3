@@ -12,8 +12,7 @@ select {
   min-width: 50%;
   margin-top: 85px;
   margin-left: 220px;
-  margin-right: 15px;
-  padding-right: 15px;
+  margin-right: 20px;
   transition: width 0.3s ease, margin-left 0.3s ease;
 }
 
@@ -177,10 +176,9 @@ select {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 100%;
+  width: auto;
   margin-top: 20px;
   margin-bottom: 20px;
-  padding-right: 10px;
   padding-top: 20px;
   padding-bottom: 20px;
   border-radius: 4px;
@@ -191,10 +189,10 @@ select {
 .row1 {
   display: flex;
   flex-direction: row;
-  width: 99%;
+  width: auto;
   gap: 10px;
   margin-top: 10px;
-  margin-left: 10px;
+  margin-left: 20px;
   margin-right: 20px;
 }
 
@@ -202,7 +200,6 @@ select {
   display: flex;
   flex-direction: column;
   width: 100%;
-  flex: 1;
 }
 
 input,
@@ -295,18 +292,11 @@ mat-error {
   .form-container1 {
     width: 100%;
     margin-left: 20px;
-    margin-right: 35px;
     transition: none;
   }
 
   .sidebar-open {
     transition: none;
-  }
-
-  .form-area3 {
-    margin-right: 20px;
-    padding-left: 10px;
-    padding-right: 20px;
   }
 }
 

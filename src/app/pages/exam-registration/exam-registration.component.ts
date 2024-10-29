@@ -1,23 +1,25 @@
-import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatButton, MatButtonModule } from '@angular/material/button';
-import { ErrorStateMatcher } from '@angular/material/core';
+import { Title } from '@angular/platform-browser';
+import { DataTransformService } from '../../shared/services/data-transform.service';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { Title } from '@angular/platform-browser';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { ErrorStateMatcher, MatNativeDateModule } from '@angular/material/core';
+import { MatButtonModule, MatButton } from '@angular/material/button';
+import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ActivatedRoute, Router } from '@angular/router';
 import moment from 'moment';
-import { Appointment } from '../../models/appointment.model';
 import { Patient } from '../../models/patient.model';
 import { ConfirmDialogComponent } from '../../shared/components/confirm-dialog/confirm-dialog.component';
 import { DialogComponent } from '../../shared/components/dialog/dialog.component';
 import { SidebarMenuComponent } from '../../shared/components/sidebar-menu/sidebar-menu.component';
 import { ToolbarComponent } from '../../shared/components/toolbar/toolbar.component';
 import { ApiService } from '../../shared/services/api.service';
-import { DataTransformService } from '../../shared/services/data-transform.service';
+import { Exam } from '../../models/exam.model';
 import { ShareMenuStatusService } from '../../shared/services/share-menu-status.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -28,48 +30,49 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 }
 
 @Component({
-  selector: 'app-appointment-registration',
+  selector: 'app-exam-register-page',
   standalone: true,
-  imports: [ToolbarComponent, SidebarMenuComponent, ConfirmDialogComponent, DialogComponent, HttpClientModule, CommonModule, MatFormField, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, MatButton, ReactiveFormsModule],
+  imports: [ToolbarComponent, SidebarMenuComponent, MatFormFieldModule, MatInputModule, MatSelectModule, MatFormField, MatDatepickerModule, MatNativeDateModule, MatButtonModule, MatButton, ReactiveFormsModule, CommonModule, MatDatepickerModule, HttpClientModule, MatAutocompleteModule, DialogComponent, ConfirmDialogComponent],
   providers: [DataTransformService, ApiService],
-  templateUrl: './appointment-registration.component.html',
-  styleUrl: './appointment-registration.component.scss'
+  templateUrl: './exam-registration.component.html',
+  styleUrl: './exam-registration.component.scss'
 })
-export class AppointmentRegistrationComponent implements OnInit {
+export class ExamRegistrationComponent implements OnInit {
   showMessage = false;
-  appointmentId: any = '';
   patients: any[] = [];
-  filteredPatients: any[] = [];
+  examId: any = '';
+  filteredPatients: Patient[] = [];
   patientSearchControl = new FormControl();
   isEditing: boolean = false;
   saveDisabled: boolean = false;
-  appointRegistration: FormGroup;
-  noResults: boolean = false;
+  examRegistration: FormGroup;
   currentPage: number = 0;
   totalPages: number = 0;
   pageSize: number = 10;
   totalPatients: number = 0;
+  noResults: boolean = false;
   menuTrueFalse: boolean | undefined;
 
   constructor(
-    private dataTransformService: DataTransformService, 
-    private titleService: Title, 
-    private fb: FormBuilder, 
-    private apiService: ApiService, 
-    private activatedRoute: ActivatedRoute, 
-    private router: Router, 
+    private dataTransformService: DataTransformService,
+    private titleService: Title,
+    private fb: FormBuilder,
+    private apiService: ApiService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
     private shareMenuStatusService: ShareMenuStatusService
   ) {
     this.isEditing = !!this.activatedRoute.snapshot.paramMap.get('id'),
-      this.appointRegistration = this.fb.group({
+      this.examRegistration = this.fb.group({
         idPatient: [{ value: '', disabled: true }, Validators.required],
         name: [{ value: '', disabled: true }, Validators.required],
-        reason: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(64)]],
-        consultDate: ['', Validators.required],
-        consultTime: ['', Validators.required],
-        problemDescrip: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(1024)]],
-        prescMed: ['',],
-        dosagesPrec: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(256)]],
+        exam: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(64)]],
+        examDate: ['', Validators.required],
+        examTime: ['', Validators.required],
+        examType: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(32)]],
+        lab: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(32)]],
+        docUrl: ['',],
+        result: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(1024)]],
       });
   }
 
@@ -85,10 +88,9 @@ export class AppointmentRegistrationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.titleService.setTitle('Registro de Consulta');
-    this.appointmentId = this.activatedRoute.snapshot.paramMap.get('id');
-    this.getAppointmentData();
-
+    this.titleService.setTitle('Registro de Exame');
+    this.examId = this.activatedRoute.snapshot.paramMap.get('id');
+    this.getExamData();
 
     this.shareMenuStatusService.menuTrueFalse$.subscribe(value => {
       this.menuTrueFalse = value;
@@ -100,9 +102,9 @@ export class AppointmentRegistrationComponent implements OnInit {
     const dateString = moment(currentDate).format('YYYY-MM-DD');
     const timeString = moment(currentDate).format('HH:mm');
 
-    this.appointRegistration.patchValue({
-      consultDate: dateString,
-      consultTime: timeString,
+    this.examRegistration.patchValue({
+      examDate: dateString,
+      examTime: timeString,
     });
   }
 
@@ -169,39 +171,49 @@ export class AppointmentRegistrationComponent implements OnInit {
   }
 
   selectPatient(patient: any): void {
-    this.appointRegistration.patchValue({
+    this.examRegistration.patchValue({
       idPatient: patient.id,
       name: patient.name
     })
     this.filteredPatients = [];
   }
 
-  appointRegister() {
-    const idPatientValue = this.appointRegistration.getRawValue().idPatient;
-    const nameValue = this.appointRegistration.getRawValue().name;
+  setPatientData(patient: { id: any; name: any; }) {
+    this.examRegistration.patchValue({
+      idPatient: patient.id,
+      name: patient.name
+    });
 
-    if (!this.appointRegistration.valid || !idPatientValue || !nameValue) {
+    this.patientSearchControl.setValue('');
+  }
+
+  examRegister() {
+    const idPatientValue = this.examRegistration.getRawValue().idPatient;
+    const nameValue = this.examRegistration.getRawValue().name;
+
+    if (!this.examRegistration.valid || !idPatientValue || !nameValue) {
       this.dialog.openDialog('Preencha todos os campos obrigatórios corretamente.');
       return;
     }
 
-    if (this.appointRegistration.valid) {
+    if (this.examRegistration.valid) {
 
-      const newAppointment: Appointment = {
-        id: this.appointRegistration.getRawValue().idPatient,
-        reason: this.appointRegistration.value.reason,
-        consultDate: this.appointRegistration.value.consultDate,
-        consultTime: this.appointRegistration.value.consultTime,
-        problemDescrip: this.appointRegistration.value.problemDescrip,
-        prescMed: this.appointRegistration.value.prescMed,
-        dosagesPrec: this.appointRegistration.value.dosagesPrec,
+      const newExam: Exam = {
+        id: this.examRegistration.getRawValue().idPatient,
+        exam: this.examRegistration.value.exam,
+        examDate: this.dataTransformService.formatDate(this.examRegistration.value.examDate),
+        examTime: this.examRegistration.value.examTime,
+        examType: this.examRegistration.value.examType,
+        lab: this.examRegistration.value.lab,
+        docUrl: this.examRegistration.value.docUrl,
+        result: this.examRegistration.value.result,
       }
 
-      this.apiService.saveAppointment(newAppointment).subscribe({
+      this.apiService.saveExam(newExam).subscribe({
         next: (response) => {
-          console.log('Appointment saved successfully:', response);
+          console.log('Exam saved successfully:', response);
           this.showMessage = true;
-          this.appointRegistration.reset();
+          this.examRegistration.reset();
           this.setCurrentTimeAndDate();
 
           setTimeout(() => {
@@ -209,7 +221,7 @@ export class AppointmentRegistrationComponent implements OnInit {
           }, 1000);
         },
         error: (error) => {
-          console.error('Error saving appointment:', error);
+          console.error('Error saving exam:', error);
         }
       });
 
@@ -218,26 +230,28 @@ export class AppointmentRegistrationComponent implements OnInit {
     }
   }
 
-  getAppointmentData() {
-    if (this.appointmentId) {
-      this.apiService.getAppointment(this.appointmentId).subscribe({
-        next: (appointment: Appointment) => {
-          this.appointRegistration.patchValue({
-            idPatient: appointment.id,
-            name: appointment.patientName,
-            reason: appointment.reason,
-            consultDate: appointment.consultDate,
-            consultTime: appointment.consultTime,
-            problemDescrip: appointment.problemDescrip,
-            prescMed: appointment.prescMed,
-            dosagesPrec: appointment.dosagesPrec,
+  getExamData() {
+    if (this.examId) {
+      this.apiService.getExam(this.examId).subscribe({
+        next: (exam: Exam) => {
+          this.examRegistration.patchValue({
+            idPatient: exam.id,
+            name: exam.patientName,
+            exam: exam.exam,
+            examDate: exam.examDate,
+            examTime: exam.examTime,
+            examType: exam.examType,
+            lab: exam.lab,
+            docUrl: exam.docUrl,
+            result: exam.result
           });
+
         },
         error: (error) => {
-          console.error('Error when fetching appointment data:', error);
+          console.error('Error when fetching exam data:', error);
         },
         complete: () => {
-          console.log('Appointment search completed.');
+          console.log('Exam search completed.');
         }
       });
     } else {
@@ -245,27 +259,28 @@ export class AppointmentRegistrationComponent implements OnInit {
     }
   }
 
-  saveEditAppoint() {
-    this.appointRegistration.enable();
+  saveEditExam() {
+    this.examRegistration.enable();
     this.saveDisabled = false;
 
-    if (this.appointRegistration.valid) {
+    if (this.examRegistration.valid) {
 
-      const newAppointment: Appointment = {
-        id: this.appointRegistration.getRawValue().idPatient,
-        reason: this.appointRegistration.value.reason,
-        consultDate: this.appointRegistration.value.consultDate,
-        consultTime: this.appointRegistration.value.consultTime,
-        problemDescrip: this.appointRegistration.value.problemDescrip,
-        prescMed: this.appointRegistration.value.prescMed,
-        dosagesPrec: this.appointRegistration.value.dosagesPrec,
+      const newExam: Exam = {
+        id: this.examRegistration.getRawValue().idPatient,
+        exam: this.examRegistration.value.exam,
+        examDate: this.examRegistration.value.examDate,
+        examTime: this.examRegistration.value.examTime,
+        examType: this.examRegistration.value.examType,
+        lab: this.examRegistration.value.lab,
+        docUrl: this.examRegistration.value.docUrl,
+        result: this.examRegistration.value.result,
       };
 
-      this.apiService.editAppointment(this.appointmentId, newAppointment).subscribe({
+      this.apiService.editExam(this.examId, newExam).subscribe({
         next: (response) => {
-          console.log('Appointment updated successfully:', response);
+          console.log('Exam updated successfully:', response);
           this.showMessage = true;
-          this.appointRegistration.disable();
+          this.examRegistration.disable();
           this.saveDisabled = true;
 
           setTimeout(() => {
@@ -273,7 +288,7 @@ export class AppointmentRegistrationComponent implements OnInit {
           }, 1000);
         },
         error: (error) => {
-          console.error('Error updating appointment:', error);
+          console.error('Error updating exam:', error);
 
         }
       });
@@ -282,23 +297,23 @@ export class AppointmentRegistrationComponent implements OnInit {
     }
   }
 
-  editAppoint() {
-    this.appointRegistration.enable();
+  editExam() {
+    this.examRegistration.enable();
     this.saveDisabled = false;
   }
 
-  deleteAppointment(id: string) {
-    this.confirmDialog.openDialog("Tem certeza que deseja excluir a consulta? Essa ação não pode ser desfeita.");
+  deleteExam(id: string) {
+    this.confirmDialog.openDialog("Tem certeza que deseja excluir o exame? Essa ação não pode ser desfeita.");
 
     const subscription = this.confirmDialog.confirm.subscribe(result => {
       if (result) {
-        this.apiService.deleteAppointment(id).subscribe({
+        this.apiService.deleteExam(id).subscribe({
           next: () => {
             this.router.navigate(['/lista-prontuarios']);
             subscription.unsubscribe();
           },
           error: (error) => {
-            console.error('Error deleting appointment:', error);
+            console.error('Error deleting exam:', error);
           }
         });
       } else {
@@ -307,4 +322,14 @@ export class AppointmentRegistrationComponent implements OnInit {
     });
   }
 
+
+
 }
+
+
+
+
+
+
+
+

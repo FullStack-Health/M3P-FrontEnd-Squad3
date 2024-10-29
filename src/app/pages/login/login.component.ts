@@ -107,7 +107,7 @@ export class LoginComponent implements OnInit {
     const newUser: User = {
       name: formValue.name,
       email: formValue.email,
-      role: formValue.role,
+      roleName: formValue.role,
       password: formValue.password
     };
 
