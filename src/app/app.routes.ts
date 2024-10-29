@@ -6,6 +6,7 @@ import { MedicalRecordListComponent } from './pages/medical-record-list/medical-
 import { MedicalRecordComponent } from './pages/medical-record/medical-record.component';
 import { PatientRegistrationComponent } from './pages/patient-registration/patient-registration.component';
 import {ExamRegistrationComponent} from "./pages/exam-registration/exam-registration.component";
+import { UserUpdateComponent } from './pages/user-update/user-update.component';
 
 export const routes: Routes = [
     { path: '', component: LoginComponent },
@@ -20,7 +21,8 @@ export const routes: Routes = [
         ]
     },
     { path: 'registro-consulta', component: AppointmentRegistrationComponent},
-    { path: 'registro-exame', component: ExamRegistrationComponent}
+    { path: 'registro-exame', component: ExamRegistrationComponent},
+    { path: 'editar-usuario/:id', component: UserUpdateComponent}
 
 
 ];

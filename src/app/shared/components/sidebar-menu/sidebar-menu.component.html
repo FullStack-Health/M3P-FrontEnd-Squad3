@@ -1,5 +1,4 @@
 <div class="sidenav-container1">
-    <!-- <div class="sidenav1" mode="side" [(opened)]="showSidebar"> -->
 
     <i *ngIf="!menuTrueFalse" (click)="openCloseMenu()" class="material-icons menu-close" id="menu-close">menu_open</i>
 
@@ -43,11 +42,10 @@
                     <span id="btn-text">NOVO EXAME</span>
                 </button>
 
-                <button class="menu-button" [routerLink]="['/registro-usuario']">
-                    <!-- <mat-icon>account_circle</mat-icon> -->
-                    <i class="material-icons">person_add</i>
-                    <span id="btn-text">NOVO USUÁRIO</span>
-                </button>
+                <!-- <button class="menu-button" [routerLink]="['/administracao-usuario']">
+                    <i class="material-icons">manage_accounts</i>
+                    <span id="btn-text">EDITAR USUÁRIO</span>
+                </button> -->
 
                 <button class="menu-button" [routerLink]="['/lista-usuarios']">
                     <!-- <mat-icon>account_circle</mat-icon> -->

@@ -39,6 +39,27 @@ export class ApiService {
     return this.http.put<void>(`${this.apiUrl}/user`, body, { headers });
   }
 
+  getUser(id: string): Observable<User> {
+    const jwtToken = sessionStorage.getItem('jwtToken');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
+
+    return this.http.get<User>(`${this.apiUrl}/users/${id}`, { headers });
+  }
+
+  updateUser(id: string, user: User): Observable<User> {
+    const jwtToken = sessionStorage.getItem('jwtToken');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
+
+    return this.http.put<User>(`${this.apiUrl}/users/${id}`, user, { headers });
+  }
+
+  deleteUser(id: string): Observable<User> {
+    const jwtToken = sessionStorage.getItem('jwtToken');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
+
+    return this.http.delete<User>(`${this.apiUrl}/users/${id}`, { headers });
+  }
+
   // dashboard endpoint
 
   getDashboardStats(): Observable<DashboardStats> {
