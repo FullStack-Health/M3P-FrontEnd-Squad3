@@ -12,7 +12,7 @@
         <app-sidebar-menu></app-sidebar-menu>
 
 
-        <div class="form-container1">
+        <div [ngClass]="{'sidebar-open': !menuTrueFalse}" class="form-container1">
 
                 <div id="button-group1">       
                     <button id="btn-save-d" (click)="saveEditUser()">Salvar</button>

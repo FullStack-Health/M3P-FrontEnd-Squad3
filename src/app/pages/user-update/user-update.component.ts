@@ -14,6 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../../models/user.model';
 import { RoleTransformPipe } from '../../shared/pipes/role-transform.pipe';
 import { AuthService } from '../../security/auth.service';
+import { ShareMenuStatusService } from '../../shared/services/share-menu-status.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -37,28 +38,41 @@ export class UserUpdateComponent implements OnInit {
   showMessage = false;
   userId: any = '';
   userRole: string | null;
+  menuTrueFalse: boolean | undefined;
 
-  constructor(private router: Router, private authService: AuthService, private fb: FormBuilder, private titleService: Title, private apiService: ApiService, private activatedRoute: ActivatedRoute) { 
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private fb: FormBuilder,
+    private titleService: Title,
+    private apiService: ApiService,
+    private activatedRoute: ActivatedRoute,
+    private shareMenuStatusService: ShareMenuStatusService
+  ) {
     this.userRole = this.authService.getDecodedToken()?.scope || null;
     console.log(this.userRole);
     this.userForm = this.fb.group({
-    roleName: [{value: '', disabled: true}, Validators.required],
-    userId: [{value: '', disabled: true}, Validators.required],
-    name: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(64)]],
-    email: ['', [Validators.required, Validators.email]],
-    birthdate: ['', Validators.required],
-    cpf: ['', [Validators.required]],
-    phone: ['', [Validators.required]],
-  });
- }
+      roleName: [{ value: '', disabled: true }, Validators.required],
+      userId: [{ value: '', disabled: true }, Validators.required],
+      name: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(64)]],
+      email: ['', [Validators.required, Validators.email]],
+      birthdate: ['', Validators.required],
+      cpf: ['', [Validators.required]],
+      phone: ['', [Validators.required]],
+    });
+  }
 
- @ViewChild(DialogComponent) dialog!: DialogComponent;
- @ViewChild(ConfirmDialogComponent) confirmDialog!: ConfirmDialogComponent;
+  @ViewChild(DialogComponent) dialog!: DialogComponent;
+  @ViewChild(ConfirmDialogComponent) confirmDialog!: ConfirmDialogComponent;
 
   ngOnInit() {
     this.titleService.setTitle('Administração de Usuários');
-    this.userId = this.activatedRoute.snapshot.paramMap.get('id');   
+    this.userId = this.activatedRoute.snapshot.paramMap.get('id');
     this.getUserData();
+
+    this.shareMenuStatusService.menuTrueFalse$.subscribe(value => {
+      this.menuTrueFalse = value;
+    });
   }
 
   getUserData() {
@@ -105,14 +119,14 @@ export class UserUpdateComponent implements OnInit {
           this.showMessage = true;
           this.userForm.disable();
           this.saveDisabled = true;
-      
+
           setTimeout(() => {
             this.showMessage = false;
           }, 1000);
         },
         error: (error) => {
           console.error('Error updating user:', error);
-        
+
         }
       });
     } else {
@@ -120,32 +134,32 @@ export class UserUpdateComponent implements OnInit {
     }
   }
 
-  editUser(){
+  editUser() {
     this.userForm.enable();
     this.saveDisabled = false;
   }
 
   deleteUser(id: string) {
     this.confirmDialog.openDialog("Tem certeza que deseja excluir o usuário? Essa ação não pode ser desfeita.");
-  
+
     const subscription = this.confirmDialog.confirm.subscribe(result => {
       if (result) {
         this.apiService.deleteUser(id).subscribe({
           next: () => {
             // this.dialog.openDialog('Usuário excluído com sucesso!')
-            this.router.navigate(['/dashboard']); 
-            subscription.unsubscribe(); 
+            this.router.navigate(['/dashboard']);
+            subscription.unsubscribe();
           },
           error: (error) => {
-            console.error('Error deleting user:', error); 
+            console.error('Error deleting user:', error);
           }
         });
       } else {
-        subscription.unsubscribe(); 
+        subscription.unsubscribe();
       }
     });
   }
-  
+
 
 }
 
