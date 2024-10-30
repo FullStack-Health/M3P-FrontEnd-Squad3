@@ -130,7 +130,7 @@ export class UserListComponent {
   }
 
   private checkWindowSize(): void {
-    if (window.innerWidth > 555) {
+    if (window.innerWidth > 575) {
       this.isScreenLarge = true;
     } else {
       this.isScreenLarge = false;
