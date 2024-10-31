@@ -24,7 +24,7 @@
       <ng-template #patientTemplate>
         <div class="content-container">
           <div class="container-edit-btn">
-            <button class="edit-btn" (click)="editPatient(patientID)">EDITAR</button>
+            <button *ngIf="userRole === 'SCOPE_ADMIN' || userRole === 'SCOPE_MEDICO'" class="edit-btn" (click)="editPatient(patientID)">EDITAR</button>
           </div>
           <div class="content-patient" *ngIf="patient">
             <h3>Dados</h3>
@@ -89,7 +89,7 @@
                     }}</p>
                   <p *ngIf="!appointment.dosagesPrec"><strong>Dosagens e precauções: </strong>Sem dosagens ou
                     precauções.</p>
-                  <button class="edit-btn" (click)="editAppointment(appointment.appointment_id)">EDITAR</button>
+                  <button *ngIf="userRole === 'SCOPE_ADMIN' || userRole === 'SCOPE_MEDICO'" class="edit-btn" (click)="editAppointment(appointment.appointment_id)">EDITAR</button>
                 </p-card>
               </ng-template>
             </p-timeline>
@@ -115,7 +115,7 @@
                   <p *ngIf="!exam.docUrl"><strong>Url do documento: </strong>Sem URL.</p>
                   <p><strong>Tipo do exame: </strong>{{ exam.examType }}</p>
                   <p><strong>Resultados: </strong>{{ exam.result }}</p>
-                  <button class="edit-btn" (click)="editExam(exam.examId)">EDITAR</button>
+                  <button *ngIf="userRole === 'SCOPE_ADMIN' || userRole === 'SCOPE_MEDICO'" class="edit-btn" (click)="editExam(exam.examId)">EDITAR</button>
                 </p-card>
               </ng-template>
             </p-timeline>
