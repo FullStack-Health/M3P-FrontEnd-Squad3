@@ -91,27 +91,26 @@ export class ApiService {
     return this.http.get<DashboardStats>(`${this.apiUrl}/dashboard/stats`, { headers });
   }
 
-  // medical record list endpoint
+  // patient endpoint
 
-  listPatients(page: number, size: number, name?: string, id?: string): Observable<Page<ListPatients>> {
+  listPatients(page: number, size: number, fullName?: string, id?: number): Observable<Page<ListPatients>> {
     const jwtToken = sessionStorage.getItem('jwtToken');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
 
     let params = new HttpParams().set('page', page.toString()).set('size', size.toString());
 
-    if (name) {
-        params = params.set('name', name);
+    if (fullName) {
+        params = params.set('fullName', fullName);
     }
     if (id) {
-      params = params.set('id', id);
+      params = params.set('id', id.toString());
     }
 
     console.log("Sending request with params:", params.toString());
 
-    return this.http.get<Page<ListPatients>>(`${this.apiUrl}/patients/medical-record-list`, { headers, params });
+    return this.http.get<Page<ListPatients>>(`${this.apiUrl}/patients`, { headers, params });
   }
 
-  // patient endpoint
 
   savePatient(patient: Patient): Observable<Patient> {
     const jwtToken = sessionStorage.getItem('jwtToken');

@@ -53,18 +53,20 @@ export class MedicalRecordListComponent implements OnInit {
   getPatients(page: number): void {
     const searchTerm = this.searchTerm.trim();
 
-    let name: string | undefined;
-    let id: string | undefined;
+    let fullName: string | undefined;
+    let id: number | undefined;
 
     if (searchTerm) {
       if (/\d/.test(searchTerm)) {
-        id = searchTerm;
-      } else {
-        name = searchTerm;
+        id = parseInt(searchTerm);
+        } else {
+            fullName = searchTerm;
     }
   }
 
-    this.apiService.listPatients(page, this.pageSize, name, id).subscribe({
+    console.log("Parameters being sent:", { fullName, id });
+
+    this.apiService.listPatients(page, this.pageSize, fullName, id).subscribe({
         next: (response: Page<ListPatients>) => {
 
             this.patientsList = response.content;

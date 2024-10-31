@@ -32,7 +32,7 @@
 
                 <div *ngFor="let patient of medicalRecordPatientsList" class="patient-card1">
                     <div class="card-content1" id="id">{{ patient.id }}</div>
-                    <div class="card-content1" id="name">{{ patient.name | shortenName }}</div>
+                    <div class="card-content1" id="name">{{ patient.fullName | shortenName }}</div>
                     <div class="card-content1" id="phone">{{ patient.phone }}</div>
                     <div class="card-content1" id="insurance">{{ patient.healthInsurance }}</div>
                     <div class="edit-patient">
@@ -55,7 +55,7 @@
                     </div>
 
                     <div class="containers" id="header-pat-name">Nome: <div class="card-content1" id="name">{{
-                            patient.name | shortenName }}</div>
+                            patient.fullName | shortenName }}</div>
                     </div>
 
                     <div class="containers" id="header-phone">Telefone: <div class="card-content1" id="phone">{{
