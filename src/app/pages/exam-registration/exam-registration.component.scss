@@ -1,0 +1,332 @@
+@import '../../../assets/styles/variables';
+
+input,
+select {
+  box-sizing: border-box;
+}
+
+.form-container1 {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 200px);
+  min-width: 50%;
+  margin-top: 85px;
+  margin-left: 220px;
+  margin-right: 20px;
+  transition: width 0.3s ease, margin-left 0.3s ease;
+}
+
+.sidebar-open {
+  width: 100%;
+  margin-left: 20px;
+  transition: width 0.27s ease, margin-left 0.27s ease;
+}
+
+#search-and-btn {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  margin-right: 20px;
+}
+
+#search {
+  width: 100%;
+  height: 40px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 1.3rem;
+  border-radius: 4px;
+  border: none;
+  background: $colorSearchBackground;
+  outline: none;
+  transition: box-shadow 0.3s ease-in-out;
+  @include border-shadow();
+}
+
+#search::placeholder {
+  color: $colorSearchPlaceholder;
+}
+
+.button-group1 {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button-group1 button {
+  font-family: "Dosis", sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  text-transform: uppercase;
+  margin-left: 10px;
+  background: $colorButton;
+  border: none;
+  border-radius: 4px;
+  color: $colorFontButton;
+  height: 40px;
+  width: 85px;
+}
+
+.button-group1 button:disabled {
+  background: $colorButtonDisable;
+  color: $colorFontButtonDisable;
+}
+
+.button-group1 button:hover {
+  background: $colorHover;
+  color: $colorFontButtonHover;
+}
+
+.button-group1 button:disabled:hover {
+  background: $colorButtonDisable;
+  color: $colorFontButtonDisable;
+}
+
+.button-group1 .btn-save-valid {
+  background-color: $colorBtnSaveFormValid;
+}
+
+.list-search-area {
+  background: $colorAreaBackground;
+  border-radius: 4px;
+  padding-bottom: 15px;
+}
+
+.list-search-area ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.list-search-area h3 {
+  font-family: "Dosis", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: $colorLabelForms;
+  padding: 1%;
+}
+
+.list-search-area a {
+  padding-left: 1%;
+  padding-right: 1%;
+  padding-bottom: 15px;
+  font-family: "Dosis", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: $colorPatientResult;
+}
+
+.list-search-area a:hover {
+  color: $colorPatientResultHover;
+  cursor: pointer;
+}
+
+.no-results {
+  background-color: $colorAreaBackground;
+  border-radius: 4px;
+  padding: 1%;
+}
+
+.no-results p {
+  font-family: "Dosis", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: $colorPatientNotFound;
+  padding: 0;
+  margin: 0;
+}
+
+.pages {
+  display: flex;
+  justify-content: right;
+  padding-right: 15px;
+}
+
+.pages button {
+  background: $colorButton;
+  color: $colorFontButton;
+  border-radius: 4px;
+  height: 40px;
+  width: 85px;
+  font-family: "Dosis", sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  border: none;
+  margin-left: 10px;
+  text-transform: uppercase;
+}
+
+.pages button:disabled {
+  background: $colorButtonDisable;
+  color: $colorFontButtonDisable;
+}
+
+.pages button:hover {
+  background: $colorHover;
+  color: $colorFontButtonHover;
+}
+
+.pages button:disabled:hover {
+  background: $colorButtonDisable;
+  color: $colorFontButtonDisable;
+}
+
+.form-area3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 4px;
+  background: $colorAreaBackground;
+  @include border-shadow();
+}
+
+.row1 {
+  display: flex;
+  flex-direction: row;
+  width: auto;
+  gap: 10px;
+  margin-top: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.form-field1 {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+input,
+select {
+  font-family: "Dosis", sans-serif;
+  height: 35px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 2px;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  border-radius: 4px;
+  border: 2px solid #ccc;
+}
+
+textarea {
+  font-family: "Dosis", sans-serif;
+  padding-left: 10px;
+  padding-top: 2px;
+  font-size: 1.2rem;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+}
+
+select:disabled,
+input:disabled,
+textarea:disabled {
+  background: rgb(182, 182, 182);
+  color: $colorFontDisable;
+}
+
+label {
+  font-family: "Dosis", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: $colorLabelForms;
+}
+
+.idPatient {
+  flex: 1;
+}
+
+.name {
+  flex: 3;
+}
+
+@keyframes checkmark {
+  0% {
+    opacity: 0;
+  }
+
+  5% {
+    opacity: 1;
+  }
+
+  95% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.checkmark {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  animation: checkmark 1s;
+  z-index: 9999;
+}
+
+mat-error {
+  font-family: "Dosis", sans-serif;
+  font-size: 1.1rem;
+  color: $colorTextDangerForm;
+}
+
+@media only screen and (max-width: 1023px) {
+  label, input {
+    font-size: 1rem !important;
+  }
+
+  button {
+    width: 70px !important;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .form-container1 {
+    width: 100%;
+    margin-left: 20px;
+    transition: none;
+  }
+
+  .sidebar-open {
+    transition: none;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+
+  #search-and-btn {
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+  }
+
+  .button-group1 {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .button-group1 button {
+    width: 40% !important;
+  }
+}
+
+@media only screen and (max-width: 481px) {
+  .form-container1 {
+    margin-top: 111px;
+  }
+
+  .row1 {
+    flex-direction: column;
+    align-items: center;
+  }
+}

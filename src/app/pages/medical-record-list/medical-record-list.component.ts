@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { SidebarMenuComponent } from '../../shared/components/sidebar-menu/sidebar-menu.component';
 import { ToolbarComponent } from '../../shared/components/toolbar/toolbar.component';
 import { HttpClientModule, HttpErrorResponse } from '@angular/common/http';
@@ -10,6 +10,7 @@ import { ListPatients } from '../../models/list-patients.model';
 import { Title } from '@angular/platform-browser';
 import { Page } from '../../models/page.interface';
 import { ShortenNamePipe } from '../../shared/pipes/shorten-name.pipe';
+import { ShareMenuStatusService } from '../../shared/services/share-menu-status.service';
 
 @Component({
   selector: 'app-medical-record-list',
@@ -28,12 +29,25 @@ export class MedicalRecordListComponent implements OnInit {
   pageSize: number = 10;
   hasMorePages: boolean = false;
   noResults: boolean = false;
+  menuTrueFalse: boolean | undefined;
+  isScreenLarge: boolean | undefined;
 
-  constructor(private titleService: Title, private apiService: ApiService, private router: Router) { }
+  constructor(
+    private titleService: Title, 
+    private apiService: ApiService, 
+    private router: Router,
+    private shareMenuStatusService: ShareMenuStatusService
+  ) { }
 
   ngOnInit(): void {
     this.titleService.setTitle('Lista de prontuários');
     this.getPatients(this.currentPage);
+
+    this.shareMenuStatusService.menuTrueFalse$.subscribe(value => {
+      this.menuTrueFalse = value;
+    });
+
+    this.checkWindowSize();
   }
 
   getPatients(page: number): void {
@@ -110,6 +124,19 @@ export class MedicalRecordListComponent implements OnInit {
   
   editPatient(id: string) {
     this.router.navigate(['/cadastro-paciente', id]);
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any): void {
+    this.checkWindowSize();
+  }
+
+  private checkWindowSize(): void {
+    if(window.innerWidth > 555) {
+      this.isScreenLarge = true;
+    } else {
+      this.isScreenLarge = false;
+    }
   }
 
 }

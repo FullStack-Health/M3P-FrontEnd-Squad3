@@ -1,0 +1,170 @@
+@import '../../../assets/styles/variables';
+
+.container1 {
+    margin-top: 85px;
+    margin-bottom: 50px;
+    margin-right: 20px;
+    margin-left: 220px;
+    width: calc(100% - 200px);
+    transition: width 0.3s ease, margin-left 0.3s ease;
+}
+
+.sidebar-open {
+    width: 100%;
+    margin-left: 20px;
+    transition: width 0.27s ease, margin-left 0.27s ease;
+}
+
+::ng-deep div.slider-content {
+    @include border-shadow();
+}
+
+::ng-deep .topics button {
+    @include border-shadow();
+}
+
+.container-edit-btn {
+    display: flex;
+    justify-content: end;
+}
+
+.edit-btn {
+    background: $colorButton;
+    color: $colorFontButton;
+    border-radius: 4px;
+    height: 35px;
+    width: 75px;
+    margin: 15px;
+    border: none;
+    font-family: "Dosis", sans-serif;
+}
+
+.edit-btn:hover {
+    background: $colorHover;
+    color: $colorFontButtonHover;
+}
+
+.content-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+    @include border-shadow ();
+}
+
+.content-patient {
+    margin: 1rem;
+}
+
+.content-patient p {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1rem;
+    border-bottom: 1px solid black;
+}
+
+.content-patient strong {
+    margin-right: 0.5rem;
+}
+
+.containerCards {
+    margin-top: 1rem;
+    border-bottom: 4px solid #4A7A8C;
+    padding-bottom: 5px;
+}
+
+p-card h2 {
+    display: flex;
+    flex-wrap: wrap;    
+}
+
+p-card span {
+    margin-right: 0.5rem;
+}
+
+.image {
+    padding: 0.5rem;
+}
+
+/* Card das informações */
+::ng-deep .p-card-body {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #d9d9d948;
+    border-radius: 4px;
+    @include border-shadow();
+}
+
+/* Linha do timeline */
+.p-timeline-event-connector {
+    width: 4px;
+    height: 100%;
+    background-color: #4A7A8C;
+}
+
+/* Elemento padrão do timeline que você não quer que apareça */
+::ng-deep .p-timeline-event-opposite {
+    display: none;
+}
+
+@media only screen and (max-width: 767px) {
+    .container1 {
+        width: 100%;
+        margin-left: 20px;
+        transition: none;
+    }
+
+    .sidebar-open {
+        transition: none;
+    }
+
+    ::ng-deep .topics button {
+        width: 120px !important;
+    }
+
+    .containerCards {
+        font-size: 1rem;
+    }
+}
+
+@media only screen and (max-width: 481px) {
+    .container1 {
+        margin-top: 111px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    ::ng-deep .topics button {
+        width: 90px !important;
+        font-size: 1rem !important;
+    }
+
+    ::ng-deep .slider-content {
+        padding: 5px !important;
+    }
+
+    .image {
+        padding-left: 0px;
+    }
+
+    ::ng-deep .p-timeline-event-content {
+        padding: 0px !important;
+    }
+
+    ::ng-deep div.p-card-body {
+        padding: 10px !important;
+    }
+
+    .content-patient p {
+        font-size: 1rem;
+    }
+
+    p-card span {
+        margin-right: 0px;
+    }
+}
+
+@media only screen and (max-width: 470px) {
+    .content-patient {
+        margin: 0px;
+    }
+}

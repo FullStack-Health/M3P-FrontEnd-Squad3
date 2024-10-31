@@ -22,6 +22,22 @@ $black: #000000;
 
 // SHARED
 
+// general
+$colorPageBackground: $purplePinkGradient;
+$colorBrand: $white;
+$colorSearchBackground: $whiteLowOpacity;
+$colorSearchPlaceholder: $blackHighOpacity;
+$colorGeneralCard: $white;
+$colorAreaBackground: $whiteLowOpacity;
+$colorBackgroundSidebarMenu: $white;
+$colorBorderSidebarMenu: $transparent;
+$colorBackgroundToolbar: $white;
+$colorPatCardNameBackground: $blueHighOpacity;
+$colorCardContent: $whiteMediumOpacity;
+$colorPatientResult: $black;
+$colorPatientResultHover: $redBrand;
+$colorPatientNotFound: $redBrand;
+
 // forms
 $colorFormBorder: $pinkPurple;
 $colorLabelForms: $black;
@@ -57,11 +73,11 @@ $colorHoverIconOutsideMenu: $redBrand;
 // PAGES
 
 $colorPageBackground: #DAE9EC;
-$colorAreaBackground: $whiteLowOpacity;
+$colorAreaBackground: #f5f5f5de;
 
 // dashboard
-$colorGeneralCard: $white;
-$colorCardContent: $whiteMediumOpacity;
+$colorGeneralCard: $whiteLowOpacity;
+$colorCardContent: $whiteLowOpacity;
 $colorPatCardNameBackground: $blueHighOpacity;
 $colorSearchBackground: $whiteLowOpacity;
 $colorSearchPlaceholder: $blackHighOpacity;
@@ -112,3 +128,8 @@ $colorBorderSidebarMenu: $transparent;
 
 // toolbar
 $colorBackgroundToolbar: #6DB7B8;
+
+// sombra para borda
+@mixin border-shadow($color: gray, $blur: 10px) {
+    box-shadow: 0 0 $blur $color;
+  }

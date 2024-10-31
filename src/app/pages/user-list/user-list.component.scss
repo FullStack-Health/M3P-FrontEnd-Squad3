@@ -1,0 +1,323 @@
+@import '../../../assets/styles/variables';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.container-list {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 200px);
+  min-width: 300px;
+  margin-top: 65px;
+  margin-right: 20px;
+  margin-left: 220px;
+  margin-bottom: 20px;
+  transition: width 0.3s ease, margin-left 0.3s ease;
+}
+
+.sidebar-open {
+  width: 100%;
+  margin-left: 20px;
+  transition: width 0.27s ease, margin-left 0.27s ease;
+}
+
+.search-area {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  justify-content: space-between;
+}
+
+#search {
+  width: 100%;
+  height: 40px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 1.3rem;
+  border-radius: 4px;
+  border: none;
+  background: $colorSearchBackground;
+  outline: none;
+  transition: box-shadow 0.3s ease-in-out;
+  font-family: "Dosis", sans-serif;
+  @include border-shadow();
+}
+
+#search::placeholder {
+  color: $colorSearchPlaceholder;
+}
+
+.container-btn {
+  display: flex;
+}
+
+.btns {
+  background: $colorButton;
+  color: $colorFontButton;
+  border-radius: 4px;
+  height: 40px;
+  width: 5vw;
+  min-width: 58px;
+  margin-left: 10px;
+  font-family: "Dosis", sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  border: none;
+}
+
+.btns:hover {
+  background: $colorHover;
+  color: $colorFontButtonHover;
+}
+
+.list-area {
+  width: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+  color: $colorFontHeaderForm;
+  background-color: $colorContainerList;
+  font-family: "Dosis", sans-serif;
+  font-weight: 500;
+  font-size: 1.8rem;
+  @include border-shadow();
+}
+
+.user-card1 {
+  display: grid;
+  grid-template-columns: 2fr 2fr 2fr 2fr 0.5fr;
+  margin: 20px;
+  padding-right: 1%;
+  @include border-shadow();
+}
+
+.header-area {
+  background: $colorHeaderArea;
+  height: 60px;
+  border-radius: 4px;
+  color: $colorFontHeaderArea;
+}
+
+.card-header {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.card-content1 {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  padding-right: 18px;
+  color: $colorGeneralFont;
+  font-family: "Roboto", sans-serif;
+  word-break: break-word;
+  font-size: 1.2rem;
+  font-weight: 300;
+}
+
+.register-id {
+  min-width: 100px;
+  padding-left: 20px;
+}
+
+.login-email {
+  min-width: 295px;
+}
+
+.role {
+  min-width: 100px;
+}
+
+.password {
+  min-width: 100px;
+}
+
+.space-btn {
+  width: 45.48px;
+}
+
+.edit-user {
+  margin: auto;
+}
+
+.edit-user button {
+  background-color: $colorButton;
+  color: $colorFontButton;
+  border-style: none;
+  border-radius: 4px;
+  width: 100%;
+  padding: 5px;
+  height: 30px;
+  font-size: 0.8rem;
+
+}
+
+.edit-user button:hover {
+  background-color: $colorHover;
+  color: $colorFontButtonHover;
+}
+
+.pages {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.pages button {
+  background: $colorButton;
+  color: $colorFontButton;
+  border-radius: 4px;
+  height: 40px;
+  width: 85px;
+  font-family: "Dosis", sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  border: none;
+  margin-left: 10px;
+  text-transform: uppercase;
+}
+
+.pages button:disabled {
+  background: $colorButtonDisable;
+  color: $colorFontButtonDisable;
+}
+
+.pages button:hover {
+  background: $colorHover;
+  color: $colorFontButtonHover;
+}
+
+.pages button:disabled:hover {
+  background: $colorButtonDisable;
+  color: $colorFontButtonDisable;
+}
+
+.no-results {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: $colorPatientNotFound;
+  font-size: 1.4rem;
+}
+
+@media only screen and (max-width: 1279px) {
+  .btns {
+    font-size: 0.9rem;
+  }
+
+  .header-area {
+    font-size: 1.3rem;
+  }
+}
+
+@media only screen and (max-width: 1023px) {
+  .user-card1 {
+    margin: 10px;
+  }
+
+  .header-area {
+    font-size: 1.2rem;
+  }
+
+  .card-content1 {
+    font-size: 1rem;
+  }
+
+  .register-id {
+    min-width: 90px;
+  }
+
+  .login-email {
+    min-width: 240px;
+  }
+
+  .role {
+    min-width: 85px;
+  }
+
+  .password {
+    min-width: 50px;
+  }
+}
+
+@media only screen and (max-width: 879px) {
+
+  .login-email {
+    min-width: 240px;
+  }
+
+  .register-id {
+    padding-left: 10px;
+  }
+
+  .card-content1 {
+    font-size: 0.9rem;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .container-list {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  #search {
+    margin-bottom: 20px;
+  }
+
+  .search-area {
+    flex-direction: column;
+  }
+
+  .container-btn {
+    justify-content: space-between;
+  }
+
+  .btns {
+    width: 49%;
+    margin: 0px;
+  }
+
+  .user-card1 {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .containers {
+    color: $colorFontHeaderArea;
+    display: flex;
+    align-items: baseline;
+    min-width: none;
+    height: 40px;
+    padding-left: 10px;
+    font-size: 1.2rem;
+  }
+
+  .min-width-none {
+    min-width: none;
+    padding-left: 0px;
+  }
+
+  .card-content1 {
+    margin-left: 0.5rem;
+    font-size: 1.1rem;
+  }
+
+  .edit-user {
+    margin: 10px;
+  }
+}
+
+@media only screen and (max-width: 481px) {
+  .container-list {
+    margin-top: 91px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}

@@ -1,0 +1,125 @@
+<div *ngIf="showMessage" class="checkmark">
+    <img src="../../../assets/images/check-save.png">
+</div>
+
+<app-dialog></app-dialog>
+<app-confirm-dialog></app-confirm-dialog>
+
+<div style="display: flex; flex-direction: column; height: 100vh;">
+    <app-toolbar></app-toolbar>
+
+    <div style="display: flex; flex-grow: 1;">
+        <app-sidebar-menu></app-sidebar-menu>
+
+        <div [ngClass]="{'sidebar-open': !menuTrueFalse}" class="form-container1" style="flex-grow: 0.9;">
+            <div id="search-and-btn">
+
+                <input *ngIf="!isEditing" type="text" id="search" name="search" placeholder="Digite o nome do paciente"
+                    matInput [formControl]="patientSearchControl">
+
+                <div class="button-group1">
+                    <button id="btn-search" *ngIf="!isEditing" (click)="onSearch()">Buscar</button>
+                    <button id="btn-save-d" [disabled]="saveDisabled" *ngIf="isEditing"
+                        (click)="saveEditAppoint()">Salvar</button>
+                    <button id="btn-save"
+                        [ngClass]="{'btn-save-valid': appointRegistration.valid && appointRegistration.getRawValue().idPatient && appointRegistration.getRawValue().name, 'btn-save-invalid': !appointRegistration.valid}"
+                        *ngIf="!isEditing" (click)="appointRegister()">Salvar</button>
+                    <button id="btn-edit" *ngIf="isEditing" (click)="editAppoint()">Editar</button>
+                    <button disabled id="btn-edit-d" *ngIf="!isEditing">Editar</button>
+                    <button id="btn-del" *ngIf="isEditing" (click)="deleteAppointment(appointmentId)">Deletar</button>
+                    <button disabled id="btn-del-d" *ngIf="!isEditing">Deletar</button>
+                </div>
+            </div>
+
+            <div class="search-result">
+                <div *ngIf="noResults" class="no-results">
+                    <p>Nenhum paciente encontrado.</p>
+                </div>
+
+                <div class="list-search-area" *ngIf="!noResults && filteredPatients && filteredPatients.length > 0">
+                    <h3>Selecione o paciente para registrar a consulta:</h3>
+                    <ul>
+                        <li *ngFor="let patient of filteredPatients" [value]="patient">
+                            <div>
+                                <a (click)="selectPatient(patient)">{{ patient.name }}</a>
+
+                            </div>
+
+                        </li>
+                    </ul>
+
+                    <div class="pages">
+                        <button (click)="previousPage()" [disabled]="currentPage === 0">Anterior</button>
+                        <button (click)="nextPage()" [disabled]="currentPage >= totalPages - 1">Próximo</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-area2" [formGroup]="appointRegistration">
+
+                <div class="form-area3">
+
+                    <div class="row1">
+                        <div class="form-field1 idPatient">
+                            <label for="idPatient">ID paciente</label>
+                            <input matInput formControlName="idPatient" name="idPatient" readonly>
+                        </div>
+                        <div class="form-field1 name">
+                            <label for="name">Nome</label>
+                            <input matInput formControlName="name" name="name" readonly>
+                        </div>
+                    </div>
+
+                    <div class="row1">
+                        <div class="form-field1 reason">
+                            <label for="reason">Motivo da consulta*</label>
+                            <input matInput formControlName="reason" name="reason">
+                            <mat-error
+                                *ngIf="appointRegistration.get('reason')?.invalid && (appointRegistration.get('reason')?.dirty || appointRegistration.get('reason')?.touched)">
+                                Motivo da consulta é obrigatório e deve ter entre 8 e 64 caracteres
+                            </mat-error>
+                        </div>
+                    </div>
+                    <div class="row1">
+                        <div class="form-field1 consultDate">
+                            <label for="consultDate">Data da consulta*</label>
+                            <input type="date" name="consultDate" formControlName="consultDate">
+                        </div>
+                        <div class="form-field1 consultTime">
+                            <label for="consultTime">Hora da consulta*</label>
+                            <input type="time" name="consultTime" formControlName="consultTime">
+                        </div>
+                    </div>
+                    <div class="row1">
+                        <div class="form-field1 problemDescrip">
+                            <label for="problemDescrip">Descrição do problema*</label>
+                            <textarea name="problemDescrip" formControlName="problemDescrip" rows="4"
+                                cols="50"></textarea>
+                            <mat-error
+                                *ngIf="appointRegistration.get('problemDescrip')?.invalid && (appointRegistration.get('problemDescrip')?.dirty || appointRegistration.get('problemDescrip')?.touched)">
+                                Descrição do problema é obrigatório e deve ter entre 16 e 1024 caracteres
+                            </mat-error>
+                        </div>
+                    </div>
+
+                    <div class="row1">
+                        <div class="form-field1 prescMed">
+                            <label for="problemDescrip">Medicação receitada</label>
+                            <textarea name="prescMed" formControlName="prescMed" rows="4" cols="50"></textarea>
+                        </div>
+                    </div>
+                    <div class="row1">
+                        <div class="form-field1 dosagesPrec">
+                            <label for="dosagesPrec">Dosagens e precauções*</label>
+                            <textarea name="dosagesPrec" formControlName="dosagesPrec" rows="4" cols="50"></textarea>
+                            <mat-error
+                                *ngIf="appointRegistration.get('dosagesPrec')?.invalid && (appointRegistration.get('dosagesPrec')?.dirty || appointRegistration.get('dosagesPrec')?.touched)">
+                                Dosagens e precauções é obrigatório e deve ter entre 16 e 256 caracteres
+                            </mat-error>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
