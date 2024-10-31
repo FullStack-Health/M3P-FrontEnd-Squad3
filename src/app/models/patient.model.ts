@@ -1,18 +1,21 @@
 export class Patient {
-    name: string = '';
+    static birthDate(birthDate: any) {
+      throw new Error('Method not implemented.');
+    }
+    fullName: string = '';
     gender: string = '';
-    birthdate: string = '';
+    birthDate: string = '';
     cpf: string = '';
     rg: string = '';
-    issOrg: string = '';
+    // issOrg: string = '';
     maritalStatus: string = '';
     phone: string = '';
     email: string = '';
     placeOfBirth: string = '';
-    emergCont: string = '';
-    emergContNumber: string = '';
+    emergencyContact: string = '';
+    // emergContNumber: string = '';
     listOfAllergies?: string;
-    careList?: string;
+    listCare?: string;
     healthInsurance: string = '';
     healthInsuranceNumber?: string;
     healthInsuranceVal?: string;

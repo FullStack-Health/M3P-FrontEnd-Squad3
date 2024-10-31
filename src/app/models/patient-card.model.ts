@@ -1,8 +1,8 @@
 export class PatientCard {
     id: string = '';
-    name: string = '';
+    fullName: string = '';
     gender: string = '';
-    birthdate: string = '';
+    birthDate: string = '';
     phone: string = '';
     email: string = '';
     healthInsurance: string = '';

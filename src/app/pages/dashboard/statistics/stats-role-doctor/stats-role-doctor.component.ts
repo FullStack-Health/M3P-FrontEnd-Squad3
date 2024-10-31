@@ -31,9 +31,9 @@ export class StatsRoleDoctorComponent {
   getDashboardStats(): void {
     this.apiService.getDashboardStats().subscribe({
       next: (stats: DashboardStats) => {
-        this.countPatients = stats.totalPatients;
-        this.countAppointments = stats.totalAppointments;
-        this.countExams = stats.totalExams;
+        this.countPatients = stats.countPatients;
+        this.countAppointments = stats.countAppointments;
+        this.countExams = stats.countExams;
         console.log('Dashboard stats loaded successfully:', stats);
       },
       error: (error) => {

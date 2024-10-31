@@ -1,6 +1,6 @@
 export class User {
     roleName?: string = '';
-    name?: string = '';
+    fullName?: string = '';
     email?: string = '';
     password?: string = '';
     phone?: string = '';
