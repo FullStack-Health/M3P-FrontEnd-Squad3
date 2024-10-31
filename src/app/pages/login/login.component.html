@@ -2,8 +2,12 @@
 
 <div class="container1">
 
-  <div class="logo">
-    <img id="logo-img" src="../../../assets/images/logo-labmedical.png">
+  <div *ngIf="isScreenLarge" class="logo">
+    <img id="logo-img" src="../../../assets/images/logo-labinc.png">
+  </div>
+
+  <div *ngIf="!isScreenLarge" class="logo">
+    <img id="logo-img" src="../../../assets/images/logo-labmedical-white.png">
   </div>
 
   <div class="login-forgot-signup-area" *ngIf="!showRegisterForm && !showPasswordArea">
@@ -11,7 +15,7 @@
     <div class="container-text size">
       <span class="container-text-title">
         <p>Conecte-se em</p>
-        <h4 class="title">LABmedical</h4>
+        <h4 class="title">Lab Inc.</h4>
       </span>
       <p class="text-below-title">Entre com os dados da sua conta abaixo</p>
     </div>
@@ -51,7 +55,7 @@
     <div class="container-text size">
       <span class="container-text-title">
         <p>Registre-se em</p>
-        <h4 class="title">LABmedical</h4>
+        <h4 class="title">Lab Inc.</h4>
       </span>
       <p class="text-below-title">Preencha os campos abaixo para criar uma conta</p>
     </div>
@@ -111,7 +115,7 @@
     <div class="container-text size">
       <span class="container-text-title">
         <p>Trocar senha do</p>
-        <h4 class="title">LABmedical</h4>
+        <h4 class="title">Lab Inc.</h4>
       </span>
       <p class="text-below-title">Informe o e-mail da sua conta e defina uma nova senha</p>
     </div>

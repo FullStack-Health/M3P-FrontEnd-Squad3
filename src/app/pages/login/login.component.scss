@@ -55,7 +55,7 @@ body {
 
 .title {
     margin-left: 0.5rem;
-    color: $colorLabMedicalBrand;
+    color: $colorLabIncBrand;
 }
 
 .text-below-title {
@@ -68,7 +68,7 @@ body {
     background: $colorInputBackground;
     border: 1px solid $colorFormBorderLoginRegister;
     border-radius: 4px;
-    height: 50px;
+    height: 40px;
     color: $colorFontInput;
     padding-left: 15px;
     font-size: 1.6rem;
@@ -76,8 +76,17 @@ body {
     box-sizing: border-box;
 }
 
-.inputs::placeholder {
-    color: $colorInputPlaceholder;
+.inputs:focus {
+    border: 2px solid black;
+    outline: none;
+}
+
+.inputs:-webkit-autofill,
+.inputs:-webkit-autofill:hover,
+.inputs:-webkit-autofill:focus,
+.inputs:-webkit-autofill:active {
+    box-shadow: 0 0 0 30px #6DB7B8 inset !important;
+    -webkit-text-fill-color: #000 !important;
 }
 
 .buttons {
@@ -141,6 +150,7 @@ body {
 
 #select-role option {
     background-color: $colorBackgroundSelect;
+    color: white;
 }
 
 .container-inputs {
@@ -175,47 +185,36 @@ label {
     color: $colorTextDanger;
 }
 
-@media only screen and (max-width: 376px) {
-    .size {
-        width: 300px !important;
-    }
-}
 
-@media only screen and (max-width: 481px) {
-    .size {
-        width: 20rem;
-    }
-
-    #logo-img {
-        width: 8rem !important;
-    }
-
-    .login-forgot-signup-area {
-        height: 80vh;
-    }
-
-    .container-text-title {
+@media only screen and (max-width: 1023px) {
+    .container1 {
         flex-direction: column;
+        background: $colorBackgroundFormSideLogin;
+    }
+    
+    .logo {
+        width: 100vw;
+        height: 30%;
+        background: $colorBackgroundFormSideLogin;
+    }
+    
+    #logo-img {
+        margin-top: 20px;
+        width: 11rem;
+    }
+    
+    .login-forgot-signup-area {
+        justify-content: start;
+        width: 100vw;
+        min-height: 100vh;
     }
 
-    .container-text-title p {
-        margin-bottom: 0px;
-    }
-
-    .title {
-        margin-top: 0px;
-    }
-
-    .container-forgot-and-signup {
-        text-align: center;
-        width: 19rem;
+    .container-forgot-and-signup p span {
+        text-decoration: underline;
     }
 }
 
 @media only screen and (max-width: 767px) {
-    .logo {
-        height: 20vh;
-    }
 
     .container-text-title {
         justify-content: center;
@@ -223,50 +222,62 @@ label {
         width: 100%;
         height: 100px;
     }
-
-    .inputs {
-        height: 40px;
-    }
-
+    
     .container-label-input {
         height: 70px;
     }
-
+    
     .container-forgot-and-signup {
         display: flex;
         align-items: center;
         justify-content: center;
         height: 40px;
     }
-
+    
     .container-line {
         align-items: center;
         height: 20px;
         margin-bottom: 10px;
     }
-
+    
     .line {
         margin-top: 5px;
     }
 }
 
-@media only screen and (max-width: 1023px) {
-    .container1 {
+@media only screen and (max-width: 481px) {
+    .size {
+        width: 20rem;
+    }
+    
+    #logo-img {
+        width: 8rem !important;
+    }
+    
+    .login-forgot-signup-area {
+        height: 80vh;
+    }
+    
+    .container-text-title {
         flex-direction: column;
     }
-
-    .logo {
-        width: 100vw;
-        height: 30vh;
+    
+    .container-text-title p {
+        margin-bottom: 0px;
+    }
+    
+    .title {
+        margin-top: 0px;
+    }
+    
+    .container-forgot-and-signup {
+        text-align: center;
+        width: 19rem;
     }
 
-    #logo-img {
-        width: 12rem;
-    }
-
-    .login-forgot-signup-area {
-        justify-content: start;
-        width: 100vw;
-        min-height: 100vh;
+    @media only screen and (max-width: 376px) {
+        .size {
+            width: 300px !important;
+        }
     }
 }
