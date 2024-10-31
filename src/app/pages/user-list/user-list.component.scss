@@ -10,6 +10,7 @@
   display: flex;
   flex-direction: column;
   width: calc(100% - 200px);
+  min-width: 300px;
   margin-top: 65px;
   margin-right: 20px;
   margin-left: 220px;
@@ -100,37 +101,38 @@
   color: $colorFontHeaderArea;
 }
 
-.card-content1 {
-  color: $colorGeneralFont;
-  font-family: "Roboto", sans-serif;
-  font-size: 1.2rem;
-  font-weight: 300;
-  height: 60px;
-}
-
-#header-reg {
-  padding-left: 100px;
-}
-
-#id {
-  padding-left: 100px;
-}
-
-#header-reg,
-#header-login,
-#header-role,
-#header-pass,
-#header-edit {
+.card-header {
   margin-top: auto;
   margin-bottom: auto;
 }
 
-#id,
-#email,
-#role,
-#password {
+.card-content1 {
   display: flex;
   align-items: center;
+  height: 60px;
+  padding-right: 18px;
+  color: $colorGeneralFont;
+  font-family: "Roboto", sans-serif;
+  word-break: break-word;
+  font-size: 1.2rem;
+  font-weight: 300;
+}
+
+.register-id {
+  min-width: 100px;
+  padding-left: 20px;
+}
+
+.login-email {
+  min-width: 295px;
+}
+
+.role {
+  min-width: 100px;
+}
+
+.password {
+  min-width: 100px;
 }
 
 .space-btn {
@@ -211,11 +213,6 @@
   .header-area {
     font-size: 1.3rem;
   }
-
-  #header-reg,
-  #id {
-    padding-left: 70px;
-  }
 }
 
 @media only screen and (max-width: 1023px) {
@@ -227,24 +224,34 @@
     font-size: 1.2rem;
   }
 
-  #header-reg,
-  #id {
-    padding-left: 25px;
-  }
-
-
   .card-content1 {
     font-size: 1rem;
+  }
+
+  .register-id {
+    min-width: 90px;
+  }
+
+  .login-email {
+    min-width: 240px;
+  }
+
+  .role {
+    min-width: 85px;
+  }
+
+  .password {
+    min-width: 50px;
   }
 }
 
 @media only screen and (max-width: 879px) {
-  .user-card1 {
-    grid-template-columns: 2fr 3fr 3fr 3fr 0.5fr;
+
+  .login-email {
+    min-width: 240px;
   }
 
-  #header-reg,
-  #id {
+  .register-id {
     padding-left: 10px;
   }
 
@@ -259,13 +266,22 @@
   }
 }
 
-@media only screen and (max-width: 555px) {
+@media only screen and (max-width: 575px) {
   #search {
     margin-bottom: 20px;
   }
 
   .search-area {
     flex-direction: column;
+  }
+
+  .container-btn {
+    justify-content: space-between;
+  }
+
+  .btns {
+    width: 49%;
+    margin: 0px;
   }
 
   .user-card1 {
@@ -277,9 +293,15 @@
     color: $colorFontHeaderArea;
     display: flex;
     align-items: baseline;
+    min-width: none;
     height: 40px;
     padding-left: 10px;
     font-size: 1.2rem;
+  }
+
+  .min-width-none {
+    min-width: none;
+    padding-left: 0px;
   }
 
   .card-content1 {
@@ -287,13 +309,15 @@
     font-size: 1.1rem;
   }
 
-  .edit-user button {
-    margin-bottom: 10px;
+  .edit-user {
+    margin: 10px;
   }
 }
 
 @media only screen and (max-width: 481px) {
   .container-list {
     margin-top: 91px;
+    margin-left: 10px;
+    margin-right: 10px;
   }
 }

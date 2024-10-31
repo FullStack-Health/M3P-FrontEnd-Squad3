@@ -19,22 +19,22 @@
             <div *ngIf="isScreenLarge" class="list-area">
 
                 <div class="user-card1 header-area">
-                    <div id="header-reg">Registro</div>
-                    <div id="header-login">Login</div>
-                    <div id="header-role">Perfil</div>
-                    <div id="header-pass">Senha</div>
-                    <div class="space-btn"></div>
+                    <div class="card-header register-id">Registro</div>
+                    <div class="card-header login-email">Login</div>
+                    <div class="card-header role">Perfil</div>
+                    <div class="card-header password">Senha</div>
+                    <div class="card-header space-btn"></div>
                 </div>
-
-                <div *ngIf="noResults" class="no-results">
-                    Nenhum usuário encontrado.
-                </div>
+                
+                    <div *ngIf="noResults" class="no-results">
+                        Nenhum usuário encontrado.
+                    </div>
 
                 <div *ngFor="let user of usersList" class="user-card1">
-                    <div class="card-content1" id="id">{{ user.userId }}</div>
-                    <div class="card-content1" id="email">{{ user.email }}</div>
-                    <div class="card-content1" id="role">{{ user.roleName | roleTransform }}</div>
-                    <div class="card-content1" id="password">{{ user.password }}</div>
+                    <div class="card-content1 register-id">{{ user.id }}</div>
+                    <div class="card-content1 login-email">{{ user.email }}</div>
+                    <div class="card-content1 role">{{ user.roleName | roleTransform }}</div>
+                    <div class="card-content1 password">{{ user.password }}</div>
                     <div class="edit-user">
                         <button (click)="editUser(user.userId)">EDITAR</button>
                     </div>
@@ -50,20 +50,20 @@
 
                 <div *ngFor="let user of usersList" class="user-card1">
 
-                    <div class="containers" id="header-reg">Registro: <div class="card-content1" id="id">{{
-                            user.id }}</div>
+                    <div class="containers register-id">Registro: 
+                        <div class="card-content1 register-id min-width-none">{{user.id }}</div>
+                    </div>
+                    
+                    <div class="containers login-email">Login: 
+                        <div class="card-content1 login-email min-width-none">{{ user.email }}</div>
                     </div>
 
-                    <div class="containers" id="header-login">Login: <div class="card-content1" id="email">{{
-                            user.email }}</div>
+                    <div class="containers role">Perfil: 
+                        <div class="card-content1 role min-width-none">{{ user.roleName }}</div>
                     </div>
 
-                    <div class="containers" id="header-role">Perfil: <div class="card-content1" id="role">{{
-                            user.role }}</div>
-                    </div>
-
-                    <div class="containers" id="header-pass">Senha: <div class="card-content1" id="password">{{
-                            user.password }}</div>
+                    <div class="containers password">Senha: 
+                        <div class="card-content1 password min-width-none">{{ user.password }}</div>
                     </div>
 
                     <div class="edit-user">
