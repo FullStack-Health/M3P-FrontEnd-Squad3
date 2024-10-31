@@ -28,20 +28,21 @@
           </div>
           <div class="content-patient" *ngIf="patient">
             <h3>Dados</h3>
-            <p><strong>Nome: </strong>{{ patient.name }}</p>
+            <p><strong>Nome: </strong>{{ patient.fullName }}</p>
             <p><strong>Gênero: </strong>{{ patient.gender }}</p>
-            <p><strong>Data de Nascimento: </strong>{{ patient.birthdate | dateFormat }}</p>
+            <p><strong>Data de Nascimento: </strong>{{ patient.birthDate }}</p>
             <p><strong>Nasceu em: </strong>{{ patient.placeOfBirth }}</p>
-            <p><strong>Idade: </strong>{{ patient.birthdate | age }}</p>
+            <p><strong>Idade: </strong>{{ patient.birthDate | age }}</p>
             <p><strong>CPF: </strong>{{ patient.cpf }}</p>
             <p><strong>RG: </strong>{{ patient.rg }}</p>
-            <p><strong>Orgão Emissor: </strong>{{ patient.issOrg }}</p>
+            <!-- <p><strong>Orgão Emissor: </strong>{{ patient.issOrg }}</p> -->
             <p><strong>Estado Civil: </strong>{{ patient.maritalStatus }}</p>
             <p><strong>Telefone: </strong>{{ patient.phone }}</p>
             <p><strong>E-mail: </strong>{{ patient.email }}</p>
-            <p><strong>Contato de emergência: </strong>{{ patient.emergCont | shortenName }} - {{ patient.emergContNumber }}</p>
+            <!-- <p><strong>Contato de emergência: </strong>{{ patient.emergCont | shortenName }} - {{ patient.emergContNumber }}</p> -->
+            <p><strong>Contato de emergência: </strong>{{ patient.emergencyContact }}</p>
             <p><strong>Alergias: </strong>{{ patient.listOfAllergies || 'N/A' }}</p>
-            <p><strong>Cuidados específicos: </strong>{{ patient.careList || 'N/A' }}</p>
+            <p><strong>Cuidados específicos: </strong>{{ patient.listCare || 'N/A' }}</p>
 
             <h3>Convênio</h3>
             <p><strong>Convênio: </strong>{{ patient.healthInsurance }}</p>

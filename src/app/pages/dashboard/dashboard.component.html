@@ -5,13 +5,13 @@
         <app-sidebar-menu></app-sidebar-menu>
 
         <div class="dashboard-content">
-            <div class="app-stats-role-doctor" *ngIf="userRole === 'ROLE_MEDICO'">
+            <div class="app-stats-role-doctor" *ngIf="userRole === 'SCOPE_MEDICO'">
                 <app-stats-role-doctor></app-stats-role-doctor>
             </div>
-            <div class="app-stats-role-admin" *ngIf="userRole === 'ROLE_ADMIN'">
+            <div class="app-stats-role-admin" *ngIf="userRole === 'SCOPE_ADMIN'">
                 <app-stats-role-admin></app-stats-role-admin>
             </div>
-            <div class="patient-card" *ngIf="userRole === 'ROLE_ADMIN' || userRole === 'ROLE_MEDICO'">
+            <div class="patient-card" *ngIf="userRole === 'SCOPE_ADMIN' || userRole === 'SCOPE_MEDICO'">
                 <app-patient-card></app-patient-card>
             </div>
         </div> 

@@ -41,7 +41,7 @@
                     <ul>
                         <li *ngFor="let patient of filteredPatients" [value]="patient">
                             <div>
-                                <a (click)="selectPatient(patient)">{{ patient.name }}</a>
+                                <a (click)="selectPatient(patient)">{{ patient.fullName }}</a>
                                 <!-- <p> {{ patient.gender }}</p>
                             <p> {{ patient.birthdate }}</p> -->
                             </div>

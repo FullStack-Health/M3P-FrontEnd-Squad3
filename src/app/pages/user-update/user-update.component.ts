@@ -82,7 +82,7 @@ export class UserUpdateComponent implements OnInit {
           this.userForm.patchValue({
             userId: user.id,
             roleName: user.roleName,
-            name: user.name,
+            name: user.fullName,
             email: user.email,
             birthdate: user.birthdate,
             cpf: user.cpf,
@@ -106,7 +106,7 @@ export class UserUpdateComponent implements OnInit {
     if (this.userForm.valid) {
 
       const updateUser: User = {
-        name: this.userForm.value.name,
+        fullName: this.userForm.value.name,
         email: this.userForm.value.email,
         birthdate: this.userForm.value.birthdate,
         cpf: this.userForm.value.cpf,

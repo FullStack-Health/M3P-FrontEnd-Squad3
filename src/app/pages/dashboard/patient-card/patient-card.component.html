@@ -3,7 +3,7 @@
     <div class="search-area">
         <label for="search"></label>
         <input type="text" id="search" name="search" [(ngModel)]="searchTerm"
-            placeholder="Busque pelo nome, telefone ou e-mail">
+            placeholder="Busque pelo nome, email ou telefone">
         <div class="btn-container">
             <button id="btn-search" (click)="search()">BUSCAR</button>
             <button id="btn-clear" (click)="clearSearch()">LIMPAR</button>
@@ -24,7 +24,7 @@
                     <img *ngIf="patient.gender === 'Feminino'" src="../../../assets/images/pat-female.webp">
                 </div>
                 <div id="name">
-                    <p>{{ patient.name | shortenName }}</p>
+                    <p>{{ patient.fullName | shortenName }}</p>
                 </div>
             </div>
 
@@ -32,7 +32,7 @@
 
                 <div class="age-and-btn">
                     <div class="card-age-btn" id="age">
-                        <p>{{ patient.birthdate | age }} anos</p>
+                        <p>{{ patient.birthDate | age }} anos</p>
                     </div>
                     <button class="btn-medical-record" (click)="medicalRecord(patient.id)">PRONTUÁRIO</button>
                 </div>

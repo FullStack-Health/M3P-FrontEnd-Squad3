@@ -11,32 +11,32 @@
         <div class="general-menu">
             <div class="group-menu">
 
-                <button class="menu-button" [routerLink]="['/dashboard']">
+                <button class="menu-button" *ngIf="userRole === 'SCOPE_ADMIN' || userRole === 'SCOPE_MEDICO'" [routerLink]="['/dashboard']">
                     <!-- <mat-icon>assessment</mat-icon> -->
                     <i class="material-icons">assessment</i>
                     <!-- <span class="material-symbols-outlined">health_metrics</span> -->
                     <span id="btn-text">PAINEL MÉDICO</span>
                 </button>
 
-                <button class="menu-button" [routerLink]="['/lista-prontuarios']">
+                <button class="menu-button" *ngIf="userRole === 'SCOPE_ADMIN' || userRole === 'SCOPE_MEDICO'" [routerLink]="['/lista-prontuarios']">
                     <!-- <mat-icon>assignment</mat-icon> -->
                     <i class="material-icons">assignment</i>
-                    <span id="btn-text">PRONTUÁRIOS</span>
+                    <span id="btn-text">LISTA PACIENTES</span>
                 </button>
 
-                <button class="menu-button" [routerLink]="['/registro-paciente']">
+                <button class="menu-button" *ngIf="userRole === 'SCOPE_ADMIN' || userRole === 'SCOPE_MEDICO'" [routerLink]="['/registro-paciente']">
                     <!-- <mat-icon>person_add</mat-icon> -->
                     <i class="material-icons">person_add</i>
                     <span id="btn-text">NOVO PACIENTE</span>
                 </button>
 
-                <button class="menu-button" [routerLink]="['/registro-consulta']">
+                <button class="menu-button" *ngIf="userRole === 'SCOPE_ADMIN' || userRole === 'SCOPE_MEDICO'" [routerLink]="['/registro-consulta']">
                     <!-- <mat-icon>calendar_today</mat-icon> -->
                     <i class="material-icons">calendar_today</i>
                     <span id="btn-text">NOVA CONSULTA</span>
                 </button>
 
-                <button class="menu-button" [routerLink]="['/registro-exame']">
+                <button class="menu-button" *ngIf="userRole === 'SCOPE_ADMIN' || userRole === 'SCOPE_MEDICO'" [routerLink]="['/registro-exame']">
                     <!-- <mat-icon>note_add</mat-icon> -->
                     <i class="material-icons">note_add</i>
                     <span id="btn-text">NOVO EXAME</span>
@@ -47,16 +47,26 @@
                     <span id="btn-text">EDITAR USUÁRIO</span>
                 </button> -->
 
-                <button class="menu-button" [routerLink]="['/lista-usuarios']">
+                <button class="menu-button" *ngIf="userRole === 'SCOPE_ADMIN'" [routerLink]="['/lista-usuarios']">
                     <!-- <mat-icon>account_circle</mat-icon> -->
                     <i class="material-icons">person_search</i>
                     <span id="btn-text">USUÁRIOS</span>
                 </button>
 
+                <button class="menu-button" *ngIf="userRole === 'SCOPE_PACIENTE'" [routerLink]="['/lista-prontuarios']">
+                    <i class="material-icons">assignment</i>
+                    <span id="btn-text">PRONTUÁRIO</span>
+                </button>
+
+                <button class="menu-button" *ngIf="userRole === 'SCOPE_PACIENTE'" (click)="cleanLoggedUser()">
+                    <i class="material-icons">logout</i>
+                    <span id="btn-text">SAIR</span>
+                </button>
+
             </div>
         </div>
 
-        <div id="exit" (click)="cleanLoggedUser()">
+        <div *ngIf="userRole === 'SCOPE_ADMIN' || userRole === 'SCOPE_MEDICO'" id="exit" (click)="cleanLoggedUser()">
             <p>SAIR</p>
             <i class="material-icons">logout</i>
         </div>
