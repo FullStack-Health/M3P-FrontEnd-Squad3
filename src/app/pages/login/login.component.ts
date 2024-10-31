@@ -64,9 +64,17 @@ export class LoginComponent implements OnInit {
       )
       .subscribe(response => {
         this.authService.saveToken(response.token);
-        this.router.navigate(['/dashboard']);
+
+        const userRole = this.authService.getUserRole();
+        const patientId = this.authService.getPatientId();
+        
+        if (userRole === 'SCOPE_PACIENTE' && patientId !== null) {
+          this.router.navigate([`/prontuario/${patientId}`]);
+        } else {
+          this.router.navigate(['/dashboard']);
+        }
       });
-  }
+    }
   
   changePassword(): void {
     if (this.changePasswordForm.valid) {
@@ -105,7 +113,7 @@ export class LoginComponent implements OnInit {
     }
 
     const newUser: User = {
-      name: formValue.name,
+      fullName: formValue.name,
       email: formValue.email,
       roleName: formValue.role,
       password: formValue.password
