@@ -21,7 +21,7 @@
                 <button class="menu-button" *ngIf="userRole === 'SCOPE_ADMIN' || userRole === 'SCOPE_MEDICO'" [routerLink]="['/lista-prontuarios']">
                     <!-- <mat-icon>assignment</mat-icon> -->
                     <i class="material-icons">assignment</i>
-                    <span id="btn-text">LISTA PACIENTES</span>
+                    <span id="btn-text">PRONTUÁRIOS</span>
                 </button>
 
                 <button class="menu-button" *ngIf="userRole === 'SCOPE_ADMIN' || userRole === 'SCOPE_MEDICO'" [routerLink]="['/registro-paciente']">
@@ -51,11 +51,6 @@
                     <!-- <mat-icon>account_circle</mat-icon> -->
                     <i class="material-icons">person_search</i>
                     <span id="btn-text">USUÁRIOS</span>
-                </button>
-
-                <button class="menu-button" *ngIf="userRole === 'SCOPE_PACIENTE'" [routerLink]="['/lista-prontuarios']">
-                    <i class="material-icons">assignment</i>
-                    <span id="btn-text">PRONTUÁRIO</span>
                 </button>
 
                 <button class="menu-button" *ngIf="userRole === 'SCOPE_PACIENTE'" (click)="cleanLoggedUser()">
