@@ -6,5 +6,5 @@ export class User {
     phone?: string = '';
     birthdate?: string = '';
     cpf?: string = '';
-    id?: string = '';
+    userId?: string = '';
   }

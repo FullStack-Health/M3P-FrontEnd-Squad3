@@ -127,14 +127,11 @@ export class PatientRegistrationComponent implements OnInit {
   patientRegister() {
     if (this.patRegistration.valid) {
 
-      const cpf = this.patRegistration.value.cpf.replace(/\D/g, '');
-      const formattedCpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
-
       const newPatient: Patient = {
         fullName: this.patRegistration.value.fullName,
         gender: this.patRegistration.value.gender,
         birthDate: this.patRegistration.value.birthDate,
-        cpf: formattedCpf,
+        cpf: this.dataTransformService.formatCpf(this.patRegistration.value.cpf),
         rg: this.patRegistration.value.rg,
         // issOrg: this.patRegistration.value.issOrg,
         maritalStatus: this.patRegistration.value.maritalStatus,
@@ -185,14 +182,11 @@ export class PatientRegistrationComponent implements OnInit {
 
     if (this.patRegistration.valid) {
 
-      const cpf = this.patRegistration.value.cpf.replace(/\D/g, '');
-      const formattedCpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
-
       const newPatient: Patient = {
         fullName: this.patRegistration.value.fullName,
         gender: this.patRegistration.value.gender,
         birthDate: this.patRegistration.value.birthDate,
-        cpf: formattedCpf,
+        cpf: this.dataTransformService.formatCpf(this.patRegistration.value.cpf),
         rg: this.patRegistration.value.rg,
         // issOrg: this.patRegistration.value.issOrg,
         maritalStatus: this.patRegistration.value.maritalStatus,

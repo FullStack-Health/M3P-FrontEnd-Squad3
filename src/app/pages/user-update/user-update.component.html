@@ -37,8 +37,8 @@
 
                     <div class="form-field1">
                         <label for="name">Nome completo*</label>
-                        <input matInput formControlName="name" name="name">
-                        <mat-error *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched">
+                        <input matInput formControlName="fullName" name="name">
+                        <mat-error *ngIf="userForm.get('fullName')?.invalid && userForm.get('fullName')?.touched">
                             Obrigatório
                         </mat-error>
                     </div>
@@ -69,7 +69,7 @@
 
                     <div class="form-field1">
                         <label for="phone">Telefone*</label>
-                        <input matInput type="phone" formControlName="phone" id="phone-form-field" name="phone">
+                        <input matInput type="phone" formControlName="phone" mask="(00) 0 0000-0000" id="phone-form-field" name="phone">
                         <mat-error *ngIf="userForm.get('phone')?.invalid && userForm.get('phone')?.touched">
                             Obrigatório
                         </mat-error>
