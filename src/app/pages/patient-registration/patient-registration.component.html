@@ -64,7 +64,7 @@
                             <input matInput formControlName="cpf" mask="000.000.000-00" id="cpf-form-field" name="cpf">
                             <mat-error
                                 *ngIf="patRegistration.get('cpf')?.invalid && patRegistration.get('cpf')?.touched">
-                                Obrigatório
+                                Obrigatório com o formato 000.000.000-00
                             </mat-error>
                         </div>
                         <div class="form-field1">
@@ -106,7 +106,7 @@
                             <input matInput type="email" formControlName="email" name="email">
                             <mat-error
                                 *ngIf="patRegistration.get('email')?.invalid && patRegistration.get('email')?.touched">
-                                Obrigatório
+                                Obrigatório com o formato exemplo&#64;exemplo
                             </mat-error>
                         </div>
                         <div class="form-field1">
@@ -114,18 +114,18 @@
                             <input matInput formControlName="placeOfBirth" name="placeOfBirth">
                             <mat-error
                                 *ngIf="patRegistration.get('placeOfBirth')?.invalid && patRegistration.get('placeOfBirth')?.touched">
-                                Obrigatório
+                                Obrigatório e deve ter entre 8 e 64 caracteres
                             </mat-error>
                         </div>
                     </div>
                     <div class="row1">
                         <div class="form-field1">
                             <label for="phone">Telefone*</label>
-                            <input matInput formControlName="phone" mask="(00)00000-0009" id="phone-form-field"
+                            <input matInput formControlName="phone" mask="(00) 0 0000-0009" id="phone-form-field"
                                 name="phone">
                             <mat-error
                                 *ngIf="patRegistration.get('phone')?.invalid && patRegistration.get('phone')?.touched">
-                                Obrigatório
+                                Obrigatório com o formato (99) 9 9999-9999
                             </mat-error>
                         </div>
                         <div class="form-field1">
@@ -137,12 +137,12 @@
                             </mat-error>
                         </div>
                         <div class="form-field1">
-                            <label for="emergContNumber">Telefone emergência*</label>
-                            <input matInput formControlName="emergContNumber" mask="(00)00000-0009"
+                            <label for="emergContNumber">Telefone do contato de emergência*</label>
+                            <input matInput formControlName="emergContNumber" mask="(00) 0 0000-0009"
                                 name="emergContNumber">
                             <mat-error
                                 *ngIf="patRegistration.get('emergContNumber')?.invalid && patRegistration.get('emergContNumber')?.touched">
-                                Obrigatório
+                                Obrigatório com o formato (99) 9 9999-9999
                             </mat-error>
                         </div>
                     </div>
@@ -168,6 +168,7 @@
                         <div class="form-field1 insurance">
                             <label for="healthInsurance">Convênio*</label>
                             <select formControlName="healthInsurance" name="healthInsurance" id="ins-form-field">
+                                <option value="Particular">Particular</option>
                                 <option value="Allianz Saúde">Allianz Saúde</option>
                                 <option value="Amil">Amil</option>
                                 <option value="Biosaúde">Biosaúde</option>
@@ -175,7 +176,6 @@
                                 <option value="Care Plus">Care Plus</option>
                                 <option value="Sul América Saúde">Sul América Saúde</option>
                                 <option value="Unimed">Unimed</option>
-                                <option value="Particular">Particular</option>
                             </select>
                             <mat-error
                                 *ngIf="patRegistration.get('healthInsurance')?.invalid && patRegistration.get('healthInsurance')?.touched">
@@ -206,7 +206,7 @@
                             <input matInput formControlName="zipcode" mask="00000-000" name="zipcode">
                             <mat-error
                                 *ngIf="patRegistration.get('zipcode')?.invalid && patRegistration.get('zipcode')?.touched">
-                                Obrigatório
+                                Obrigatório com o formato 00000-000
                             </mat-error>
 
                         </div>
