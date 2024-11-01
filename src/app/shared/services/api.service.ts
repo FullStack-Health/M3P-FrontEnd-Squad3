@@ -23,19 +23,15 @@ export class ApiService {
   //user endpoint
 
   saveUser(user: User): Observable<User> {
-
     return this.http.post<User>(`${this.apiUrl}/users/pre-registration`, user);
   }
 
   updatePassword(email: string, newPassword: string): Observable<void> {
     const body: User = { 
-      email: email, 
       password: newPassword 
     };
-    const jwtToken = sessionStorage.getItem('jwtToken');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
 
-    return this.http.put<void>(`${this.apiUrl}/user`, body, { headers });
+    return this.http.put<void>(`${this.apiUrl}/users/email/${email}/redefine-password`, body);
   }
 
   getUser(id: string): Observable<User> {
@@ -59,7 +55,7 @@ export class ApiService {
     return this.http.delete<User>(`${this.apiUrl}/users/${id}`, { headers });
   }
 
-  listUsers(page: number, size: number, email?: string, id?: string): Observable<Page<ListUsers>> {
+  listUsers(page: number, size: number, email?: string, userId?: string): Observable<Page<ListUsers>> {
     const jwtToken = sessionStorage.getItem('jwtToken');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
 
@@ -68,14 +64,10 @@ export class ApiService {
     if (email) {
       params = params.set('email', email);
     }
-    if (id) {
-      params = params.set('userId', id);
+    if (userId) {
+      params = params.set('userId', userId);
     }
 
-    if (email || id) {
-      params = params.set('fullName', '');
-    }
-    
     console.log("Sending request with params:", params.toString());
 
     return this.http.get<Page<ListUsers>>(`${this.apiUrl}/users`, { headers, params });
