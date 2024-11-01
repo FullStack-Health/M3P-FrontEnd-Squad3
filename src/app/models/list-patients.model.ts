@@ -1,6 +1,6 @@
 export class ListPatients {
     id: string = '';
-    name: string = '';
+    fullName: string = '';
     healthInsurance: string = '';
     phone: string = '';
   }

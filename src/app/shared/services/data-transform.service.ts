@@ -8,8 +8,9 @@ export class DataTransformService {
   constructor() { }
 
   formatPhone(phone: any): any {
-    return '(' + phone.substring(0, 2) + ') ' + phone.substring(2, 3) + phone.substring(3, 7) + '-' + phone.substring(7, 11);
-  }
+    return `(${phone.substring(0, 2)}) ${phone.substring(2, 3)} ${phone.substring(3, 7)}-${phone.substring(7, 11)}`;
+}
+
 
   formatDate(dateAny: any): any {
     const date = new Date(dateAny);
@@ -20,5 +21,8 @@ export class DataTransformService {
     return `${year}-${month}-${day}`;
   }
 
+  formatCep(cep: any): any {
+    return `${cep.substring(0, 5)}-${cep.substring(5, 8)}`;
+  }
 
 }

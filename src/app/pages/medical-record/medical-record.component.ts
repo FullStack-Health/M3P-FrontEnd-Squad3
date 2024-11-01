@@ -95,8 +95,8 @@ export class MedicalRecordComponent implements OnInit {
 
     this.appointment = {
       id: '',
-      appointment_id: '',
-      patientName: '',
+      appointmentId: '',
+      fullName: '',
       reason: '',
       consultDate: '',
       consultTime: '',
@@ -108,8 +108,8 @@ export class MedicalRecordComponent implements OnInit {
     this.exam = {
       id: '',
       examId: '',
-      patientName: '',
-      exam: '',
+      fullName: '',
+      examName: '',
       examDate: '',
       examTime: '',
       examType: '',

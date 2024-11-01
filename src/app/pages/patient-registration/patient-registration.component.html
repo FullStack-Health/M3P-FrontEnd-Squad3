@@ -69,7 +69,7 @@
                         </div>
                         <div class="form-field1">
                             <label for="rg">RG*</label>
-                            <input matInput type="number" formControlName="rg" name="rg">
+                            <input matInput formControlName="rg" name="rg">
                             <mat-error *ngIf="patRegistration.get('rg')?.invalid && patRegistration.get('rg')?.touched">
                                 Obrigatório
                             </mat-error>
@@ -122,7 +122,7 @@
                     <div class="row1">
                         <div class="form-field1">
                             <label for="phone">Telefone*</label>
-                            <input matInput formControlName="phone" mask="(00)00000-0009" id="phone-form-field"
+                            <input matInput formControlName="phone" mask="(00) 0 0000-0009" id="phone-form-field"
                                 name="phone">
                             <mat-error
                                 *ngIf="patRegistration.get('phone')?.invalid && patRegistration.get('phone')?.touched">
@@ -131,7 +131,7 @@
                         </div>
                         <div class="form-field1">
                             <label for="emergCont">Contato de emergência*</label>
-                            <input matInput formControlName="emergencyContact" name="emergencyContact" id="emergency-form-field">
+                            <input matInput formControlName="emergencyContact" mask="(00) 0 0000-0009" name="emergencyContact" id="emergency-form-field">
                             <mat-error
                                 *ngIf="patRegistration.get('emergencyContact')?.invalid && patRegistration.get('emergencyContact')?.touched">
                                 Obrigatório
