@@ -15,14 +15,32 @@ export const routes: Routes = [
     { path: 'lista-prontuarios', component: MedicalRecordListComponent },
     { path: 'registro-paciente', component: PatientRegistrationComponent },
     { path: 'registro-paciente/:id', component: PatientRegistrationComponent },
+
     {
         path: 'prontuario',
         children: [
           { path: ':id', component: MedicalRecordComponent }
         ]
     },
+
     { path: 'registro-consulta', component: AppointmentRegistrationComponent },
+
+    {
+      path: 'registro-consulta',
+      children: [
+        { path: ':id', component: AppointmentRegistrationComponent }
+      ]
+    },
+
     { path: 'registro-exame', component: ExamRegistrationComponent },
+
+    {
+      path: 'registro-exame',
+      children: [
+        { path: ':id', component: ExamRegistrationComponent }
+      ]
+    },
+
     { path: 'editar-usuario/:id', component: UserUpdateComponent },
     { path: 'lista-usuarios', component: UserListComponent }
 ];

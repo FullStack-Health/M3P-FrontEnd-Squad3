@@ -125,7 +125,7 @@ export class MedicalRecordListComponent implements OnInit {
   }
   
   editPatient(id: string) {
-    this.router.navigate(['/cadastro-paciente', id]);
+    this.router.navigate(['/registro-paciente', id]);
   }
 
   @HostListener('window:resize', ['$event'])
