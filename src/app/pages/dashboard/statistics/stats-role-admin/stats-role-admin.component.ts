@@ -17,16 +17,11 @@ export class StatsRoleAdminComponent {
   countAppointments: number = 0;
   countExams: number = 0;
   countUsers: number = 0;
-  menuTrueFalse: boolean | undefined;
 
-  constructor(private apiService: ApiService, private shareMenuStatusService: ShareMenuStatusService) { }
+  constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
     this.getStats();
-
-    this.shareMenuStatusService.menuTrueFalse$.subscribe(value => {
-      this.menuTrueFalse = value;
-    });
   }
 
   getStats(): void {

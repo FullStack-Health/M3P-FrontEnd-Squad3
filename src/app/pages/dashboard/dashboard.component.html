@@ -3,7 +3,7 @@
 
     <div class="app-sidebar-menu">
         <app-sidebar-menu></app-sidebar-menu>
-
+        
         <div class="dashboard-content">
             <div class="app-stats-role-doctor" *ngIf="userRole === 'ROLE_MEDICO'">
                 <app-stats-role-doctor></app-stats-role-doctor>
@@ -14,6 +14,6 @@
             <div class="patient-card" *ngIf="userRole === 'ROLE_ADMIN' || userRole === 'ROLE_MEDICO'">
                 <app-patient-card></app-patient-card>
             </div>
-        </div> 
+        </div>
     </div>
 </div>

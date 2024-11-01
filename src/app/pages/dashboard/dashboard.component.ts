@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { StatsRoleAdminComponent } from './statistics/stats-role-admin/stats-role-admin.component';
 import { PatientCardComponent } from './patient-card/patient-card.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ShareMenuStatusService } from '../../shared/services/share-menu-status.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,14 +20,22 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class DashboardComponent implements OnInit {
   userRole: string | null;
+  menuTrueFalse: boolean | undefined;
 
-  constructor(private titleService: Title, private authService: AuthService) {
+  constructor(
+    private titleService: Title,
+    private authService: AuthService,
+    private shareMenuStatusService: ShareMenuStatusService
+  ) {
     this.userRole = this.authService.getDecodedToken()?.scope || null;
     console.log(this.userRole);
-   }
+  }
 
   ngOnInit() {
     this.titleService.setTitle('Informações e Estatísticas');
-  }
 
+    this.shareMenuStatusService.menuTrueFalse$.subscribe(value => {
+      this.menuTrueFalse = value;
+    });
+  }
 }

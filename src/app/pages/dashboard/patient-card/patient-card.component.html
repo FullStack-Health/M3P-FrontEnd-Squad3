@@ -1,12 +1,12 @@
-<div [ngClass]="{'sidebar-open': !menuTrueFalse}" class="container1">
+<div class="container1">
 
     <div class="search-area">
         <label for="search"></label>
         <input type="text" id="search" name="search" [(ngModel)]="searchTerm"
             placeholder="Busque pelo nome, telefone ou e-mail">
         <div class="btn-container">
-            <button id="btn-search" (click)="search()">BUSCAR</button>
-            <button id="btn-clear" (click)="clearSearch()">LIMPAR</button>
+            <button class="btns-search-clear" (click)="search()">BUSCAR</button>
+            <button class="btns-search-clear" (click)="clearSearch()">LIMPAR</button>
         </div>
     </div>
 

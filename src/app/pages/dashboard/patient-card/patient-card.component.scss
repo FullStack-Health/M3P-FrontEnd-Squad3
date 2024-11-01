@@ -5,15 +5,16 @@
 }
 
 .container1 {
-  width: calc(100% - 200px);
-  margin-left: 200px;
-  transition: width 0.3s ease, margin-left 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
-.sidebar-open {
+.search-area {
+  display: flex;
+  justify-content: center;
   width: 100%;
-  margin-left: 0px;
-  transition: width 0.27s ease, margin-left 0.27s ease;
+  margin: 10px 0;
 }
 
 #search {
@@ -31,12 +32,6 @@
   @include border-shadow();
 }
 
-.search-area {
-  margin: 20px;
-  display: flex;
-  justify-content: center;
-}
-
 #search::placeholder {
   color: $colorSearchPlaceholder;
 }
@@ -45,7 +40,7 @@
   display: flex;
 }
 
-#btn-search {
+.btns-search-clear {
   background: $colorButton;
   color: $colorFontButton;
   border-radius: 4px;
@@ -58,25 +53,7 @@
   border: none;
 }
 
-#btn-search:hover {
-  background: $colorHover;
-  color: $colorFontButtonHover;
-}
-
-#btn-clear {
-  background: $colorButton;
-  color: $colorFontButton;
-  border-radius: 4px;
-  height: 40px;
-  width: 5vw;
-  margin-left: 1vw;
-  font-family: "Dosis", sans-serif;
-  font-weight: 500;
-  font-size: 1rem;
-  border: none;
-}
-
-#btn-clear:hover {
+.btns-search-clear:hover {
   background: $colorHover;
   color: $colorFontButtonHover;
 }
@@ -85,8 +62,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-column-gap: 5%;
-  width: calc(100% - 40px);
-  margin-left: 20px;
+  width: 100%;
   background-color: $colorAreaBackground;
   padding: 20px;
   border-radius: 4px;
@@ -141,9 +117,6 @@
   text-align: left;
   z-index: 2;
   overflow: hidden;
-}
-
-#name p {
   padding-left: 10px;
   color: $colorGeneralFont;
 }
@@ -164,9 +137,9 @@
   margin-left: 35px;
 }
 
-.card-content1 p {
-  padding: 0;
-  margin-top: 0;
+  .card-content1 p {
+    padding: 0;
+    margin-top: 0;
 }
 
 .age-and-btn {
@@ -223,7 +196,7 @@
 }
 
 .pages {
-  margin: 20px;
+  margin: 20px 0px 20px 20px;
   display: flex;
   justify-content: flex-end;
 }
@@ -263,9 +236,7 @@
     grid-column-gap: 2%;
   }
 
-
-  #btn-search,
-  #btn-clear {
+  .btns-search-clear {
     width: 65px;
   }
 }
@@ -312,7 +283,14 @@
   }
 
   .btn-container {
+    width: 100%;
     margin-top: 10px;
+    gap: 10px;
+  }
+
+  .btns-search-clear {
+    width: 100%;
+    margin-left: 0px;
   }
 }
 
