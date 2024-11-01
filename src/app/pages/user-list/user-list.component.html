@@ -31,7 +31,7 @@
                     </div>
 
                 <div *ngFor="let user of usersList" class="user-card1">
-                    <div class="card-content1 register-id">{{ user.id }}</div>
+                    <div class="card-content1 register-id">{{ user.userId }}</div>
                     <div class="card-content1 login-email">{{ user.email }}</div>
                     <div class="card-content1 role">{{ user.roleName | roleTransform }}</div>
                     <div class="card-content1 password">{{ user.password }}</div>
