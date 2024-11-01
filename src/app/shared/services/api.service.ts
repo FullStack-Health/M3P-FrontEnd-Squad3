@@ -156,8 +156,7 @@ export class ApiService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
 
     let params = new HttpParams()
-        .set('name', searchTerm)
-        .set('id', 'null')
+        .set(searchField, searchTerm)
         .set('page', page.toString())
         .set('size', size.toString());
 
