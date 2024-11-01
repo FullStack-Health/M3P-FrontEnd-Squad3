@@ -64,9 +64,9 @@ export class ExamRegistrationComponent implements OnInit {
   ) {
     this.isEditing = !!this.activatedRoute.snapshot.paramMap.get('id'),
       this.examRegistration = this.fb.group({
-        idPatient: [{ value: '', disabled: true }, Validators.required],
-        name: [{ value: '', disabled: true }, Validators.required],
-        exam: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(64)]],
+        id: [{ value: '', disabled: true }, Validators.required],
+        fullName: [{ value: '', disabled: true }, Validators.required],
+        examName: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(64)]],
         examDate: ['', Validators.required],
         examTime: ['', Validators.required],
         examType: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(32)]],
@@ -109,7 +109,7 @@ export class ExamRegistrationComponent implements OnInit {
   }
 
   getPatientsBySearchTerm(searchTerm: string, page: number, size: number): void {
-    this.apiService.getPatients(searchTerm, 'name', page, size).subscribe({
+    this.apiService.getPatients(searchTerm, 'fullName', page, size).subscribe({
       next: (response: any) => {
         this.filteredPatients = response.content;
         this.totalPatients = response.totalElements;
@@ -172,24 +172,24 @@ export class ExamRegistrationComponent implements OnInit {
 
   selectPatient(patient: any): void {
     this.examRegistration.patchValue({
-      idPatient: patient.id,
-      name: patient.name
+      id: patient.id,
+      fullName: patient.fullName
     })
     this.filteredPatients = [];
   }
 
-  setPatientData(patient: { id: any; name: any; }) {
+  setPatientData(patient: { id: any; fullName: any; }) {
     this.examRegistration.patchValue({
-      idPatient: patient.id,
-      name: patient.name
+      id: patient.id,
+      fullName: patient.fullName
     });
 
     this.patientSearchControl.setValue('');
   }
 
   examRegister() {
-    const idPatientValue = this.examRegistration.getRawValue().idPatient;
-    const nameValue = this.examRegistration.getRawValue().name;
+    const idPatientValue = this.examRegistration.getRawValue().id;
+    const nameValue = this.examRegistration.getRawValue().fullName;
 
     if (!this.examRegistration.valid || !idPatientValue || !nameValue) {
       this.dialog.openDialog('Preencha todos os campos obrigatórios corretamente.');
@@ -199,8 +199,8 @@ export class ExamRegistrationComponent implements OnInit {
     if (this.examRegistration.valid) {
 
       const newExam: Exam = {
-        id: this.examRegistration.getRawValue().idPatient,
-        exam: this.examRegistration.value.exam,
+        id: this.examRegistration.getRawValue().id,
+        examName: this.examRegistration.value.examName,
         examDate: this.dataTransformService.formatDate(this.examRegistration.value.examDate),
         examTime: this.examRegistration.value.examTime,
         examType: this.examRegistration.value.examType,
@@ -235,9 +235,9 @@ export class ExamRegistrationComponent implements OnInit {
       this.apiService.getExam(this.examId).subscribe({
         next: (exam: Exam) => {
           this.examRegistration.patchValue({
-            idPatient: exam.id,
-            name: exam.patientName,
-            exam: exam.exam,
+            id: exam.id,
+            fullName: exam.fullName,
+            examName: exam.examName,
             examDate: exam.examDate,
             examTime: exam.examTime,
             examType: exam.examType,
@@ -266,8 +266,8 @@ export class ExamRegistrationComponent implements OnInit {
     if (this.examRegistration.valid) {
 
       const newExam: Exam = {
-        id: this.examRegistration.getRawValue().idPatient,
-        exam: this.examRegistration.value.exam,
+        id: this.examRegistration.getRawValue().id,
+        examName: this.examRegistration.value.examName,
         examDate: this.examRegistration.value.examDate,
         examTime: this.examRegistration.value.examTime,
         examType: this.examRegistration.value.examType,
@@ -300,6 +300,8 @@ export class ExamRegistrationComponent implements OnInit {
   editExam() {
     this.examRegistration.enable();
     this.saveDisabled = false;
+    this.examRegistration.get('id')?.disable();
+    this.examRegistration.get('fullName')?.disable();
   }
 
   deleteExam(id: string) {
