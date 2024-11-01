@@ -89,7 +89,7 @@
                     }}</p>
                   <p *ngIf="!appointment.dosagesPrec"><strong>Dosagens e precauções: </strong>Sem dosagens ou
                     precauções.</p>
-                  <button *ngIf="userRole === 'SCOPE_ADMIN' || userRole === 'SCOPE_MEDICO'" class="edit-btn" (click)="editAppointment(appointment.appointment_id)">EDITAR</button>
+                  <button *ngIf="userRole === 'SCOPE_ADMIN' || userRole === 'SCOPE_MEDICO'" class="edit-btn" (click)="editAppointment(appointment.appointmentId)">EDITAR</button>
                 </p-card>
               </ng-template>
             </p-timeline>
@@ -100,7 +100,7 @@
       <ng-template #examTemplate>
         <div class="containerCards">
           <div class="card">
-            <span *ngIf="appointmentsList.length === 0">Esse paciente não tem exames cadastrados.</span>
+            <span *ngIf="examsList.length === 0">Esse paciente não tem exames cadastrados.</span>
             <p-timeline [value]="examsList" align="left" styleClass="customized-timeline">
               <ng-template pTemplate="marker" let-exam>
                 <img class="image" src="../../../../../assets/images/exams.webp" alt="Ícone personalizado" width="70"
@@ -110,6 +110,7 @@
               <ng-template pTemplate="content" let-exam>
                 <p-card>
                   <h2>Data: {{ exam.examDate | dateFormat }}, Horário: {{ exam.examTime | timeFormat }} </h2>
+                  <p><strong>Exame: </strong>{{ exam.examName }}</p>
                   <p><strong>Laboratório: </strong>{{ exam.lab }}</p>
                   <p *ngIf="exam.docUrl"><strong>Url do documento: </strong>{{ exam.docUrl }}</p>
                   <p *ngIf="!exam.docUrl"><strong>Url do documento: </strong>Sem URL.</p>
