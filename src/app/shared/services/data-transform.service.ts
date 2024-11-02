@@ -29,8 +29,13 @@ export class DataTransformService {
   }
 
   formatCep(cep: any): any {
+    const cepPattern = /^\d{5}-\d{3}$/;
+    if (cepPattern.test(cep)) {
+        return cep; 
+    }
     return `${cep.substring(0, 5)}-${cep.substring(5, 8)}`;
-  }
+}
+
 
   formatCpf(cpf: string): string {
     const numericCpf = cpf.replace(/\D/g, '');
