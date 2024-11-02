@@ -30,7 +30,7 @@
                     Nenhum paciente encontrado.
                 </div>
 
-                <div *ngFor="let patient of medicalRecordPatientsList" class="patient-card1">
+                <div *ngFor="let patient of medicalRecordPatientsListPlaceHolder" class="patient-card1">
                     <div class="card-content1" id="id">{{ patient.id }}</div>
                     <div class="card-content1" id="name">{{ patient.name | shortenName }}</div>
                     <div class="card-content1" id="phone">{{ patient.phone }}</div>
@@ -48,7 +48,7 @@
                     Nenhum paciente encontrado.
                 </div>
 
-                <div *ngFor="let patient of medicalRecordPatientsList" class="patient-card1">
+                <div *ngFor="let patient of medicalRecordPatientsListPlaceHolder" class="patient-card1">
 
                     <div class="containers" id="header-reg">Registro: <div class="card-content1" id="id">{{
                             patient.id }}</div>
