@@ -108,7 +108,6 @@ h4 {
   margin-right: 20px;
 }
 
-
 input,
 select {
   height: 35px;
@@ -122,9 +121,13 @@ select {
   font-family: "Dosis", sans-serif;
 }
 
+input:focus {
+  border: 2px solid black;
+  outline: none;
+}
+
 select:disabled,
-input:disabled,
-textarea:disabled {
+input:disabled {
   background: rgb(182, 182, 182);
   color: $colorFontDisable;
 }
@@ -195,7 +198,6 @@ mat-error {
   #button-group1 {
     justify-content: center;
     gap: 10px;
-    margin-top: 10px;
   }
 
   #button-group1 button {
@@ -206,7 +208,7 @@ mat-error {
 
 @media only screen and (max-width: 481px) {
   .form-container1 {
-    margin-top: 111px;
+    margin-top: 95px;
   }
 
   .row1 {
