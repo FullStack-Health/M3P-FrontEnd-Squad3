@@ -120,6 +120,16 @@ select {
   font-size: 1.3rem;
 }
 
+input:focus {
+  border: 2px solid black;
+  outline: none;
+}
+
+select:focus{
+  border: 2px solid black;
+  outline: none;
+}
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -127,6 +137,7 @@ input:-webkit-autofill:active {
   box-shadow: 0 0 0 30px white inset !important;
   -webkit-text-fill-color: #000 !important;
 }
+
 
 select option {
   background-color: white;
