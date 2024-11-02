@@ -12,7 +12,7 @@ select {
   min-width: 50%;
   margin-top: 85px;
   margin-left: 220px;
-  margin-right: 20px;
+  padding-right: 20px;
   transition: width 0.3s ease, margin-left 0.3s ease;
 }
 
@@ -137,6 +137,119 @@ select {
   margin: 0;
 }
 
+.form-area3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 4px;
+  background: $colorAreaBackground;
+  @include border-shadow();
+}
+
+.row1 {
+  display: flex;
+  flex-direction: row;
+  width: auto;
+  gap: 10px;
+}
+
+.form-field1 {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 10px;
+}
+
+input,
+select {
+  font-family: "Dosis", sans-serif;
+  height: 35px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 2px;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  border-radius: 4px;
+  border: 2px solid #ccc;
+}
+
+textarea {
+  font-family: "Dosis", sans-serif;
+  padding-left: 10px;
+  padding-top: 2px;
+  font-size: 1.2rem;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+}
+
+input:focus {
+  border: 2px solid black;
+  outline: none;
+}
+
+textarea:focus {
+  border: 2px solid black;
+  outline: none;
+}
+
+select:disabled,
+input:disabled,
+textarea:disabled {
+  background: rgb(182, 182, 182);
+  color: $colorFontDisable;
+}
+
+label {
+  font-family: "Dosis", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: $colorLabelForms;
+}
+
+.idPatient {
+  flex: 1;
+}
+
+.name {
+  flex: 3;
+}
+
+@keyframes checkmark {
+  0% {
+    opacity: 0;
+  }
+  
+  5% {
+    opacity: 1;
+  }
+  
+  95% {
+    opacity: 1;
+  }
+  
+  100% {
+    opacity: 0;
+  }
+}
+
+.checkmark {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  animation: checkmark 1s;
+  z-index: 9999;
+}
+
+mat-error {
+  font-family: "Dosis", sans-serif;
+  font-size: 1.1rem;
+  color: $colorTextDangerForm;
+}
+
 .pages {
   display: flex;
   justify-content: right;
@@ -172,112 +285,6 @@ select {
   color: $colorFontButtonDisable;
 }
 
-.form-area3 {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: auto;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  border-radius: 4px;
-  background: $colorAreaBackground;
-  @include border-shadow();
-}
-
-.row1 {
-  display: flex;
-  flex-direction: row;
-  width: auto;
-  gap: 10px;
-  margin-top: 10px;
-  margin-left: 20px;
-  margin-right: 20px;
-}
-
-.form-field1 {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-input,
-select {
-  font-family: "Dosis", sans-serif;
-  height: 35px;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 2px;
-  border-radius: 4px;
-  font-size: 1.2rem;
-  border-radius: 4px;
-  border: 2px solid #ccc;
-}
-
-textarea {
-  font-family: "Dosis", sans-serif;
-  padding-left: 10px;
-  padding-top: 2px;
-  font-size: 1.2rem;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-}
-
-select:disabled,
-input:disabled,
-textarea:disabled {
-  background: rgb(182, 182, 182);
-  color: $colorFontDisable;
-}
-
-label {
-  font-family: "Dosis", sans-serif;
-  font-size: 1.3rem;
-  font-weight: 500;
-  color: $colorLabelForms;
-}
-
-.idPatient {
-  flex: 1;
-}
-
-.name {
-  flex: 3;
-}
-
-@keyframes checkmark {
-  0% {
-    opacity: 0;
-  }
-
-  5% {
-    opacity: 1;
-  }
-
-  95% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-  }
-}
-
-.checkmark {
-  position: fixed;
-  top: 40%;
-  left: 50%;
-  animation: checkmark 1s;
-  z-index: 9999;
-}
-
-mat-error {
-  font-family: "Dosis", sans-serif;
-  font-size: 1.1rem;
-  color: $colorTextDangerForm;
-}
-
 @media only screen and (max-width: 1023px) {
   label, input {
     font-size: 1rem !important;
@@ -301,28 +308,29 @@ mat-error {
 }
 
 @media only screen and (max-width: 600px) {
-
   #search-and-btn {
     display: flex;
     flex-direction: column;
+    width: 100%;
     margin: 0px;
   }
 
   .button-group1 {
-    justify-content: center;
     flex-wrap: wrap;
-    gap: 10px;
+    justify-content: space-between;
     margin-top: 10px;
   }
 
   .button-group1 button {
-    width: 40% !important;
+    width: calc(50% - 10px) !important;
+    margin-top: 10px;
+    margin-left: 0px;
   }
 }
 
 @media only screen and (max-width: 481px) {
   .form-container1 {
-    margin-top: 111px;
+    margin-top: 94px;
   }
 
   .row1 {
