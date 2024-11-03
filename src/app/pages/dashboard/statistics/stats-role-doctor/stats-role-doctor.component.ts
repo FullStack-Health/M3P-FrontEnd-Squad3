@@ -16,16 +16,11 @@ export class StatsRoleDoctorComponent {
   countPatients: number = 0;
   countAppointments: number = 0;
   countExams: number = 0;
-  menuTrueFalse: boolean | undefined;
 
-  constructor(private apiService: ApiService, private shareMenuStatusService: ShareMenuStatusService) { }
+  constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
     this.getDashboardStats();
-
-    this.shareMenuStatusService.menuTrueFalse$.subscribe(value => {
-      this.menuTrueFalse = value;
-    });
   }
     
   getDashboardStats(): void {

@@ -15,7 +15,7 @@
   .dialog-content1 {
     display: flex;
     background: $colorBackgroundDialog;
-    border: 2px solid $colorBorderDialog;
+    border: 4px solid $colorBorderDialog;
     border-radius: 4px;
     justify-content: space-between;
   }
@@ -30,10 +30,15 @@
     margin: auto;
   }
   
+  .container-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
   .dialog-content1 img {
     width: 35px;
     height: 35px;
+    margin-right: 5px;
     cursor: pointer;
-    padding-top: 7px;
-    padding-right: 7px;
   }

@@ -16,6 +16,7 @@ import { CommonModule } from '@angular/common';
 export class ToolbarComponent implements OnInit {
   pageTitle: string | undefined;
   userName: String | null = '';
+  userRole: String | null = '';
   menuTrueFalse: boolean | undefined;
 
   constructor(
@@ -27,6 +28,7 @@ export class ToolbarComponent implements OnInit {
 
   ngOnInit() {
     this.pageTitle = this.titleService.getTitle();
+    this.userRole = this.authService.getDecodedToken()?.scope || null;
     this.getToken();
 
     this.shareMenuStatusService.menuTrueFalse$.subscribe(value => {

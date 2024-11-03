@@ -12,8 +12,7 @@ select {
   min-width: 50%;
   margin-top: 85px;
   margin-left: 220px;
-  margin-right: 15px;
-  padding-right: 15px;
+  padding-right: 20px;
   transition: width 0.3s ease, margin-left 0.3s ease;
 }
 
@@ -138,51 +137,14 @@ select {
   margin: 0;
 }
 
-.pages {
-  display: flex;
-  justify-content: right;
-  padding-right: 15px;
-}
-
-.pages button {
-  background: $colorButton;
-  color: $colorFontButton;
-  border-radius: 4px;
-  height: 40px;
-  width: 85px;
-  font-family: "Dosis", sans-serif;
-  font-weight: 500;
-  font-size: 1rem;
-  border: none;
-  margin-left: 10px;
-  text-transform: uppercase;
-}
-
-.pages button:disabled {
-  background: $colorButtonDisable;
-  color: $colorFontButtonDisable;
-}
-
-.pages button:hover {
-  background: $colorHover;
-  color: $colorFontButtonHover;
-}
-
-.pages button:disabled:hover {
-  background: $colorButtonDisable;
-  color: $colorFontButtonDisable;
-}
-
 .form-area3 {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 100%;
+  width: auto;
   margin-top: 20px;
   margin-bottom: 20px;
-  padding-right: 10px;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: 20px;
   border-radius: 4px;
   background: $colorAreaBackground;
   @include border-shadow();
@@ -191,18 +153,15 @@ select {
 .row1 {
   display: flex;
   flex-direction: row;
-  width: 99%;
+  width: auto;
   gap: 10px;
-  margin-top: 10px;
-  margin-left: 10px;
-  margin-right: 20px;
 }
 
 .form-field1 {
   display: flex;
   flex-direction: column;
   width: 100%;
-  flex: 1;
+  margin-top: 10px;
 }
 
 input,
@@ -232,6 +191,16 @@ input:disabled,
 textarea:disabled {
   background: rgb(182, 182, 182);
   color: $colorFontDisable;
+}
+
+input:focus {
+  border: 2px solid black;
+  outline: none;
+}
+
+textarea:focus {
+  border: 2px solid black;
+  outline: none;
 }
 
 label {
@@ -275,6 +244,41 @@ label {
   z-index: 9999;
 }
 
+.pages {
+  display: flex;
+  justify-content: right;
+  padding-right: 15px;
+}
+
+.pages button {
+  background: $colorButton;
+  color: $colorFontButton;
+  border-radius: 4px;
+  height: 40px;
+  width: 85px;
+  font-family: "Dosis", sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  border: none;
+  margin-left: 10px;
+  text-transform: uppercase;
+}
+
+.pages button:disabled {
+  background: $colorButtonDisable;
+  color: $colorFontButtonDisable;
+}
+
+.pages button:hover {
+  background: $colorHover;
+  color: $colorFontButtonHover;
+}
+
+.pages button:disabled:hover {
+  background: $colorButtonDisable;
+  color: $colorFontButtonDisable;
+}
+
 mat-error {
   font-family: "Dosis", sans-serif;
   font-size: 1.1rem;
@@ -282,7 +286,9 @@ mat-error {
 }
 
 @media only screen and (max-width: 1023px) {
-  label, input {
+
+  label,
+  input {
     font-size: 1rem !important;
   }
 
@@ -295,44 +301,39 @@ mat-error {
   .form-container1 {
     width: 100%;
     margin-left: 20px;
-    margin-right: 35px;
+    margin-right: 0px;
     transition: none;
   }
 
   .sidebar-open {
     transition: none;
   }
-
-  .form-area3 {
-    margin-right: 20px;
-    padding-left: 10px;
-    padding-right: 20px;
-  }
 }
 
 @media only screen and (max-width: 600px) {
-
   #search-and-btn {
     display: flex;
     flex-direction: column;
+    width: 100%;
     margin: 0px;
   }
 
   .button-group1 {
-    justify-content: center;
     flex-wrap: wrap;
-    gap: 10px;
+    justify-content: space-between;
     margin-top: 10px;
   }
 
   .button-group1 button {
-    width: 40% !important;
+    width: calc(50% - 10px) !important;
+    margin-top: 10px;
+    margin-left: 0px;
   }
 }
 
 @media only screen and (max-width: 481px) {
   .form-container1 {
-    margin-top: 111px;
+    margin-top: 94px;
   }
 
   .row1 {

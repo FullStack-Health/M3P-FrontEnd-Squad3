@@ -1,5 +1,5 @@
 <div *ngIf="showMessage" class="checkmark">
-    <img src="../../../assets/images/check-save.png">
+    <img src="../../../assets/images/check-save.webp" style="width: 100px;">
 </div>
 
 <app-dialog></app-dialog>
@@ -57,7 +57,6 @@
 
                     <div class="pages">
                         <button (click)="previousPage()" [disabled]="currentPage === 0">Anterior</button>
-                        <!-- <span>Página {{ currentPage + 1 }} de {{ totalPatients > 0 ? totalPages : 1 }}</span> -->
                         <button (click)="nextPage()" [disabled]="currentPage >= totalPages - 1">Próximo</button>
                     </div>
                 </div>
@@ -78,16 +77,15 @@
                         </div>
                     </div>
 
-                    <div class="row1">
-                        <div class="form-field1 exam">
-                            <label for="exam">Nome do exame*</label>
-                            <input matInput formControlName="examName" name="exam">
-                            <mat-error
-                                *ngIf="examRegistration.get('examName')?.invalid && (examRegistration.get('examName')?.dirty || examRegistration.get('examName')?.touched)">
-                                Nome do exame é obrigatório e deve ter entre 8 e 64 caracteres
-                            </mat-error>
-                        </div>
+                    <div class="form-field1 exam">
+                        <label for="exam">Nome do exame*</label>
+                        <input matInput formControlName="examName" name="exam">
+                        <mat-error
+                            *ngIf="examRegistration.get('examName')?.invalid && (examRegistration.get('examName')?.dirty || examRegistration.get('examName')?.touched)">
+                             Nome do exame é obrigatório e deve ter entre 8 e 64 caracteres
+                          </mat-error>
                     </div>
+
                     <div class="row1">
                         <div class="form-field1 examDate">
                             <label for="examDate">Data do exame*</label>
@@ -98,46 +96,39 @@
                             <input type="time" name="examTime" formControlName="examTime">
                         </div>
                     </div>
-                    <div class="row1">
-                        <div class="form-field1 examType">
-                            <label for="examType">Tipo do exame*</label>
-                            <input matInput formControlName="examType" name="examType">
-                            <mat-error
-                                *ngIf="examRegistration.get('examType')?.invalid && (examRegistration.get('examType')?.dirty || examRegistration.get('examType')?.touched)">
-                                Tipo do exame é obrigatório e deve ter entre 4 e 32 caracteres
-                            </mat-error>
-                        </div>
+                    <div class="form-field1 examType">
+                        <label for="examType">Tipo do exame*</label>
+                        <input matInput formControlName="examType" name="examType">
+                        <mat-error
+                            *ngIf="examRegistration.get('examType')?.invalid && (examRegistration.get('examType')?.dirty || examRegistration.get('examType')?.touched)">
+                            Tipo do exame é obrigatório e deve ter entre 4 e 32 caracteres
+                        </mat-error>
                     </div>
 
-                    <div class="row1">
-                        <div class="form-field1 lab">
-                            <label for="lab">Laboratório*</label>
-                            <input matInput name="lab" formControlName="lab">
-                            <mat-error
-                                *ngIf="examRegistration.get('lab')?.invalid && (examRegistration.get('lab')?.dirty || examRegistration.get('lab')?.touched)">
-                                Laboratório é obrigatório e deve ter entre 4 e 32 caracteres
-                            </mat-error>
-                        </div>
+                    <div class="form-field1 lab">
+                        <label for="lab">Laboratório*</label>
+                        <input matInput name="lab" formControlName="lab">
+                        <mat-error
+                            *ngIf="examRegistration.get('lab')?.invalid && (examRegistration.get('lab')?.dirty || examRegistration.get('lab')?.touched)">
+                            Laboratório é obrigatório e deve ter entre 4 e 32 caracteres
+                        </mat-error>
                     </div>
-                    <div class="row1">
-                        <div class="form-field1 docUrl">
-                            <label for="docUrl">URL do documento</label>
-                            <input matInput name="docUrl" formControlName="docUrl">
-                        </div>
+
+                    <div class="form-field1 docUrl">
+                        <label for="docUrl">URL do documento</label>
+                        <input matInput name="docUrl" formControlName="docUrl">
                     </div>
-                    <div class="row1">
-                        <div class="form-field1 result">
-                            <label for="result">Resultados*</label>
-                            <textarea name="result" formControlName="result" rows="4" cols="50"></textarea>
-                            <mat-error
-                                *ngIf="examRegistration.get('result')?.invalid && (examRegistration.get('result')?.dirty || examRegistration.get('result')?.touched)">
-                                Resultados é obrigatório e deve ter entre 16 e 1024 caracteres
-                            </mat-error>
-                        </div>
+
+                    <div class="form-field1 result">
+                        <label for="result">Resultados*</label>
+                        <textarea name="result" formControlName="result" rows="4" cols="50"></textarea>
+                        <mat-error
+                            *ngIf="examRegistration.get('result')?.invalid && (examRegistration.get('result')?.dirty || examRegistration.get('result')?.touched)">
+                            Resultados é obrigatório e deve ter entre 16 e 1024 caracteres
+                        </mat-error>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
