@@ -10,19 +10,19 @@ import { UserUpdateComponent } from './pages/user-update/user-update.component';
 import { UserListComponent } from './pages/user-list/user-list.component';
 
 export const routes: Routes = [
-    { path: '', component: LoginComponent },
-    { path: 'dashboard', component: DashboardComponent },
-    { path: 'lista-prontuarios', component: MedicalRecordListComponent },
-    { path: 'registro-paciente', component: PatientRegistrationComponent },
-    { path: 'registro-paciente/:id', component: PatientRegistrationComponent },
+    { path: '', component: LoginComponent, data: { animation: 'login'} },
+    { path: 'dashboard', component: DashboardComponent, data: { animation: 'dashboard'} },
+    { path: 'lista-prontuarios', component: MedicalRecordListComponent, data: { animation: 'lista-prontuarios'} },
+    { path: 'registro-paciente', component: PatientRegistrationComponent, data: { animation: 'registro-paciente'} },
+    { path: 'registro-paciente/:id', component: PatientRegistrationComponent, data: { animation: 'registro-paciente/:id'} },
     {
         path: 'prontuario',
         children: [
-          { path: ':id', component: MedicalRecordComponent }
+          { path: ':id', component: MedicalRecordComponent, data: { animation: 'prontuario/:id'} }
         ]
     },
-    { path: 'registro-consulta', component: AppointmentRegistrationComponent },
-    { path: 'registro-exame', component: ExamRegistrationComponent },
-    { path: 'editar-usuario/:id', component: UserUpdateComponent },
-    { path: 'lista-usuarios', component: UserListComponent }
+    { path: 'registro-consulta', component: AppointmentRegistrationComponent, data: { animation: 'registro-consulta'} },
+    { path: 'registro-exame', component: ExamRegistrationComponent, data: { animation: 'registro-exame'} },
+    { path: 'editar-usuario/:id', component: UserUpdateComponent, data: { animation: 'editar-usuario/:id'} },
+    { path: 'lista-usuarios', component: UserListComponent, data: { animation: 'lista-usuarios'} }
 ];
