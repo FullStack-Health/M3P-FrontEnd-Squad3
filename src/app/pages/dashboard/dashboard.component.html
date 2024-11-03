@@ -4,7 +4,7 @@
     <div class="app-sidebar-menu">
         <app-sidebar-menu></app-sidebar-menu>
         
-        <div class="dashboard-content">
+        <div [ngClass]="{'sidebar-open': !menuTrueFalse}" class="dashboard-content">
             <div class="app-stats-role-doctor" *ngIf="userRole === 'SCOPE_MEDICO'">
                 <app-stats-role-doctor></app-stats-role-doctor>
             </div>
