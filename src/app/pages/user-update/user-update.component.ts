@@ -56,7 +56,7 @@ export class UserUpdateComponent implements OnInit {
     this.userForm = this.fb.group({
       roleName: [{ value: '', disabled: true }, Validators.required],
       userId: [{ value: '', disabled: true }, Validators.required],
-      fullName: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(64)]],
+      fullName: ['', [Validators.required, Validators.maxLength(64)]],
       email: ['', [Validators.required, Validators.email]],
       birthdate: ['', Validators.required],
       cpf: ['', [Validators.required]],
@@ -123,14 +123,23 @@ export class UserUpdateComponent implements OnInit {
           this.showMessage = true;
           this.userForm.disable();
           this.saveDisabled = true;
+          this.userForm.get('phone')?.disable();
 
           setTimeout(() => {
             this.showMessage = false;
           }, 1000);
         },
-        error: (error) => {
-          console.error('Error updating user:', error);
-
+        error: (err) => {
+          if(err.status === 409 && err.error.fieldName === 'email') {
+            this.dialog.openDialog('Já existe um usuário com este e-mail.');
+            this.userForm.get('userId')?.disable();
+            this.userForm.get('roleName')?.disable();
+          } else if (err.status === 409 && err.error.fieldName === 'cpf') {
+            this.dialog.openDialog('Já existe um usuário com este CPF.');
+            this.userForm.get('userId')?.disable();
+            this.userForm.get('roleName')?.disable();
+          }
+          console.error('Error updating user:', err);
         }
       });
     } else {
