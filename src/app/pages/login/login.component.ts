@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router, RouterModule } from '@angular/router';
@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
   showPasswordArea = false;
   registerForm: FormGroup;
   changePasswordForm: FormGroup;
+  isScreenLarge: boolean | undefined;
 
   constructor(private router: Router, private titleService: Title, private authService: AuthService, private fb: FormBuilder, private apiService: ApiService) {
     this.registerForm = this.fb.group({
@@ -43,7 +44,9 @@ export class LoginComponent implements OnInit {
   @ViewChild(DialogComponent) dialog!: DialogComponent;
 
   ngOnInit() {
-    this.titleService.setTitle('LABMedical - Login');
+    this.titleService.setTitle('Lab Inc. - Login');
+
+    this.checkWindowSize();
   }
 
   toggleRegisterForm() {
@@ -126,9 +129,24 @@ export class LoginComponent implements OnInit {
         this.showRegisterForm = false;
       },
       error: (err) => {
+        if(err.status === 409 && err.error.fieldName === 'email') {
+          this.dialog.openDialog('Já existe um usuário com este e-mail.');
+        }
         console.error('Error registering user', err);
       }
     });
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any): void {
+    this.checkWindowSize();
+  }
+
+  private checkWindowSize(): void {
+    if (window.innerWidth > 1023) {
+      this.isScreenLarge = true;
+    } else {
+      this.isScreenLarge = false;
+    }
+  }
 }

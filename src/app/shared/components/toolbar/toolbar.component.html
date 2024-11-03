@@ -5,7 +5,9 @@
     <div class="user-info">
         <span class="logged-user">Usuário:<strong> {{ userName }}</strong></span>
         <div class="profile-icon">
-            <img src="../../../../assets/images/woman-doctor.png" alt="Foto de Perfil">
+            <img *ngIf="userRole === 'ADMIN'" src="../../../../assets/images/pat-male.webp" alt="Foto de Perfil">
+            <img *ngIf="userRole === 'MEDICO'" src="../../../../assets/images/woman-doctor.png" alt="Foto de Perfil">
+            <img *ngIf="userRole === 'PACIENTE'" src="../../../../assets/images/pat-female.webp" alt="Foto de Perfil">
         </div>
         <div id="logout-icon" (click)="cleanLoggedUser()">
             <i class="material-icons">logout</i>

@@ -28,16 +28,11 @@ export class PatientCardComponent implements OnInit {
   pageSize: number = 6;
   hasMorePages: boolean = false;
   noResults: boolean = false;
-  menuTrueFalse: boolean | undefined;
 
-  constructor(private apiService: ApiService, private router: Router, private shareMenuStatusService: ShareMenuStatusService) { }
+  constructor(private apiService: ApiService, private router: Router) { }
 
   ngOnInit() {
     this.getPatients(this.currentPage);
-
-    this.shareMenuStatusService.menuTrueFalse$.subscribe(value => {
-      this.menuTrueFalse = value;
-    });
   }
 
   getPatients(page: number): void {

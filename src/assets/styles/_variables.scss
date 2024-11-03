@@ -23,7 +23,7 @@ $black: #000000;
 // SHARED
 
 // general
-$colorPageBackground: $purplePinkGradient;
+$colorPageBackground: #DAE9EC;
 $colorBrand: $white;
 $colorSearchBackground: $whiteLowOpacity;
 $colorSearchPlaceholder: $blackHighOpacity;
@@ -44,7 +44,7 @@ $colorLabelForms: $black;
 $colorTitleSectionForm: $black;
 $colorBackgroundDisable: $purpleHighOpacity;
 $colorFontDisable: $black;
-$colorTextDangerForm: $red;
+$colorTextDangerForm: #ff4c4cb2;
 
 // fonts
 $colorGeneralFont: $black;
@@ -55,11 +55,11 @@ $colorTextDanger: $redBrand;
 // buttons
 $colorButton: #4A7A8C;
 $colorFontButton: $white;
-$colorHover: $redBrand;
+$colorHover: #02A724;
 $colorFontButtonHover: $black;
-$colorButtonDisable: $purpleHighOpacity;
+$colorButtonDisable: #02a72373;
 $colorFontButtonDisable: rgba($white, 0.266);
-$colorButtonLoginRegister: $purple;
+$colorButtonLoginRegister: #027017;
 $colorButtonEditPatientCard: $blueHighOpacity;
 $colorFontBtnEditPatCard: $black;
 $colorBtnSaveFormValid: $green;
@@ -78,24 +78,24 @@ $colorAreaBackground: #f5f5f5de;
 // dashboard
 $colorGeneralCard: $whiteLowOpacity;
 $colorCardContent: $whiteLowOpacity;
-$colorPatCardNameBackground: $blueHighOpacity;
+$colorPatCardNameBackground: #B9E7E8;
 $colorSearchBackground: $whiteLowOpacity;
 $colorSearchPlaceholder: $blackHighOpacity;
 $colorPatientNotFound: $redBrand;
 
 // login
-$colorFontClearLogin: rgba($white, 0.747);
-$colorFontMidLogin: rgba($white, 0.596);
-$colorFontDarkLogin: $white;
-$colorFontFormsLoginRegister: $white;
-$colorLabelLoginRegister: $white;
-$colorFormBorderLoginRegister: rgba($white, 0.295);
-$colorBackgroundFormSideLogin: $darkPurple;
+$colorFontClearLogin: black;
+$colorFontMidLogin: black;
+$colorFontDarkLogin: black;
+$colorFontFormsLoginRegister: black;
+$colorLabelLoginRegister: black;
+$colorFormBorderLoginRegister: black;
+$colorBackgroundFormSideLogin: #6DB7B8;
 $colorBackgroundLogoSigeLogin: $white;
-$colorLabMedicalBrand: $redBrand;
-$colorFontInput: $white;
-$colorBackgroundSelect: $black;
-$colorInputPlaceholder: $whiteHighOpacity;
+$colorLabIncBrand: #027017;
+$colorFontInput: black;
+$colorBackgroundSelect: black;
+$colorInputPlaceholder: black;
 $colorInputBackground: $transparent;
 
 // medical record
@@ -105,7 +105,7 @@ $colorMedRecListHover: $redMediumOpacity;
 $colorFontHeaderForm: $white;
 $colorFontHeaderArea: $black;
 $colorContainerList: $whiteLowOpacity;
-$colorHeaderArea: $purpleWhite;
+$colorHeaderArea: #B9E7E8;
 $colorInfoBackground: $lightPurple;
 $colorInfoBackgroundLabel: $transparent;
 $colorInfoBackgroundPatient: $white;
@@ -116,8 +116,8 @@ $colorBtnTopicFont: $black;
 // COMPONENTS
 
 // dialog
-$colorBackgroundDialog: $darkPurple;
-$colorBorderDialog: $redBrand;
+$colorBackgroundDialog: #6db7b8be;
+$colorBorderDialog: #4A7A8C;
 $colorFontDialog: $white;
 $colorBtnDialog: $lightPurple;
 $colorFontBtnDialog: $black;

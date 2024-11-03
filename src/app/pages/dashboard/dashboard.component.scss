@@ -11,13 +11,25 @@
 
 .dashboard-content {
     display: flex;
-    flex-grow: 1;
-    margin-top: 65px;
-    justify-content: center; 
     flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+    width: calc(100% - 200px);
+    min-width: 50%;
+    margin-left: 220px;
+    margin-top: 65px;
+    margin-right: 20px;
+    transition: width 0.3s ease, margin-left 0.3s ease;
 }
 
-.app-stats-role-doctor, .app-stats-role-admin {
+.sidebar-open {
+    width: 100%;
+    margin-left: 20px;
+    transition: width 0.27s ease, margin-left 0.27s ease;
+}
+
+.app-stats-role-doctor,
+.app-stats-role-admin {
     flex-grow: 1;
     width: 100%;
 }
@@ -25,4 +37,18 @@
 .patient-card {
     flex-grow: 1;
     width: 100%;
+}
+
+@media only screen and (max-width: 767px) {
+
+    .dashboard-content {
+        width: 100%;
+        margin-right: 20px;
+        margin-left: 20px;
+        transition: none;
+    }
+
+    .sidebar-open {
+        transition: none;
+    }
 }

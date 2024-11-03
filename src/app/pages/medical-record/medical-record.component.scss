@@ -68,7 +68,6 @@
 
 .containerCards {
     margin-top: 1rem;
-    border-bottom: 4px solid #4A7A8C;
     padding-bottom: 5px;
 }
 
@@ -128,14 +127,20 @@ p-card span {
 
 @media only screen and (max-width: 481px) {
     .container1 {
-        margin-top: 111px;
+        margin-top: 95px;
         margin-left: 10px;
         margin-right: 10px;
     }
+    ::ng-deep .topics{
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+    }
 
     ::ng-deep .topics button {
-        width: 90px !important;
+        width: 100% !important;
         font-size: 1rem !important;
+        margin: 0px !important;
     }
 
     ::ng-deep .slider-content {

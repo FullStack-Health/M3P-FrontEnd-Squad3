@@ -256,6 +256,12 @@
 @media only screen and (max-width: 767px) {
   .container-list {
     width: 100%;
+    margin-left: 20px;
+    transition: none;
+  }
+
+  .sidebar-open {
+    transition: none;
   }
 }
 
@@ -266,6 +272,17 @@
 
   .search-area {
     flex-direction: column;
+  }
+
+  .container-btn {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .btns {
+    width: 100%;
+    margin: 0px;
   }
 
   .patient-card1 {
@@ -287,13 +304,21 @@
     font-size: 1.1rem;
   }
 
+  .edit-patient {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-top: 10px;
+  }
+
   .edit-patient button {
+    width: 50%;
     margin-bottom: 10px;
   }
 }
 
 @media only screen and (max-width: 481px) {
   .container-list {
-    margin-top: 91px;
+    margin-top: 75px;
   }
 }

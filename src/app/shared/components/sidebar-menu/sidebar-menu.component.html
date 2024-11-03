@@ -6,7 +6,7 @@
 
         <i class="material-icons menu-close" id="menu-close" (click)="openCloseMenu()">menu_open</i>
 
-        <img src="../../../../assets/images/logo-labmedical.png" alt="Logomarca" id="logo-sidebar">
+        <img src="../../../../assets/images/logo-labinc.png" alt="Logomarca" id="logo-sidebar">
 
         <div class="general-menu">
             <div class="group-menu">
@@ -14,7 +14,6 @@
                 <button class="menu-button" *ngIf="userRole === 'SCOPE_ADMIN' || userRole === 'SCOPE_MEDICO'" [routerLink]="['/dashboard']">
                     <!-- <mat-icon>assessment</mat-icon> -->
                     <i class="material-icons">assessment</i>
-                    <!-- <span class="material-symbols-outlined">health_metrics</span> -->
                     <span id="btn-text">PAINEL MÉDICO</span>
                 </button>
 
