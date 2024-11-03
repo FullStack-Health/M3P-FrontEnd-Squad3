@@ -214,7 +214,11 @@
 
                         <div class="form-field1 street">
                             <label for="street">Rua</label>
-                            <input matInput formControlName="street" name="street">
+                            <input matInput formControlName="street" name="street" [readonly]="true">
+                            <mat-error
+                            *ngIf="patRegistration.get('street')?.invalid && patRegistration.get('street')?.touched">
+                                Esse campo sera preenchido automaticamente ao inserir o CEP.
+                            </mat-error>
                         </div>
 
                         <div class="form-field1 number">
@@ -239,17 +243,29 @@
 
                         <div class="form-field1 neighborhood">
                             <label for="neighborhood">Bairro</label>
-                            <input matInput formControlName="neighborhood" name="neighborhood">
+                            <input matInput formControlName="neighborhood" name="neighborhood"  [readonly]="true">
+                            <mat-error
+                            *ngIf="patRegistration.get('neighborhood')?.invalid && patRegistration.get('neighborhood')?.touched">
+                                Esse campo sera preenchido automaticamente ao inserir o CEP.
+                            </mat-error>
                         </div>
 
                         <div class="form-field1 city">
                             <label for="city">Cidade</label>
-                            <input matInput formControlName="city" name="city">
+                            <input matInput formControlName="city" name="city"  [readonly]="true">
+                            <mat-error
+                            *ngIf="patRegistration.get('city')?.invalid && patRegistration.get('city')?.touched">
+                                Esse campo sera preenchido automaticamente ao inserir o CEP.
+                            </mat-error>
                         </div>
 
                         <div class="form-field1 state">
                             <label for="state">Estado</label>
-                            <input matInput formControlName="state" name="state">
+                            <input matInput formControlName="state" name="state"  [readonly]="true">
+                            <mat-error
+                            *ngIf="patRegistration.get('state')?.invalid && patRegistration.get('state')?.touched">
+                                Esse campo sera preenchido automaticamente ao inserir o CEP.
+                            </mat-error>
                         </div>
 
                     </div>
