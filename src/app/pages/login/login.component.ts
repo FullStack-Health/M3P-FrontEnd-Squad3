@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
   @ViewChild(DialogComponent) dialog!: DialogComponent;
 
   ngOnInit() {
-    this.titleService.setTitle('LABMedical - Login');
+    this.titleService.setTitle('Lab Inc. - Login');
 
     this.checkWindowSize();
   }
