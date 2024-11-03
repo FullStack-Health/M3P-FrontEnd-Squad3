@@ -58,20 +58,20 @@ export class PatientRegistrationComponent implements OnInit {
   ) {
     this.isEditing = !!this.activatedRoute.snapshot.paramMap.get('id'),
     this.patRegistration = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(64)]],
+      fullName: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(64)]],
       gender: ['', Validators.required],
-      birthdate: ['', Validators.required],
+      birthDate: ['', Validators.required],
       cpf: ['', Validators.required],
       rg: ['', [Validators.required, Validators.maxLength(20)]],
-      issOrg: ['', Validators.required],
+      // issOrg: ['', Validators.required],
       maritalStatus: ['', Validators.required],
       phone: ['', Validators.required],
       email: ['', [Validators.email, Validators.required]],
       placeOfBirth: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(64)]],
-      emergCont: ['', Validators.required],
-      emergContNumber: ['', Validators.required],
+      emergencyContact: ['', Validators.required],
+      // emergContNumber: ['', Validators.required],
       listOfAllergies: [''],
-      careList: [''],
+      listCare: [''],
       healthInsurance: ['', Validators.required],
       healthInsuranceNumber: [''],
       healthInsuranceVal: [''],
@@ -127,29 +127,26 @@ export class PatientRegistrationComponent implements OnInit {
   patientRegister() {
     if (this.patRegistration.valid) {
 
-      const cpf = this.patRegistration.value.cpf.replace(/\D/g, '');
-      const formattedCpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
-
       const newPatient: Patient = {
-        name: this.patRegistration.value.name,
+        fullName: this.patRegistration.value.fullName,
         gender: this.patRegistration.value.gender,
-        birthdate: this.patRegistration.value.birthdate,
-        cpf: formattedCpf,
+        birthDate: this.patRegistration.value.birthDate,
+        cpf: this.dataTransformService.formatCpf(this.patRegistration.value.cpf),
         rg: this.patRegistration.value.rg,
-        issOrg: this.patRegistration.value.issOrg,
+        // issOrg: this.patRegistration.value.issOrg,
         maritalStatus: this.patRegistration.value.maritalStatus,
         phone: this.dataTransformService.formatPhone(this.patRegistration.value.phone),
         email: this.patRegistration.value.email,
         placeOfBirth: this.patRegistration.value.placeOfBirth,
-        emergCont: this.patRegistration.value.emergCont,
-        emergContNumber: this.dataTransformService.formatPhone(this.patRegistration.value.emergContNumber),
+        emergencyContact: this.dataTransformService.formatPhone(this.patRegistration.value.emergencyContact),
+        // emergContNumber: this.dataTransformService.formatPhone(this.patRegistration.value.emergContNumber),
         listOfAllergies: this.patRegistration.value.listOfAllergies,
-        careList: this.patRegistration.value.careList,
+        listCare: this.patRegistration.value.listCare,
         healthInsurance: this.patRegistration.value.healthInsurance,
         healthInsuranceNumber: this.patRegistration.value.healthInsuranceNumber,
-        healthInsuranceVal: this.patRegistration.value.healthInsuranceVal ?
-          this.patRegistration.value.healthInsuranceVal : null,
-        zipcode: this.patRegistration.value.zipcode,
+        healthInsuranceVal: this.patRegistration.value.healthInsuranceVal ? 
+            this.patRegistration.value.healthInsuranceVal : undefined,
+        zipcode: this.dataTransformService.formatCep(this.patRegistration.value.zipcode),
         street: this.patRegistration.value.street,
         addressNumber: this.patRegistration.value.addressNumber,
         complement: this.patRegistration.value.complement,
@@ -185,29 +182,26 @@ export class PatientRegistrationComponent implements OnInit {
 
     if (this.patRegistration.valid) {
 
-      const cpf = this.patRegistration.value.cpf.replace(/\D/g, '');
-      const formattedCpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
-
       const newPatient: Patient = {
-        name: this.patRegistration.value.name,
+        fullName: this.patRegistration.value.fullName,
         gender: this.patRegistration.value.gender,
-        birthdate: this.patRegistration.value.birthdate,
-        cpf: formattedCpf,
+        birthDate: this.patRegistration.value.birthDate,
+        cpf: this.dataTransformService.formatCpf(this.patRegistration.value.cpf),
         rg: this.patRegistration.value.rg,
-        issOrg: this.patRegistration.value.issOrg,
+        // issOrg: this.patRegistration.value.issOrg,
         maritalStatus: this.patRegistration.value.maritalStatus,
-        phone: this.patRegistration.value.phone,
+        phone: this.dataTransformService.formatPhone(this.patRegistration.value.phone),
         email: this.patRegistration.value.email,
         placeOfBirth: this.patRegistration.value.placeOfBirth,
-        emergCont: this.patRegistration.value.emergCont,
-        emergContNumber: this.patRegistration.value.emergContNumber,
+        emergencyContact: this.dataTransformService.formatPhone(this.patRegistration.value.emergencyContact),
+        // emergContNumber: this.patRegistration.value.emergContNumber,
         listOfAllergies: this.patRegistration.value.listOfAllergies,
-        careList: this.patRegistration.value.careList,
+        listCare: this.patRegistration.value.listCare,
         healthInsurance: this.patRegistration.value.healthInsurance,
         healthInsuranceNumber: this.patRegistration.value.healthInsuranceNumber,
-        healthInsuranceVal: this.patRegistration.value.healthInsuranceVal ?
-          this.patRegistration.value.healthInsuranceVal : null,
-        zipcode: this.patRegistration.value.zipcode,
+        healthInsuranceVal: this.patRegistration.value.healthInsuranceVal ? 
+            this.patRegistration.value.healthInsuranceVal : undefined,
+        zipcode: this.dataTransformService.formatCep(this.patRegistration.value.zipcode),
         street: this.patRegistration.value.street,
         addressNumber: this.patRegistration.value.addressNumber,
         complement: this.patRegistration.value.complement,
@@ -244,31 +238,58 @@ export class PatientRegistrationComponent implements OnInit {
   }
 
   deletePatient(id: string) {
-    // implementar lógica após criação dos components e models para exam e appointment (paciente não pode ser excluído se tiver exames ou consultas)
+    this.apiService.hasAppointmentsOrExamsByPatientId(id).subscribe({
+      next: (hasRecords: boolean) => {
+        if (hasRecords) {
+          this.dialog.openDialog('O paciente tem exames ou consultas vinculadas a ele e não pode ser deletado.');
+        } else {
+          this.confirmDialog.openDialog("Tem certeza que deseja excluir o paciente? Essa ação não pode ser desfeita.");
+  
+          const subscription = this.confirmDialog.confirm.subscribe(result => {
+            if (result) {
+              this.apiService.deletePatient(id).subscribe(() => {
+                this.router.navigate(['/dashboard']);
+                subscription.unsubscribe();
+              });
+            } else {
+              subscription.unsubscribe();
+            }
+          });
+        }
+      },
+      error: (error) => {
+        console.error('Error checking patient records:', error);
+      }
+    });
   }
 
   getPatientData() {
     if (this.patientId) {
       this.apiService.getPatient(this.patientId).subscribe({
         next: (patient: Patient) => {
+
+          const formattedBirthdate = this.convertDate(patient.birthDate);
+          const formattedInsuranceVal = patient.healthInsuranceVal ? this.convertDate(patient.healthInsuranceVal) : undefined;
+
           this.patRegistration.patchValue({
-            name: patient.name,
+            
+            fullName: patient.fullName,
             gender: patient.gender,
-            birthdate: patient.birthdate,
+            birthDate: formattedBirthdate,
             cpf: patient.cpf,
             rg: patient.rg,
-            issOrg: patient.issOrg,
+            // issOrg: patient.issOrg,
             maritalStatus: patient.maritalStatus,
             phone: patient.phone,
             email: patient.email,
             placeOfBirth: patient.placeOfBirth,
-            emergCont: patient.emergCont,
-            emergContNumber: patient.emergContNumber,
+            emergencyContact: patient.emergencyContact,
+            // emergContNumber: patient.emergContNumber,
             listOfAllergies: patient.listOfAllergies,
-            careList: patient.careList,
+            listCare: patient.listCare,
             healthInsurance: patient.healthInsurance,
             healthInsuranceNumber: patient.healthInsuranceNumber,
-            healthInsuranceVal: patient.healthInsuranceVal,
+            healthInsuranceVal: formattedInsuranceVal,
             zipcode: patient.zipcode,
             street: patient.street,
             addressNumber: patient.addressNumber,
@@ -288,6 +309,11 @@ export class PatientRegistrationComponent implements OnInit {
       });
     }
   }
+
+  convertDate(dateString: string): string {
+    const [day, month, year] = dateString.split('/');
+    return `${year}-${month}-${day}`;
+}
 
 
 }

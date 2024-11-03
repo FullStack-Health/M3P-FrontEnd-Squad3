@@ -53,17 +53,17 @@ export class UserListComponent {
     const searchTerm = this.searchTerm.trim();
 
     let email: string | undefined;
-    let id: string | undefined;
+    let userId: string | undefined;
 
     if (searchTerm) {
       if (/\d/.test(searchTerm)) {
-        id = searchTerm;
+        userId = searchTerm;
       } else {
         email = searchTerm;
       }
     }
 
-    this.apiService.listUsers(page, this.pageSize, email, id).subscribe({
+    this.apiService.listUsers(page, this.pageSize, email, userId).subscribe({
       next: (response: Page<ListUsers>) => {
 
         this.usersList = response.content;

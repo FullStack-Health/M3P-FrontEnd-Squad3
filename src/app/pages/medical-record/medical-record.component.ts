@@ -21,13 +21,14 @@ import { CardModule } from 'primeng/card';
 import { AgePipe } from "../../shared/pipes/age.pipe";
 import { ShareMenuStatusService } from '../../shared/services/share-menu-status.service';
 import { ShortenNamePipe } from "../../shared/pipes/shorten-name.pipe";
+import { AuthService } from '../../security/auth.service';
 
 
 @Component({
   selector: 'app-medical-record',
   standalone: true,
   imports: [SidebarMenuComponent, ToolbarComponent, HttpClientModule, MatTabsModule, MatDividerModule, CommonModule, RouterLink, MatButton, MatButtonModule, SliderComponent, DateFormatPipe, TimeFormatPipe, TimelineModule, CardModule, AgePipe, ShortenNamePipe],
-  providers: [ApiService],
+  providers: [ApiService, AuthService],
   templateUrl: './medical-record.component.html',
   styleUrl: './medical-record.component.scss'
 })
@@ -40,17 +41,20 @@ export class MedicalRecordComponent implements OnInit {
   appointmentsList: AppointmentRecord[] = [];
   examsList: ExamRecord[] = [];
   menuTrueFalse: boolean | undefined;
+  userRole: string | null = '';
 
   constructor(
     private titleService: Title,
     private activatedRoute: ActivatedRoute,
     private apiService: ApiService,
     private router: Router,
-    private shareMenuStatusService: ShareMenuStatusService
+    private shareMenuStatusService: ShareMenuStatusService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
     this.titleService.setTitle('Prontuário de paciente');
+    this.userRole = this.authService.getDecodedToken()?.scope || null;
 
     this.patientID = this.activatedRoute.snapshot.paramMap.get('id');
     console.log(this.patientID, 'esse é o id do paciente');
@@ -61,9 +65,9 @@ export class MedicalRecordComponent implements OnInit {
 
     this.patient = {
       id: undefined,
-      name: '',
+      fullName: '',
       gender: '',
-      birthdate: '',
+      birthDate: '',
       cpf: '',
       rg: '',
       issOrg: '',
@@ -71,10 +75,9 @@ export class MedicalRecordComponent implements OnInit {
       phone: '',
       email: '',
       placeOfBirth: '',
-      emergCont: '',
-      emergContNumber: '',
+      emergencyContact: '',
       listOfAllergies: undefined,
-      careList: undefined,
+      listCare: undefined,
       healthInsurance: '',
       healthInsuranceNumber: undefined,
       healthInsuranceVal: undefined,
@@ -92,8 +95,8 @@ export class MedicalRecordComponent implements OnInit {
 
     this.appointment = {
       id: '',
-      appointment_id: '',
-      patientName: '',
+      appointmentId: '',
+      fullName: '',
       reason: '',
       consultDate: '',
       consultTime: '',
@@ -105,8 +108,8 @@ export class MedicalRecordComponent implements OnInit {
     this.exam = {
       id: '',
       examId: '',
-      patientName: '',
-      exam: '',
+      fullName: '',
+      examName: '',
       examDate: '',
       examTime: '',
       examType: '',

@@ -1,7 +1,7 @@
 export class AppointmentRecord {
     id: string = '';
-    appointment_id: string = '';
-    patientName: string = '';
+    fullName: string = '';
+    appointmentId: string = '';
     reason: string = '';
     consultDate: string = '';
     consultTime: string = '';

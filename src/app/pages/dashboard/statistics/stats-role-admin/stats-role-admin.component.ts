@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { ApiService } from '../../../../shared/services/api.service';
 import { DashboardStats } from '../../../../models/dashboard-stats.interface';
 import { HttpClientModule } from '@angular/common/http';
@@ -27,11 +27,18 @@ export class StatsRoleAdminComponent {
   getStats(): void {
     this.apiService.getDashboardStats().subscribe({
       next: (stats: DashboardStats) => {
-        this.countPatients = stats.totalPatients;
-        this.countAppointments = stats.totalAppointments;
-        this.countExams = stats.totalExams;
-        this.countUsers = stats.totalUsers;
+        this.countPatients = stats.countPatients;
+        this.countAppointments = stats.countAppointments;
+        this.countExams = stats.countExams;
+        this.countUsers = stats.countUsers;
         console.log('Dashboard stats loaded successfully:', stats);
+
+        console.log('stats:', {
+          countPatients: this.countPatients,
+          countAppointments: this.countAppointments,
+          countExams: this.countExams,
+          countUsers: this.countUsers,
+      });
       },
       error: (error) => {
         console.error('Error loading dashboard stats:', error);

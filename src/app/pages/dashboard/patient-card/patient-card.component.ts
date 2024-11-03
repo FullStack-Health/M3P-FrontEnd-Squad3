@@ -25,7 +25,7 @@ export class PatientCardComponent implements OnInit {
   searchTerm: string = '';
   currentPage: number = 0;
   totalPages: number = 0;
-  pageSize: number = 12;
+  pageSize: number = 6;
   hasMorePages: boolean = false;
   noResults: boolean = false;
 
@@ -38,7 +38,7 @@ export class PatientCardComponent implements OnInit {
   getPatients(page: number): void {
     const searchTerm = this.searchTerm.trim();
 
-    let name: string | undefined;
+    let fullName: string | undefined;
     let phone: string | undefined;
     let email: string | undefined;
 
@@ -48,11 +48,11 @@ export class PatientCardComponent implements OnInit {
       } else if (searchTerm.includes('@')) {
         email = searchTerm;
       } else {
-        name = searchTerm;
+        fullName = searchTerm;
       }
     }
 
-    this.apiService.getPatientCard(page, this.pageSize, name, phone, email).subscribe({
+    this.apiService.getPatientCard(page, this.pageSize, fullName, phone, email).subscribe({
       next: (response: Page<PatientCard>) => {
         this.patientsList = response.content;
         this.dashboardPatientsCard = this.patientsList;

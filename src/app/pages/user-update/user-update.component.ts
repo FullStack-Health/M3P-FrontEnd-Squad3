@@ -15,6 +15,7 @@ import { User } from '../../models/user.model';
 import { RoleTransformPipe } from '../../shared/pipes/role-transform.pipe';
 import { AuthService } from '../../security/auth.service';
 import { ShareMenuStatusService } from '../../shared/services/share-menu-status.service';
+import { DataTransformService } from '../../shared/services/data-transform.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -27,7 +28,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   selector: 'app-user-update',
   standalone: true,
   imports: [DialogComponent, ConfirmDialogComponent, ToolbarComponent, SidebarMenuComponent, ReactiveFormsModule, MatError, CommonModule, NgxMaskDirective, NgxMaskPipe, RoleTransformPipe],
-  providers: [provideNgxMask(), ApiService, AuthService],
+  providers: [provideNgxMask(), ApiService, AuthService, DataTransformService],
   templateUrl: './user-update.component.html',
   styleUrl: './user-update.component.scss'
 })
@@ -47,14 +48,15 @@ export class UserUpdateComponent implements OnInit {
     private titleService: Title,
     private apiService: ApiService,
     private activatedRoute: ActivatedRoute,
-    private shareMenuStatusService: ShareMenuStatusService
+    private shareMenuStatusService: ShareMenuStatusService,
+    private dataTransformService: DataTransformService
   ) {
     this.userRole = this.authService.getDecodedToken()?.scope || null;
     console.log(this.userRole);
     this.userForm = this.fb.group({
       roleName: [{ value: '', disabled: true }, Validators.required],
       userId: [{ value: '', disabled: true }, Validators.required],
-      name: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(64)]],
+      fullName: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(64)]],
       email: ['', [Validators.required, Validators.email]],
       birthdate: ['', Validators.required],
       cpf: ['', [Validators.required]],
@@ -80,9 +82,9 @@ export class UserUpdateComponent implements OnInit {
       this.apiService.getUser(this.userId).subscribe({
         next: (user: User) => {
           this.userForm.patchValue({
-            userId: user.id,
+            userId: user.userId,
             roleName: user.roleName,
-            name: user.name,
+            fullName: user.fullName,
             email: user.email,
             birthdate: user.birthdate,
             cpf: user.cpf,
@@ -106,11 +108,13 @@ export class UserUpdateComponent implements OnInit {
     if (this.userForm.valid) {
 
       const updateUser: User = {
-        name: this.userForm.value.name,
+        fullName: this.userForm.value.fullName,
         email: this.userForm.value.email,
-        birthdate: this.userForm.value.birthdate,
-        cpf: this.userForm.value.cpf,
-        phone: this.userForm.value.phone,
+        birthdate: this.dataTransformService.formatDate(this.userForm.value.birthdate),
+        cpf: this.dataTransformService.formatCpf(this.userForm.value.cpf),
+        phone: this.dataTransformService.formatPhone(this.userForm.value.phone),
+        roleName: this.userForm.value.roleName,
+        userId: this.userForm.value.userId
       };
 
       this.apiService.updateUser(this.userId, updateUser).subscribe({
@@ -131,12 +135,16 @@ export class UserUpdateComponent implements OnInit {
       });
     } else {
       this.dialog.openDialog('Preencha todos os campos obrigatórios corretamente.');
+      this.userForm.get('userId')?.disable();
+      this.userForm.get('roleName')?.disable();
     }
   }
 
   editUser() {
     this.userForm.enable();
     this.saveDisabled = false;
+    this.userForm.get('userId')?.disable();
+    this.userForm.get('roleName')?.disable();
   }
 
   deleteUser(id: string) {
@@ -146,7 +154,6 @@ export class UserUpdateComponent implements OnInit {
       if (result) {
         this.apiService.deleteUser(id).subscribe({
           next: () => {
-            // this.dialog.openDialog('Usuário excluído com sucesso!')
             this.router.navigate(['/dashboard']);
             subscription.unsubscribe();
           },

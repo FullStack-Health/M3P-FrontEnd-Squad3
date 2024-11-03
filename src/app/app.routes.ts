@@ -8,21 +8,19 @@ import { PatientRegistrationComponent } from './pages/patient-registration/patie
 import {ExamRegistrationComponent} from "./pages/exam-registration/exam-registration.component";
 import { UserUpdateComponent } from './pages/user-update/user-update.component';
 import { UserListComponent } from './pages/user-list/user-list.component';
+import { authGuard } from './security/guards/auth.guard';
 
 export const routes: Routes = [
     { path: '', component: LoginComponent, data: { animation: 'login'} },
-    { path: 'dashboard', component: DashboardComponent, data: { animation: 'dashboard'} },
-    { path: 'lista-prontuarios', component: MedicalRecordListComponent, data: { animation: 'lista-prontuarios'} },
-    { path: 'registro-paciente', component: PatientRegistrationComponent, data: { animation: 'registro-paciente'} },
-    { path: 'registro-paciente/:id', component: PatientRegistrationComponent, data: { animation: 'registro-paciente/:id'} },
-    {
-        path: 'prontuario',
-        children: [
-          { path: ':id', component: MedicalRecordComponent, data: { animation: 'prontuario/:id'} }
-        ]
-    },
-    { path: 'registro-consulta', component: AppointmentRegistrationComponent, data: { animation: 'registro-consulta'} },
-    { path: 'registro-exame', component: ExamRegistrationComponent, data: { animation: 'registro-exame'} },
-    { path: 'editar-usuario/:id', component: UserUpdateComponent, data: { animation: 'editar-usuario/:id'} },
-    { path: 'lista-usuarios', component: UserListComponent, data: { animation: 'lista-usuarios'} }
+    { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard], data: { animation: 'dashboard'} },
+    { path: 'lista-prontuarios', component: MedicalRecordListComponent, canActivate: [authGuard], data: { animation: 'lista-prontuarios'} },
+    { path: 'prontuario/:id', component: MedicalRecordComponent, canActivate: [authGuard], data: { animation: 'prontuario/:id'} },
+    { path: 'registro-paciente', component: PatientRegistrationComponent, canActivate: [authGuard], data: { animation: 'registro-paciente'} },
+    { path: 'registro-paciente/:id', component: PatientRegistrationComponent, canActivate: [authGuard], data: { animation: 'registro-paciente/:id'} },
+    { path: 'registro-consulta', component: AppointmentRegistrationComponent, canActivate: [authGuard], data: { animation: 'registro-consulta'} },
+    { path: 'registro-consulta/:id', component: AppointmentRegistrationComponent, canActivate: [authGuard], data: { animation: 'registro-consulta/:id'} },
+    { path: 'registro-exame', component: ExamRegistrationComponent, canActivate: [authGuard], data: { animation: 'registro-exame'} },
+    { path: 'registro-exame/:id', component: ExamRegistrationComponent, canActivate: [authGuard], data: { animation: 'registro-exame/:id'} },
+    { path: 'lista-usuarios', component: UserListComponent, canActivate: [authGuard], data: { animation: 'lista-usuarios'} },
+    { path: 'editar-usuario/:id', component: UserUpdateComponent, canActivate: [authGuard], data: { animation: 'editar-usuario/:id'} }
 ];

@@ -11,7 +11,6 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import moment from 'moment';
 import { Appointment } from '../../models/appointment.model';
-import { Patient } from '../../models/patient.model';
 import { ConfirmDialogComponent } from '../../shared/components/confirm-dialog/confirm-dialog.component';
 import { DialogComponent } from '../../shared/components/dialog/dialog.component';
 import { SidebarMenuComponent } from '../../shared/components/sidebar-menu/sidebar-menu.component';
@@ -62,8 +61,8 @@ export class AppointmentRegistrationComponent implements OnInit {
   ) {
     this.isEditing = !!this.activatedRoute.snapshot.paramMap.get('id'),
       this.appointRegistration = this.fb.group({
-        idPatient: [{ value: '', disabled: true }, Validators.required],
-        name: [{ value: '', disabled: true }, Validators.required],
+        id: [{ value: '', disabled: true }, Validators.required],
+        fullName: [{ value: '', disabled: true }, Validators.required],
         reason: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(64)]],
         consultDate: ['', Validators.required],
         consultTime: ['', Validators.required],
@@ -89,7 +88,6 @@ export class AppointmentRegistrationComponent implements OnInit {
     this.appointmentId = this.activatedRoute.snapshot.paramMap.get('id');
     this.getAppointmentData();
 
-
     this.shareMenuStatusService.menuTrueFalse$.subscribe(value => {
       this.menuTrueFalse = value;
     });
@@ -107,7 +105,7 @@ export class AppointmentRegistrationComponent implements OnInit {
   }
 
   getPatientsBySearchTerm(searchTerm: string, page: number, size: number): void {
-    this.apiService.getPatients(searchTerm, 'name', page, size).subscribe({
+    this.apiService.getPatients(searchTerm, 'fullName', page, size).subscribe({
       next: (response: any) => {
         this.filteredPatients = response.content;
         this.totalPatients = response.totalElements;
@@ -170,15 +168,15 @@ export class AppointmentRegistrationComponent implements OnInit {
 
   selectPatient(patient: any): void {
     this.appointRegistration.patchValue({
-      idPatient: patient.id,
-      name: patient.name
+      id: patient.id,
+      fullName: patient.fullName
     })
     this.filteredPatients = [];
   }
 
   appointRegister() {
-    const idPatientValue = this.appointRegistration.getRawValue().idPatient;
-    const nameValue = this.appointRegistration.getRawValue().name;
+    const idPatientValue = this.appointRegistration.getRawValue().id;
+    const nameValue = this.appointRegistration.getRawValue().fullName;
 
     if (!this.appointRegistration.valid || !idPatientValue || !nameValue) {
       this.dialog.openDialog('Preencha todos os campos obrigatórios corretamente.');
@@ -188,7 +186,7 @@ export class AppointmentRegistrationComponent implements OnInit {
     if (this.appointRegistration.valid) {
 
       const newAppointment: Appointment = {
-        id: this.appointRegistration.getRawValue().idPatient,
+        id: this.appointRegistration.getRawValue().id,
         reason: this.appointRegistration.value.reason,
         consultDate: this.appointRegistration.value.consultDate,
         consultTime: this.appointRegistration.value.consultTime,
@@ -223,8 +221,8 @@ export class AppointmentRegistrationComponent implements OnInit {
       this.apiService.getAppointment(this.appointmentId).subscribe({
         next: (appointment: Appointment) => {
           this.appointRegistration.patchValue({
-            idPatient: appointment.id,
-            name: appointment.patientName,
+            id: appointment.id,
+            fullName: appointment.fullName,
             reason: appointment.reason,
             consultDate: appointment.consultDate,
             consultTime: appointment.consultTime,
@@ -252,7 +250,7 @@ export class AppointmentRegistrationComponent implements OnInit {
     if (this.appointRegistration.valid) {
 
       const newAppointment: Appointment = {
-        id: this.appointRegistration.getRawValue().idPatient,
+        id: this.appointRegistration.getRawValue().id,
         reason: this.appointRegistration.value.reason,
         consultDate: this.appointRegistration.value.consultDate,
         consultTime: this.appointRegistration.value.consultTime,
@@ -285,6 +283,8 @@ export class AppointmentRegistrationComponent implements OnInit {
   editAppoint() {
     this.appointRegistration.enable();
     this.saveDisabled = false;
+    this.appointRegistration.get('id')?.disable();
+    this.appointRegistration.get('fullName')?.disable();
   }
 
   deleteAppointment(id: string) {

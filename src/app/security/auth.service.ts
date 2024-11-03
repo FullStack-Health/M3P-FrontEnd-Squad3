@@ -8,7 +8,7 @@ import { CustomJwtPayload } from './jwt.payload.model';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8081';
+  private apiUrl = 'http://localhost:8080';
 
   constructor(private http: HttpClient) {}
 
@@ -38,7 +38,17 @@ export class AuthService {
 
   getUserNameFromToken(): string | null {
     const decodedToken = this.getDecodedToken();
-    return decodedToken ? decodedToken.name : null;
+    return decodedToken && typeof decodedToken.userFullName === 'string' ? decodedToken.userFullName : null;
+  }
+
+  getUserRole(): string | null {
+    const decodedToken = this.getDecodedToken();
+    return decodedToken ? decodedToken.scope : null;
+  }
+
+  getPatientId(): any | null {
+    const decodedToken = this.getDecodedToken();
+    return decodedToken && decodedToken.patientId ? decodedToken.patientId : null;
   }
   
 }

@@ -3,7 +3,7 @@
     <h1 class="page-title">{{ pageTitle }}</h1>
 
     <div class="user-info">
-        <span class="logged-user">Usuário:<strong>{{ userName }}</strong></span>
+        <span class="logged-user">Usuário:<strong> {{ userName }}</strong></span>
         <div class="profile-icon">
             <img *ngIf="userRole === 'ADMIN'" src="../../../../assets/images/pat-male.webp" alt="Foto de Perfil">
             <img *ngIf="userRole === 'MEDICO'" src="../../../../assets/images/woman-doctor.png" alt="Foto de Perfil">

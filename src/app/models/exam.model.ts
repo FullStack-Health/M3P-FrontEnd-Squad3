@@ -1,7 +1,8 @@
 export class Exam {
     id: string = '';
-    patientName?: string;
-    exam: string = '';
+    fullName?: string;
+    examId?: string;
+    examName: string = '';
     examDate: string = '';
     examTime: string = '';
     examType: string = '';

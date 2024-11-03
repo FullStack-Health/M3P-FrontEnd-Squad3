@@ -1,6 +1,6 @@
 export interface DashboardStats {
-    totalPatients: number;
-    totalAppointments: number;
-    totalExams: number;
-    totalUsers: number;
+    countPatients: number;
+    countAppointments: number;
+    countExams: number;
+    countUsers: number;
 }

@@ -3,9 +3,9 @@ import { ExamRecord } from "./exam-record.model";
 
 export class PatientRecord {
     id: Number | undefined;
-    name: string = '';
+    fullName: string = '';
     gender: string = '';
-    birthdate: string = '';
+    birthDate: string = '';
     cpf: string = '';
     rg: string = '';
     issOrg: string = '';
@@ -13,10 +13,10 @@ export class PatientRecord {
     phone: string = '';
     email: string = '';
     placeOfBirth: string = '';
-    emergCont: string = '';
-    emergContNumber: string = '';
+    emergencyContact: string = '';
+    // emergContNumber: string = '';
     listOfAllergies?: string;
-    careList?: string;
+    listCare?: string;
     healthInsurance: string = '';
     healthInsuranceNumber?: string;
     healthInsuranceVal?: string;
