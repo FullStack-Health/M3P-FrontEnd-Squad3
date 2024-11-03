@@ -88,6 +88,7 @@ export class LoginComponent implements OnInit {
                 console.log('Password changed successfully!');
                 this.dialog.openDialog('Senha alterada com sucesso!.');
                 this.showPasswordArea = false;
+                this.changePasswordForm.reset();
             },
             error: (err) => {
               if (err.status === 404) {
@@ -127,6 +128,7 @@ export class LoginComponent implements OnInit {
         console.log('User successfully registered', response);
         this.dialog.openDialog('Cadastro efetuado com sucesso!');
         this.showRegisterForm = false;
+        this.registerForm.reset();
       },
       error: (err) => {
         console.error('Error registering user', err);
