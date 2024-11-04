@@ -39,7 +39,7 @@ export class UserListComponent {
   ) { }
 
   ngOnInit(): void {
-    this.titleService.setTitle('Lista de usuários');
+    this.titleService.setTitle('Lista de Usuários');
     this.getUsers(this.currentPage);
 
     this.shareMenuStatusService.menuTrueFalse$.subscribe(value => {
@@ -52,18 +52,19 @@ export class UserListComponent {
   getUsers(page: number): void {
     const searchTerm = this.searchTerm.trim();
 
-    let email: string | undefined;
     let userId: string | undefined;
+    let email: string | undefined;
 
     if (searchTerm) {
-      if (/\d/.test(searchTerm)) {
-        userId = searchTerm;
-      } else {
-        email = searchTerm;
+      if (/^\d+$/.test(searchTerm)) {
+          userId = searchTerm;
+      } 
+      else if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(searchTerm)) {
+          email = searchTerm;
       }
-    }
+  }
 
-    this.apiService.listUsers(page, this.pageSize, email, userId).subscribe({
+    this.apiService.listUsers(page, this.pageSize, userId, email).subscribe({
       next: (response: Page<ListUsers>) => {
 
         this.usersList = response.content;
