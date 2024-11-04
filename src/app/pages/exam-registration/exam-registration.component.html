@@ -22,7 +22,6 @@
 
                     <button id="btn-save" *ngIf="!isEditing" (click)="examRegister()">Salvar</button>
 
-                        <!-- [ngClass]="{'btn-save-valid': examRegistration.valid && examRegistration.getRawValue().idPatient && examRegistration.getRawValue().name, 'btn-save-invalid': !examRegistration.valid}" -->
 
                     <button disabled id="btn-edit" *ngIf="!isEditing">Editar</button>    
 
@@ -48,8 +47,6 @@
                         <li *ngFor="let patient of filteredPatients" [value]="patient">
                             <div>
                                 <a (click)="selectPatient(patient)">{{ patient.fullName }}</a>
-                                <!-- <p> {{ patient.gender }}</p>
-                            <p> {{ patient.birthdate }}</p> -->
                             </div>
 
                         </li>
