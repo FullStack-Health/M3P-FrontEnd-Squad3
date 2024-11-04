@@ -252,4 +252,11 @@ input:disabled {
   select {
     width: 80vw;
   }
+
+  select:disabled,
+  input:disabled,
+  textarea:disabled {
+  background: rgb(182, 182, 182);
+  color: $colorFontDisable;
+}
 }

@@ -76,13 +76,13 @@ export class PatientRegistrationComponent implements OnInit {
       healthInsuranceNumber: [''],
       healthInsuranceVal: [''],
       zipcode: ['', Validators.required],
-      street: ['', Validators.required],
+      street: [{ value: '', disabled: true }, Validators.required],
       addressNumber: [''],
       complement: [''],
       referencePoint: [''],
-      neighborhood: ['', Validators.required],
-      city: ['', Validators.required],
-      state: ['', Validators.required],
+      neighborhood: [{ value: '', disabled: true }, Validators.required],
+      city: [{ value: '', disabled: true }, Validators.required],
+      state: [{ value: '', disabled: true }, Validators.required],
     });
   }
 
