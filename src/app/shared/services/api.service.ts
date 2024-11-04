@@ -55,19 +55,19 @@ export class ApiService {
     return this.http.delete<User>(`${this.apiUrl}/users/${id}`, { headers });
   }
 
-  listUsers(page: number, size: number, email?: string, userId?: string): Observable<Page<ListUsers>> {
+  listUsers(page: number, size: number, userId?: string, email?: string): Observable<Page<ListUsers>> {
     const jwtToken = sessionStorage.getItem('jwtToken');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
 
     let params = new HttpParams().set('page', page.toString()).set('size', size.toString());
 
-    if (email) {
-      params = params.set('email', email);
-    }
     if (userId) {
       params = params.set('userId', userId);
     }
-
+    if (email) {
+      params = params.set('email', email);
+    }
+    
     console.log("Sending request with params:", params.toString());
 
     return this.http.get<Page<ListUsers>>(`${this.apiUrl}/users`, { headers, params });
