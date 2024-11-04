@@ -131,6 +131,9 @@ export class LoginComponent implements OnInit {
         this.registerForm.reset();
       },
       error: (err) => {
+        if(err.status === 409 && err.error.fieldName === 'email') {
+          this.dialog.openDialog('Já existe um usuário com este e-mail.');
+        }
         console.error('Error registering user', err);
       }
     });

@@ -166,13 +166,39 @@ export class PatientRegistrationComponent implements OnInit {
             this.showMessage = false;
           }, 1000);
         },
-        error: (error) => {
-          console.error('Error saving patient:', error);
+        error: (err) => {
+          if (err.status === 400 && err.error.errors) {
+            const birthDateError = err.error.errors.find((e: any) => e.fieldName === 'birthDate');
+            const healthInsValError = err.error.errors.find((e: any) => e.fieldName === 'healthInsuranceVal');
+            
+            if (birthDateError) {
+              this.dialog.openDialog("A data de nascimento precisa estar no passado.");
+            } else if (healthInsValError) {
+              this.dialog.openDialog("A data de validade do convênio deve estar no futuro.");
+            } else {
+              this.dialog.openDialog('Preencha os campos obrigatórios corretamente.');
+            }
+            
+            } else if (err.status === 409) {
+              const cpfAlreadyExists = err.status === 409 && err.error.error.includes("O CPF já está cadastrado");
+              const emailAlreadyExists = err.status === 409 && err.error.error.includes("O Email já está cadastrado");
+              const rgAlreadyExists = err.status === 409 && err.error.error.includes("O RG já está cadastrado");
+
+              if (cpfAlreadyExists) {
+              this.dialog.openDialog("Já existe paciente cadastrado com este CPF.");
+
+              } else if (rgAlreadyExists) {
+                this.dialog.openDialog("Já existe paciente cadastrado com este RG.");
+              } else if (emailAlreadyExists) {
+                this.dialog.openDialog("Já existe paciente cadastrado com este e-mail.");
+              } else {
+                console.error('Error saving patient:', err);
+                this.dialog.openDialog('Ocorreu um erro ao salvar o paciente.');
+              }
+          }
         }
       });
 
-    } else {
-      this.dialog.openDialog('Preencha todos os campos obrigatórios corretamente.');
     }
   }
 
@@ -222,15 +248,41 @@ export class PatientRegistrationComponent implements OnInit {
             this.showMessage = false;
           }, 1000);
         },
-        error: (error) => {
-          console.error('Error updating patient:', error);
+        error: (err) => {
+          if (err.status === 400 && err.error.errors) {
+            const birthDateError = err.error.errors.find((e: any) => e.fieldName === 'birthDate');
+            const healthInsValError = err.error.errors.find((e: any) => e.fieldName === 'healthInsuranceVal');
+            
+            if (birthDateError) {
+              this.dialog.openDialog("A data de nascimento precisa estar no passado.");
+            } else if (healthInsValError) {
+              this.dialog.openDialog("A data de validade do convênio deve estar no futuro.");
+            } else {
+              this.dialog.openDialog('Preencha os campos obrigatórios corretamente.');
+            }
+            
+            } else if (err.status === 409) {
+              const cpfAlreadyExists = err.status === 409 && err.error.error.includes("O CPF já está cadastrado");
+              const emailAlreadyExists = err.status === 409 && err.error.error.includes("O Email já está cadastrado");
+              const rgAlreadyExists = err.status === 409 && err.error.error.includes("O RG já está cadastrado");
 
+              if (cpfAlreadyExists) {
+              this.dialog.openDialog("Já existe paciente cadastrado com este CPF.");
+
+              } else if (rgAlreadyExists) {
+                this.dialog.openDialog("Já existe paciente cadastrado com este RG.");
+              } else if (emailAlreadyExists) {
+                this.dialog.openDialog("Já existe paciente cadastrado com este e-mail.");
+              } else {
+                console.error('Error saving patient:', err);
+                this.dialog.openDialog('Ocorreu um erro ao salvar o paciente.');
+              }
+          }
         }
       });
-    } else {
-      this.dialog.openDialog('Preencha todos os campos obrigatórios corretamente.');
     }
   }
+  
 
   editPatient() {
     this.patRegistration.enable();
