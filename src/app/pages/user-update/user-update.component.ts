@@ -157,6 +157,13 @@ export class UserUpdateComponent implements OnInit {
   }
 
   deleteUser(id: string) {
+    const roleName = this.userForm.get('roleName')?.value;
+
+    if (roleName === 'SCOPE_PACIENTE') {
+      this.dialog.openDialog("Não é possível excluir um usuário com perfil Paciente.");
+      return;
+    }
+
     this.confirmDialog.openDialog("Tem certeza que deseja excluir o usuário? Essa ação não pode ser desfeita.");
 
     const subscription = this.confirmDialog.confirm.subscribe(result => {
