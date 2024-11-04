@@ -14,8 +14,8 @@
         <div [ngClass]="{'sidebar-open': !menuTrueFalse}" class="form-container1" style="flex-grow: 0.9;">
             <div id="search-and-btn">
 
-                <input *ngIf="!isEditing" type="text" id="search" name="search" placeholder="Busque o paciente pelo nome"
-                    matInput [formControl]="patientSearchControl">
+                <input *ngIf="!isEditing" type="text" id="search" name="search"
+                    placeholder="Busque o paciente pelo nome" matInput [formControl]="patientSearchControl">
 
                 <div class="button-group1">
                     <button id="btn-search" *ngIf="!isEditing" (click)="onSearch()">Buscar</button>
@@ -23,21 +23,22 @@
 
                     <button id="btn-save" *ngIf="!isEditing" (click)="appointRegister()">Salvar</button>
 
-                        <!-- [ngClass]="{'btn-save-valid': appointRegistration.valid && appointRegistration.getRawValue().idPatient && appointRegistration.getRawValue().name, 'btn-save-invalid': !appointRegistration.valid}" -->
-                        
+                    <!-- [ngClass]="{'btn-save-valid': appointRegistration.valid && appointRegistration.getRawValue().idPatient && appointRegistration.getRawValue().name, 'btn-save-invalid': !appointRegistration.valid}" -->
+
                     <button disabled id="btn-edit" *ngIf="!isEditing">Editar</button>
 
                     <button disabled id="btn-del" *ngIf="!isEditing">Deletar</button>
-                    
+
 
                     <button id="btn-save-edit" [disabled]="saveDisabled" *ngIf="isEditing"
                         (click)="saveEditAppoint()">Salvar</button>
 
                     <button id="btn-edit-edit" *ngIf="isEditing" (click)="editAppoint()">Editar</button>
 
-                    <button id="btn-del-edit" *ngIf="isEditing" (click)="deleteAppointment(appointmentId)">Deletar</button>
+                    <button id="btn-del-edit" *ngIf="isEditing"
+                        (click)="deleteAppointment(appointmentId)">Deletar</button>
 
-                    
+
                 </div>
             </div>
 
@@ -52,7 +53,7 @@
                         <li *ngFor="let patient of filteredPatients" [value]="patient">
                             <div>
                                 <a (click)="selectPatient(patient)">{{ patient.fullName }}</a>
-
+                                <div class="line"></div>
                             </div>
 
                         </li>
