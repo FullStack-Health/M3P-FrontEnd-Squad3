@@ -35,7 +35,7 @@ $colorBackgroundToolbar: $white;
 $colorPatCardNameBackground: $blueHighOpacity;
 $colorCardContent: $whiteMediumOpacity;
 $colorPatientResult: $black;
-$colorPatientResultHover: $redBrand;
+$colorPatientResultHover: #18857f;
 $colorPatientNotFound: $redBrand;
 
 // forms
@@ -55,14 +55,15 @@ $colorTextDanger: $redBrand;
 // buttons
 $colorButton: #4A7A8C;
 $colorFontButton: $white;
-$colorHover: #02A724;
+$colorHover: #18857f;
 $colorFontButtonHover: $black;
-$colorButtonDisable: #02a72373;
+$colorButtonDisable: #1885806b;
 $colorFontButtonDisable: rgba($white, 0.266);
-$colorButtonLoginRegister: #027017;
+$colorButtonLoginRegister: #005954;
 $colorButtonEditPatientCard: $blueHighOpacity;
 $colorFontBtnEditPatCard: $black;
 $colorBtnSaveFormValid: $green;
+$colorButtonLoginHover: #0059558c;
 
 // icons
 $colorIcon: $white;
@@ -81,7 +82,7 @@ $colorCardContent: $whiteLowOpacity;
 $colorPatCardNameBackground: #B9E7E8;
 $colorSearchBackground: $whiteLowOpacity;
 $colorSearchPlaceholder: $blackHighOpacity;
-$colorPatientNotFound: $redBrand;
+$colorPatientNotFound: black;
 
 // login
 $colorFontClearLogin: black;
@@ -92,11 +93,12 @@ $colorLabelLoginRegister: black;
 $colorFormBorderLoginRegister: black;
 $colorBackgroundFormSideLogin: #6DB7B8;
 $colorBackgroundLogoSigeLogin: $white;
-$colorLabIncBrand: #027017;
+$colorLabIncBrand: #005954;
 $colorFontInput: black;
 $colorBackgroundSelect: black;
 $colorInputPlaceholder: black;
 $colorInputBackground: $transparent;
+$colorLinkLoginHover: #0a524e;
 
 // medical record
 $colorInterleavedList1: $purpleWhite;
