@@ -57,7 +57,6 @@ export class MedicalRecordComponent implements OnInit {
     this.userRole = this.authService.getDecodedToken()?.scope || null;
 
     this.patientID = this.activatedRoute.snapshot.paramMap.get('id');
-    console.log(this.patientID, 'esse é o id do paciente');
 
     this.getPatient(this.patientID);
     this.getAppointments(this.patientID);
