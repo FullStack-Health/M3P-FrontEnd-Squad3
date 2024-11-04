@@ -9,7 +9,7 @@ Projetado para disponibilizar todas as informações de forma simples, vinculand
 
 **Tela de login e cadastro**: Permite o cadastro rápido de usuários e a autenticação no sistema. Os recursos a seguir só podem ser visualizados após a autenticação.
 
-**Tela inicial (dasboard)**:
+**Tela inicial (dashboard)**:
  Disponibilidade de acesso: perfil Médico(a) e Admin. Pacientes são direcionados para a tela de prontuário.
  Permite visualizar estatísticas de quantidade de pacientes, consultas e exames (Administradores também visualizam estatística de usuários). 
  Traz uma busca rápida de pacientes, onde é possível filtrar por nome, e-mail ou telefone.
