@@ -172,6 +172,7 @@ export class AppointmentRegistrationComponent implements OnInit {
       fullName: patient.fullName
     })
     this.filteredPatients = [];
+    this.patientSearchControl.reset();
   }
 
   appointRegister() {

@@ -176,6 +176,7 @@ export class ExamRegistrationComponent implements OnInit {
       fullName: patient.fullName
     })
     this.filteredPatients = [];
+    this.patientSearchControl.reset();
   }
 
   setPatientData(patient: { id: any; fullName: any; }) {

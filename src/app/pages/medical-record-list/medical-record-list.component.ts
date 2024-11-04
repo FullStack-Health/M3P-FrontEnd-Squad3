@@ -40,7 +40,7 @@ export class MedicalRecordListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.titleService.setTitle('Lista de prontuários');
+    this.titleService.setTitle('Lista de Prontuários');
     this.getPatients(this.currentPage);
 
     this.shareMenuStatusService.menuTrueFalse$.subscribe(value => {

@@ -103,7 +103,7 @@ body {
 }
 
 .buttons:hover {
-    background: $colorHover;
+    background: $colorButtonLoginHover;
     color: $colorFontButtonHover;
     font-weight: 500;
 }
@@ -126,7 +126,7 @@ body {
 
 .forgot-and-signup:hover {
     cursor: pointer;
-    color: $colorHover;
+    color: $colorLinkLoginHover;
 }
 
 .container-line {
