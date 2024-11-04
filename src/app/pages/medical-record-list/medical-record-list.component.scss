@@ -93,6 +93,14 @@
   @include border-shadow();
 }
 
+.clickable-card{
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+    transform: scale(1.01);
+  }
+}
+
 .header-area {
   background: $colorHeaderArea;
   height: 60px;
