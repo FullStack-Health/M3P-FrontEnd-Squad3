@@ -90,6 +90,8 @@ select {
   background: $colorAreaBackground;
   border-radius: 4px;
   padding-bottom: 15px;
+  width: auto;
+  @include border-shadow();
 }
 
 .list-search-area ul {
@@ -104,10 +106,11 @@ select {
   font-weight: 500;
   color: $colorLabelForms;
   padding: 1%;
+  margin: 10px;
 }
 
 .list-search-area a {
-  padding-left: 1%;
+  padding-left: 15px;
   padding-right: 1%;
   padding-bottom: 15px;
   font-family: "Dosis", sans-serif;
@@ -119,6 +122,13 @@ select {
 .list-search-area a:hover {
   color: $colorPatientResultHover;
   cursor: pointer;
+}
+
+.line {
+  background: black;
+  width: 90%;
+  height: 1px;
+  margin: 10px;
 }
 
 .no-results {
