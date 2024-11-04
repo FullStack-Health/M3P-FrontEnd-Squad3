@@ -43,14 +43,15 @@ export class PatientCardComponent implements OnInit {
     let email: string | undefined;
 
     if (searchTerm) {
-      if (/\d/.test(searchTerm)) {
-        phone = searchTerm.replace(/[^\d]/g, '');
-      } else if (searchTerm.includes('@')) {
+      if (searchTerm.includes('@')) {
         email = searchTerm;
+      } else if (/\d/.test(searchTerm)) {
+        phone = searchTerm.replace(/[^\d]/g, '');
       } else {
         fullName = searchTerm;
       }
     }
+    
 
     this.apiService.getPatientCard(page, this.pageSize, fullName, phone, email).subscribe({
       next: (response: Page<PatientCard>) => {
