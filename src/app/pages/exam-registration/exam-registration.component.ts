@@ -194,7 +194,12 @@ export class ExamRegistrationComponent implements OnInit {
     const idPatientValue = this.examRegistration.getRawValue().id;
     const nameValue = this.examRegistration.getRawValue().fullName;
 
-    if (!this.examRegistration.valid || !idPatientValue || !nameValue) {
+    if(!idPatientValue || !nameValue) {
+      this.dialog.openDialog('Por favor, busque um paciente antes de salvar o exame.');
+      return;
+    }
+
+    if (!this.examRegistration.valid) {
       this.dialog.openDialog('Preencha todos os campos obrigatórios corretamente.');
       return;
     }

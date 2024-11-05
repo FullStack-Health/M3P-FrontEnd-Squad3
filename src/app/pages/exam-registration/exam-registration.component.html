@@ -47,6 +47,9 @@
                         <li *ngFor="let patient of filteredPatients" [value]="patient">
                             <div>
                                 <a (click)="selectPatient(patient)">{{ patient.fullName }}</a>
+                                <div class="line"></div>
+                                <!-- <p> {{ patient.gender }}</p>
+                            <p> {{ patient.birthdate }}</p> -->
                             </div>
 
                         </li>

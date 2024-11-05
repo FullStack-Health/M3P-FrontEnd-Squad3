@@ -25,12 +25,12 @@
                     <div id="header-ins">Convênio</div>
                     <div class="space-btn"></div>
                 </div>
-                
+
                 <div *ngIf="noResults" class="no-results">
                     Nenhum paciente encontrado.
                 </div>
 
-                <div *ngFor="let patient of medicalRecordPatientsList" class="patient-card1">
+                <div *ngFor="let patient of medicalRecordPatientsList" class="patient-card1 clickable-card" (click)="medicalRecord(patient.id)">
                     <div class="card-content1" id="id">{{ patient.id }}</div>
                     <div class="card-content1" id="name">{{ patient.fullName | shortenName }}</div>
                     <div class="card-content1" id="phone">{{ patient.phone }}</div>

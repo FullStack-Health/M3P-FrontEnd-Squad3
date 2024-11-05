@@ -181,7 +181,12 @@ export class AppointmentRegistrationComponent implements OnInit {
     const idPatientValue = this.appointRegistration.getRawValue().id;
     const nameValue = this.appointRegistration.getRawValue().fullName;
 
-    if (!this.appointRegistration.valid || !idPatientValue || !nameValue) {
+    if(!idPatientValue || !nameValue) {
+      this.dialog.openDialog('Por favor, busque um paciente antes de salvar a consulta.');
+      return;
+    }
+
+    if (!this.appointRegistration.valid) {
       this.dialog.openDialog('Preencha todos os campos obrigatórios corretamente.');
       return;
     }
