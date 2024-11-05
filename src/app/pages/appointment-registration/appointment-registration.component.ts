@@ -205,7 +205,7 @@ export class AppointmentRegistrationComponent implements OnInit {
     }
 
     if (this.appointRegistration.valid) {
-
+      this.formSubmitted = false;
       const newAppointment: Appointment = {
         id: this.appointRegistration.getRawValue().id,
         reason: this.appointRegistration.value.reason,
@@ -270,7 +270,7 @@ export class AppointmentRegistrationComponent implements OnInit {
     this.formSubmitted = true;
 
     if (this.appointRegistration.valid) {
-
+      this.formSubmitted = false;
       const newAppointment: Appointment = {
         id: this.appointRegistration.getRawValue().id,
         reason: this.appointRegistration.value.reason,
