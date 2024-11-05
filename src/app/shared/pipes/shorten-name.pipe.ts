@@ -6,10 +6,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ShortenNamePipe implements PipeTransform {
 
-  transform(value: string): string {
+  transform(value: string | null | undefined): string {
     if (!value) return '';
     const names = value.split(' ');
     if (names.length < 2) return value;
     return `${names[0]} ${names[names.length - 1]}`;
   }
+  
 }
