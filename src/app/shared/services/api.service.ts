@@ -20,6 +20,10 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
+  callBackend(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/ping`, { responseType: 'text' });
+  }
+
   //user endpoint
 
   saveUser(user: User): Observable<User> {

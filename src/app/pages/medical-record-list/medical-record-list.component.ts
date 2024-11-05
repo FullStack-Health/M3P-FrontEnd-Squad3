@@ -48,6 +48,18 @@ export class MedicalRecordListComponent implements OnInit {
     });
 
     this.checkWindowSize();
+    this.callBackend();
+  }
+
+  callBackend(): void {
+    this.apiService.callBackend().subscribe({
+      next: (response) => {
+        console.log('Backend is alive!', response);
+      },
+      error: (error) => {
+        console.error('Error trying to call backend:', error);
+      }
+    });
   }
 
   getPatients(page: number): void {
