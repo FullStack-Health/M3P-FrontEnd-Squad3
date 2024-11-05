@@ -47,6 +47,18 @@ export class UserListComponent {
     });
 
     this.checkWindowSize();
+    this.callBackend();
+  }
+
+  callBackend(): void {
+    this.apiService.callBackend().subscribe({
+      next: (response) => {
+        console.log('Backend is alive!', response);
+      },
+      error: (error) => {
+        console.error('Error trying to call backend:', error);
+      }
+    });
   }
 
   getUsers(page: number): void {
