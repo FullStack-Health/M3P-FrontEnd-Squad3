@@ -91,6 +91,7 @@ select {
   border-radius: 4px;
   padding-bottom: 15px;
   width: auto;
+  margin-top: 20px;
   @include border-shadow();
 }
 
@@ -132,9 +133,14 @@ select {
 }
 
 .no-results {
-  background-color: $colorAreaBackground;
+  background: $colorAreaBackground;
   border-radius: 4px;
-  padding: 1%;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  padding-left: 15px;
+  width: auto;
+  margin-top: 20px;
+  @include border-shadow();
 }
 
 .no-results p {
