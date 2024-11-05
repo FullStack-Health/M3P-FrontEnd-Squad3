@@ -34,7 +34,7 @@
                             <label for="name">Nome completo*</label>
                             <input matInput formControlName="fullName" [errorStateMatcher]="matcher" id="name-form-field">
                             <mat-error
-                                *ngIf="patRegistration.get('fullName')?.invalid && (patRegistration.get('fullName')?.dirty || patRegistration.get('fullName')?.touched)">
+                                *ngIf="patRegistration.get('fullName')?.invalid && (patRegistration.get('fullName')?.dirty || patRegistration.get('fullName')?.touched) || (formSubmitted && patRegistration.get('fullName')?.hasError('required'))">
                                 Nome é obrigatório e deve ter entre 8 e 64 caracteres
                             </mat-error>
                         </div>
@@ -45,7 +45,7 @@
                                 <option value="Feminino">Feminino</option>
                             </select>
                             <mat-error
-                                *ngIf="patRegistration.get('gender')?.invalid && patRegistration.get('gender')?.touched">
+                                *ngIf="patRegistration.get('gender')?.invalid && patRegistration.get('gender')?.touched || (formSubmitted && patRegistration.get('gender')?.hasError('required'))">
                                 Selecione um gênero
                             </mat-error>
                         </div>
@@ -53,7 +53,7 @@
                             <label for="birthDate">Data de Nascimento*</label>
                             <input type="date" name="birthDate" formControlName="birthDate">
                             <mat-error
-                                *ngIf="patRegistration.get('birthDate')?.invalid && patRegistration.get('birthDate')?.touched">
+                                *ngIf="patRegistration.get('birthDate')?.invalid && patRegistration.get('birthDate')?.touched || (formSubmitted && patRegistration.get('birthDate')?.hasError('required'))">
                                 Obrigatório
                             </mat-error>
                         </div>
@@ -63,14 +63,14 @@
                             <label for="cpf">CPF*</label>
                             <input matInput formControlName="cpf" mask="000.000.000-00" id="cpf-form-field" name="cpf">
                             <mat-error
-                                *ngIf="patRegistration.get('cpf')?.invalid && patRegistration.get('cpf')?.touched">
+                                *ngIf="patRegistration.get('cpf')?.invalid && patRegistration.get('cpf')?.touched || (formSubmitted && patRegistration.get('cpf')?.hasError('required'))">
                                 Obrigatório com o formato 000.000.000-00
                             </mat-error>
                         </div>
                         <div class="form-field1">
                             <label for="rg">RG*</label>
                             <input matInput formControlName="rg" name="rg">
-                            <mat-error *ngIf="patRegistration.get('rg')?.invalid && patRegistration.get('rg')?.touched">
+                            <mat-error *ngIf="patRegistration.get('rg')?.invalid && patRegistration.get('rg')?.touched || (formSubmitted && patRegistration.get('rg')?.hasError('required'))">
                                 Obrigatório
                             </mat-error>
                         </div>
@@ -85,19 +85,10 @@
                                 <option value="União Estável">União Estável</option>
                             </select>
                             <mat-error
-                                *ngIf="patRegistration.get('maritalStatus')?.invalid && patRegistration.get('maritalStatus')?.touched">
+                                *ngIf="patRegistration.get('maritalStatus')?.invalid && patRegistration.get('maritalStatus')?.touched || (formSubmitted && patRegistration.get('maritalStatus')?.hasError('required'))">
                                 Obrigatório
                             </mat-error>
                         </div>
-                        <!-- <div class="form-field1">
-                            <label for="issOrg">Órgão expedidor*</label>
-                            <input matInput formControlName="issOrg" name="issOrg">
-                            <mat-error
-                                *ngIf="patRegistration.get('issOrg')?.invalid && patRegistration.get('issOrg')?.touched">
-                                Obrigatório
-                            </mat-error>
-                        </div> -->
-
 
                     </div>
                     <div class="row1">
@@ -106,7 +97,7 @@
                             <label for="email">E-mail*</label>
                             <input matInput type="email" formControlName="email" name="email">
                             <mat-error
-                                *ngIf="patRegistration.get('email')?.invalid && patRegistration.get('email')?.touched">
+                                *ngIf="patRegistration.get('email')?.invalid && patRegistration.get('email')?.touched || (formSubmitted && patRegistration.get('email')?.hasError('required'))">
                                 Obrigatório com o formato exemplo&#64;exemplo
                             </mat-error>
                         </div>
@@ -114,7 +105,7 @@
                             <label for="placeOfBirth">Naturalidade*</label>
                             <input matInput formControlName="placeOfBirth" name="placeOfBirth">
                             <mat-error
-                                *ngIf="patRegistration.get('placeOfBirth')?.invalid && patRegistration.get('placeOfBirth')?.touched">
+                                *ngIf="patRegistration.get('placeOfBirth')?.invalid && patRegistration.get('placeOfBirth')?.touched || (formSubmitted && patRegistration.get('placeOfBirth')?.hasError('required'))">
                                 Obrigatório e deve ter entre 8 e 64 caracteres
                             </mat-error>
                         </div>
@@ -125,7 +116,7 @@
                             <input matInput formControlName="phone" mask="(00) 0 0000-0009" id="phone-form-field"
                                 name="phone">
                             <mat-error
-                                *ngIf="patRegistration.get('phone')?.invalid && patRegistration.get('phone')?.touched">
+                                *ngIf="patRegistration.get('phone')?.invalid && patRegistration.get('phone')?.touched || (formSubmitted && patRegistration.get('phone')?.hasError('required'))">
                                 Obrigatório com o formato (99) 9 9999-9999
                             </mat-error>
                         </div>
@@ -133,19 +124,11 @@
                             <label for="emergCont">Contato de emergência*</label>
                             <input matInput formControlName="emergencyContact" mask="(00) 0 0000-0009" name="emergencyContact" id="emergency-form-field">
                             <mat-error
-                                *ngIf="patRegistration.get('emergencyContact')?.invalid && patRegistration.get('emergencyContact')?.touched">
+                                *ngIf="patRegistration.get('emergencyContact')?.invalid && patRegistration.get('emergencyContact')?.touched || (formSubmitted && patRegistration.get('emergencyContact')?.hasError('required'))">
                                 Obrigatório
                             </mat-error>
                         </div>
-                        <!-- <div class="form-field1">
-                            <label for="emergContNumber">Telefone do contato de emergência*</label>
-                            <input matInput formControlName="emergContNumber" mask="(00) 0 0000-0009"
-                                name="emergContNumber">
-                            <mat-error
-                                *ngIf="patRegistration.get('emergContNumber')?.invalid && patRegistration.get('emergContNumber')?.touched">
-                                Obrigatório com o formato (99) 9 9999-9999
-                            </mat-error>
-                        </div> -->
+                 
                     </div>
                     <div class="row1">
                         <div class="form-field1">
@@ -179,7 +162,7 @@
                                 <option value="Unimed">Unimed</option>
                             </select>
                             <mat-error
-                                *ngIf="patRegistration.get('healthInsurance')?.invalid && patRegistration.get('healthInsurance')?.touched">
+                                *ngIf="patRegistration.get('healthInsurance')?.invalid && patRegistration.get('healthInsurance')?.touched || (formSubmitted && patRegistration.get('healthInsurance')?.hasError('required'))">
                                 Obrigatório
                             </mat-error>
                         </div>
@@ -206,7 +189,7 @@
                             <label for="zipcode">CEP*</label>
                             <input matInput formControlName="zipcode" mask="00000-000" name="zipcode">
                             <mat-error
-                                *ngIf="patRegistration.get('zipcode')?.invalid && patRegistration.get('zipcode')?.touched">
+                                *ngIf="patRegistration.get('zipcode')?.invalid && patRegistration.get('zipcode')?.touched || (formSubmitted && patRegistration.get('zipcode')?.hasError('required'))">
                                 Obrigatório com o formato 00000-000
                             </mat-error>
 

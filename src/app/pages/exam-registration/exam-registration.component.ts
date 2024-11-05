@@ -52,6 +52,7 @@ export class ExamRegistrationComponent implements OnInit {
   totalPatients: number = 0;
   noResults: boolean = false;
   menuTrueFalse: boolean | undefined;
+  formSubmitted = false;
 
   constructor(
     private dataTransformService: DataTransformService,
@@ -189,6 +190,7 @@ export class ExamRegistrationComponent implements OnInit {
   }
 
   examRegister() {
+    this.formSubmitted = true;
     const idPatientValue = this.examRegistration.getRawValue().id;
     const nameValue = this.examRegistration.getRawValue().fullName;
 
@@ -268,6 +270,7 @@ export class ExamRegistrationComponent implements OnInit {
   saveEditExam() {
     this.examRegistration.enable();
     this.saveDisabled = false;
+    this.formSubmitted = true;
 
     if (this.examRegistration.valid) {
 
