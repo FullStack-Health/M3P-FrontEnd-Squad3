@@ -49,6 +49,7 @@ export class AppointmentRegistrationComponent implements OnInit {
   pageSize: number = 10;
   totalPatients: number = 0;
   menuTrueFalse: boolean | undefined;
+  formSubmitted = false;
 
   constructor(
     private dataTransformService: DataTransformService, 
@@ -176,6 +177,7 @@ export class AppointmentRegistrationComponent implements OnInit {
   }
 
   appointRegister() {
+    this.formSubmitted = true;
     const idPatientValue = this.appointRegistration.getRawValue().id;
     const nameValue = this.appointRegistration.getRawValue().fullName;
 
@@ -247,6 +249,7 @@ export class AppointmentRegistrationComponent implements OnInit {
   saveEditAppoint() {
     this.appointRegistration.enable();
     this.saveDisabled = false;
+    this.formSubmitted = true;
 
     if (this.appointRegistration.valid) {
 

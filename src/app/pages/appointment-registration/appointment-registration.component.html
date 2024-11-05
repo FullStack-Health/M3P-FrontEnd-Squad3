@@ -83,7 +83,7 @@
                         <label for="reason">Motivo da consulta*</label>
                         <input matInput formControlName="reason" name="reason">
                         <mat-error
-                            *ngIf="appointRegistration.get('reason')?.invalid && (appointRegistration.get('reason')?.dirty || appointRegistration.get('reason')?.touched)">
+                            *ngIf="appointRegistration.get('reason')?.invalid && (appointRegistration.get('reason')?.dirty || appointRegistration.get('reason')?.touched) || (formSubmitted && appointRegistration.get('reason')?.hasError('required'))">
                             Motivo da consulta é obrigatório e deve ter entre 8 e 64 caracteres
                         </mat-error>
                     </div>
@@ -103,7 +103,7 @@
                         <label for="problemDescrip">Descrição do problema*</label>
                         <textarea name="problemDescrip" formControlName="problemDescrip" rows="4" cols="50"></textarea>
                         <mat-error
-                            *ngIf="appointRegistration.get('problemDescrip')?.invalid && (appointRegistration.get('problemDescrip')?.dirty || appointRegistration.get('problemDescrip')?.touched)">
+                            *ngIf="appointRegistration.get('problemDescrip')?.invalid && (appointRegistration.get('problemDescrip')?.dirty || appointRegistration.get('problemDescrip')?.touched) || (formSubmitted && appointRegistration.get('problemDescrip')?.hasError('required'))">
                             Descrição do problema é obrigatório e deve ter entre 16 e 1024 caracteres
                         </mat-error>
                     </div>
@@ -117,7 +117,7 @@
                         <label for="dosagesPrec">Dosagens e precauções*</label>
                         <textarea name="dosagesPrec" formControlName="dosagesPrec" rows="4" cols="50"></textarea>
                         <mat-error
-                            *ngIf="appointRegistration.get('dosagesPrec')?.invalid && (appointRegistration.get('dosagesPrec')?.dirty || appointRegistration.get('dosagesPrec')?.touched)">
+                            *ngIf="appointRegistration.get('dosagesPrec')?.invalid && (appointRegistration.get('dosagesPrec')?.dirty || appointRegistration.get('dosagesPrec')?.touched) || (formSubmitted && appointRegistration.get('dosagesPrec')?.hasError('required'))">
                             Dosagens e precauções é obrigatório e deve ter entre 16 e 256 caracteres
                         </mat-error>
                     </div>

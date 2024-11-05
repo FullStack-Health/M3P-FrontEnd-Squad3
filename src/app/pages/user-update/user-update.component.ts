@@ -40,6 +40,7 @@ export class UserUpdateComponent implements OnInit {
   userId: any = '';
   userRole: string | null;
   menuTrueFalse: boolean | undefined;
+  formSubmitted = false;
 
   constructor(
     private router: Router,
@@ -104,6 +105,7 @@ export class UserUpdateComponent implements OnInit {
   saveEditUser() {
     this.userForm.enable();
     this.saveDisabled = false;
+    this.formSubmitted = true;
 
     if (this.userForm.valid) {
 

@@ -45,6 +45,7 @@ export class PatientRegistrationComponent implements OnInit {
   isEditing: boolean = false;
   patRegistration: FormGroup;
   menuTrueFalse: boolean | undefined;
+  formSubmitted = false;
 
   constructor(
     private apiService: ApiService,
@@ -123,6 +124,7 @@ export class PatientRegistrationComponent implements OnInit {
   }
 
   patientRegister() {
+    this.formSubmitted = true;
     if (this.patRegistration.valid) {
 
       const newPatient: Patient = {
@@ -195,12 +197,25 @@ export class PatientRegistrationComponent implements OnInit {
         }
       });
 
+    } else {
+      let missingFields = [];
+      for (const controlName in this.patRegistration.controls) {
+        if (this.patRegistration.controls[controlName].invalid && this.patRegistration.controls[controlName].hasError('required')) {
+          missingFields.push(controlName);
+        }
+      }
+  
+      if (missingFields.length > 0) {
+        this.dialog.openDialog('Preencha os campos obrigatórios corretamente.');
+      }
+      
     }
   }
 
   saveEditPatient() {
     this.patRegistration.enable();
     this.saveDisabled = false;
+    this.formSubmitted = true;
 
     if (this.patRegistration.valid) {
 
@@ -271,11 +286,24 @@ export class PatientRegistrationComponent implements OnInit {
                 console.error('Error saving patient:', err);
                 this.dialog.openDialog('Ocorreu um erro ao salvar o paciente.');
               }
+            }
+          }
+        });
+  
+      } else {
+        let missingFields = [];
+        for (const controlName in this.patRegistration.controls) {
+          if (this.patRegistration.controls[controlName].invalid && this.patRegistration.controls[controlName].hasError('required')) {
+            missingFields.push(controlName);
           }
         }
-      });
+    
+        if (missingFields.length > 0) {
+          this.dialog.openDialog('Preencha os campos obrigatórios corretamente.');
+        }
+        
+      }
     }
-  }
   
 
   editPatient() {
