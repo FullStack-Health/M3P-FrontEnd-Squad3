@@ -217,6 +217,7 @@ export class ExamRegistrationComponent implements OnInit {
     }
 
     if (this.examRegistration.valid) {
+      this.formSubmitted = false;
 
       const newExam: Exam = {
         id: this.examRegistration.getRawValue().id,
@@ -285,7 +286,8 @@ export class ExamRegistrationComponent implements OnInit {
     this.formSubmitted = true;
 
     if (this.examRegistration.valid) {
-
+      this.formSubmitted = false;
+      
       const newExam: Exam = {
         id: this.examRegistration.getRawValue().id,
         examName: this.examRegistration.value.examName,

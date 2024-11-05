@@ -120,6 +120,7 @@ export class UserUpdateComponent implements OnInit {
     this.formSubmitted = true;
 
     if (this.userForm.valid) {
+      this.formSubmitted = false;
 
       const updateUser: User = {
         fullName: this.userForm.value.fullName,

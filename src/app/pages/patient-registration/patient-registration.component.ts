@@ -138,6 +138,7 @@ export class PatientRegistrationComponent implements OnInit {
   patientRegister() {
     this.formSubmitted = true;
     if (this.patRegistration.valid) {
+      this.formSubmitted = false;
 
       const newPatient: Patient = {
         fullName: this.patRegistration.value.fullName,
@@ -230,6 +231,7 @@ export class PatientRegistrationComponent implements OnInit {
     this.formSubmitted = true;
 
     if (this.patRegistration.valid) {
+      this.formSubmitted = false;
 
       const newPatient: Patient = {
         fullName: this.patRegistration.value.fullName,
