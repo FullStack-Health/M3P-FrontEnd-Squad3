@@ -45,6 +45,7 @@ export class PatientRegistrationComponent implements OnInit {
   isEditing: boolean = false;
   patRegistration: FormGroup;
   menuTrueFalse: boolean | undefined;
+  formSubmitted = false;
 
   constructor(
     private apiService: ApiService,
@@ -63,13 +64,11 @@ export class PatientRegistrationComponent implements OnInit {
       birthDate: ['', Validators.required],
       cpf: ['', Validators.required],
       rg: ['', [Validators.required, Validators.maxLength(20)]],
-      // issOrg: ['', Validators.required],
       maritalStatus: ['', Validators.required],
       phone: ['', Validators.required],
       email: ['', [Validators.email, Validators.required]],
       placeOfBirth: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(64)]],
       emergencyContact: ['', Validators.required],
-      // emergContNumber: ['', Validators.required],
       listOfAllergies: [''],
       listCare: [''],
       healthInsurance: ['', Validators.required],
@@ -125,6 +124,7 @@ export class PatientRegistrationComponent implements OnInit {
   }
 
   patientRegister() {
+    this.formSubmitted = true;
     if (this.patRegistration.valid) {
 
       const newPatient: Patient = {
@@ -133,13 +133,11 @@ export class PatientRegistrationComponent implements OnInit {
         birthDate: this.patRegistration.value.birthDate,
         cpf: this.dataTransformService.formatCpf(this.patRegistration.value.cpf),
         rg: this.patRegistration.value.rg,
-        // issOrg: this.patRegistration.value.issOrg,
         maritalStatus: this.patRegistration.value.maritalStatus,
         phone: this.dataTransformService.formatPhone(this.patRegistration.value.phone),
         email: this.patRegistration.value.email,
         placeOfBirth: this.patRegistration.value.placeOfBirth,
         emergencyContact: this.dataTransformService.formatPhone(this.patRegistration.value.emergencyContact),
-        // emergContNumber: this.dataTransformService.formatPhone(this.patRegistration.value.emergContNumber),
         listOfAllergies: this.patRegistration.value.listOfAllergies,
         listCare: this.patRegistration.value.listCare,
         healthInsurance: this.patRegistration.value.healthInsurance,
@@ -199,12 +197,25 @@ export class PatientRegistrationComponent implements OnInit {
         }
       });
 
+    } else {
+      let missingFields = [];
+      for (const controlName in this.patRegistration.controls) {
+        if (this.patRegistration.controls[controlName].invalid && this.patRegistration.controls[controlName].hasError('required')) {
+          missingFields.push(controlName);
+        }
+      }
+  
+      if (missingFields.length > 0) {
+        this.dialog.openDialog('Preencha os campos obrigatórios corretamente.');
+      }
+      
     }
   }
 
   saveEditPatient() {
     this.patRegistration.enable();
     this.saveDisabled = false;
+    this.formSubmitted = true;
 
     if (this.patRegistration.valid) {
 
@@ -214,13 +225,11 @@ export class PatientRegistrationComponent implements OnInit {
         birthDate: this.patRegistration.value.birthDate,
         cpf: this.dataTransformService.formatCpf(this.patRegistration.value.cpf),
         rg: this.patRegistration.value.rg,
-        // issOrg: this.patRegistration.value.issOrg,
         maritalStatus: this.patRegistration.value.maritalStatus,
         phone: this.dataTransformService.formatPhone(this.patRegistration.value.phone),
         email: this.patRegistration.value.email,
         placeOfBirth: this.patRegistration.value.placeOfBirth,
         emergencyContact: this.dataTransformService.formatPhone(this.patRegistration.value.emergencyContact),
-        // emergContNumber: this.patRegistration.value.emergContNumber,
         listOfAllergies: this.patRegistration.value.listOfAllergies,
         listCare: this.patRegistration.value.listCare,
         healthInsurance: this.patRegistration.value.healthInsurance,
@@ -277,11 +286,24 @@ export class PatientRegistrationComponent implements OnInit {
                 console.error('Error saving patient:', err);
                 this.dialog.openDialog('Ocorreu um erro ao salvar o paciente.');
               }
+            }
+          }
+        });
+  
+      } else {
+        let missingFields = [];
+        for (const controlName in this.patRegistration.controls) {
+          if (this.patRegistration.controls[controlName].invalid && this.patRegistration.controls[controlName].hasError('required')) {
+            missingFields.push(controlName);
           }
         }
-      });
+    
+        if (missingFields.length > 0) {
+          this.dialog.openDialog('Preencha os campos obrigatórios corretamente.');
+        }
+        
+      }
     }
-  }
   
 
   editPatient() {
@@ -330,13 +352,11 @@ export class PatientRegistrationComponent implements OnInit {
             birthDate: formattedBirthdate,
             cpf: patient.cpf,
             rg: patient.rg,
-            // issOrg: patient.issOrg,
             maritalStatus: patient.maritalStatus,
             phone: patient.phone,
             email: patient.email,
             placeOfBirth: patient.placeOfBirth,
             emergencyContact: patient.emergencyContact,
-            // emergContNumber: patient.emergContNumber,
             listOfAllergies: patient.listOfAllergies,
             listCare: patient.listCare,
             healthInsurance: patient.healthInsurance,

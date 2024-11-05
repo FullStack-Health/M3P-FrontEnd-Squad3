@@ -35,11 +35,9 @@
             <p><strong>Idade: </strong>{{ patient.birthDate | age }}</p>
             <p><strong>CPF: </strong>{{ patient.cpf }}</p>
             <p><strong>RG: </strong>{{ patient.rg }}</p>
-            <!-- <p><strong>Orgão Emissor: </strong>{{ patient.issOrg }}</p> -->
             <p><strong>Estado Civil: </strong>{{ patient.maritalStatus }}</p>
             <p><strong>Telefone: </strong>{{ patient.phone }}</p>
             <p><strong>E-mail: </strong>{{ patient.email }}</p>
-            <!-- <p><strong>Contato de emergência: </strong>{{ patient.emergCont | shortenName }} - {{ patient.emergContNumber }}</p> -->
             <p><strong>Contato de emergência: </strong>{{ patient.emergencyContact }}</p>
             <p><strong>Alergias: </strong>{{ patient.listOfAllergies || 'N/A' }}</p>
             <p><strong>Cuidados específicos: </strong>{{ patient.listCare || 'N/A' }}</p>

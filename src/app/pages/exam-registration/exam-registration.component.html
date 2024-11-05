@@ -22,7 +22,6 @@
 
                     <button id="btn-save" *ngIf="!isEditing" (click)="examRegister()">Salvar</button>
 
-                        <!-- [ngClass]="{'btn-save-valid': examRegistration.valid && examRegistration.getRawValue().idPatient && examRegistration.getRawValue().name, 'btn-save-invalid': !examRegistration.valid}" -->
 
                     <button disabled id="btn-edit" *ngIf="!isEditing">Editar</button>    
 
@@ -82,7 +81,7 @@
                         <label for="exam">Nome do exame*</label>
                         <input matInput formControlName="examName" name="exam">
                         <mat-error
-                            *ngIf="examRegistration.get('examName')?.invalid && (examRegistration.get('examName')?.dirty || examRegistration.get('examName')?.touched)">
+                            *ngIf="examRegistration.get('examName')?.invalid && (examRegistration.get('examName')?.dirty || examRegistration.get('examName')?.touched) || (formSubmitted && examRegistration.get('examName')?.hasError('required'))">
                              Nome do exame é obrigatório e deve ter entre 8 e 64 caracteres
                           </mat-error>
                     </div>
@@ -101,7 +100,7 @@
                         <label for="examType">Tipo do exame*</label>
                         <input matInput formControlName="examType" name="examType">
                         <mat-error
-                            *ngIf="examRegistration.get('examType')?.invalid && (examRegistration.get('examType')?.dirty || examRegistration.get('examType')?.touched)">
+                            *ngIf="examRegistration.get('examType')?.invalid && (examRegistration.get('examType')?.dirty || examRegistration.get('examType')?.touched) || (formSubmitted && examRegistration.get('examType')?.hasError('required'))">
                             Tipo do exame é obrigatório e deve ter entre 4 e 32 caracteres
                         </mat-error>
                     </div>
@@ -110,7 +109,7 @@
                         <label for="lab">Laboratório*</label>
                         <input matInput name="lab" formControlName="lab">
                         <mat-error
-                            *ngIf="examRegistration.get('lab')?.invalid && (examRegistration.get('lab')?.dirty || examRegistration.get('lab')?.touched)">
+                            *ngIf="examRegistration.get('lab')?.invalid && (examRegistration.get('lab')?.dirty || examRegistration.get('lab')?.touched) || (formSubmitted && examRegistration.get('lab')?.hasError('required'))">
                             Laboratório é obrigatório e deve ter entre 4 e 32 caracteres
                         </mat-error>
                     </div>
@@ -124,7 +123,7 @@
                         <label for="result">Resultados*</label>
                         <textarea name="result" formControlName="result" rows="4" cols="50"></textarea>
                         <mat-error
-                            *ngIf="examRegistration.get('result')?.invalid && (examRegistration.get('result')?.dirty || examRegistration.get('result')?.touched)">
+                            *ngIf="examRegistration.get('result')?.invalid && (examRegistration.get('result')?.dirty || examRegistration.get('result')?.touched) || (formSubmitted && examRegistration.get('result')?.hasError('required'))">
                             Resultados é obrigatório e deve ter entre 16 e 1024 caracteres
                         </mat-error>
                     </div>

@@ -14,7 +14,6 @@ export class PatientRecord {
     email: string = '';
     placeOfBirth: string = '';
     emergencyContact: string = '';
-    // emergContNumber: string = '';
     listOfAllergies?: string;
     listCare?: string;
     healthInsurance: string = '';

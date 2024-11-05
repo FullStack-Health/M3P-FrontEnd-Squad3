@@ -7,13 +7,11 @@ export class Patient {
     birthDate: string = '';
     cpf: string = '';
     rg: string = '';
-    // issOrg: string = '';
     maritalStatus: string = '';
     phone: string = '';
     email: string = '';
     placeOfBirth: string = '';
     emergencyContact: string = '';
-    // emergContNumber: string = '';
     listOfAllergies?: string;
     listCare?: string;
     healthInsurance: string = '';
