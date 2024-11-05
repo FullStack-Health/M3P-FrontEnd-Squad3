@@ -92,7 +92,7 @@
 
                     </div>
                     <div class="row1">
-                        
+
                         <div class="form-field1">
                             <label for="email">E-mail*</label>
                             <input matInput type="email" formControlName="email" name="email">
@@ -128,7 +128,7 @@
                                 Obrigatório
                             </mat-error>
                         </div>
-                 
+
                     </div>
                     <div class="row1">
                         <div class="form-field1">
@@ -201,6 +201,10 @@
                             <mat-error
                             *ngIf="patRegistration.get('street')?.invalid && patRegistration.get('street')?.touched">
                                 Esse campo sera preenchido automaticamente ao inserir o CEP.
+                            </mat-error>
+                            <mat-error
+                                *ngIf="formSubmitted && patRegistration.get('street')?.hasError('required')">
+                                O CEP preenchido é inválido
                             </mat-error>
                         </div>
 
