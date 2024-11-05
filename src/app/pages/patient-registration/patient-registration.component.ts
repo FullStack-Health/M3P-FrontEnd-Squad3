@@ -67,7 +67,7 @@ export class PatientRegistrationComponent implements OnInit {
       maritalStatus: ['', Validators.required],
       phone: ['', Validators.required],
       email: ['', [Validators.email, Validators.required]],
-      placeOfBirth: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(64)]],
+      placeOfBirth: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(64)]],
       emergencyContact: ['', Validators.required],
       listOfAllergies: [''],
       listCare: [''],
@@ -75,13 +75,13 @@ export class PatientRegistrationComponent implements OnInit {
       healthInsuranceNumber: [''],
       healthInsuranceVal: [''],
       zipcode: ['', Validators.required],
-      street: [{ value: '', disabled: true }, Validators.required],
+      street: ['', Validators.required],
       addressNumber: [''],
       complement: [''],
       referencePoint: [''],
-      neighborhood: [{ value: '', disabled: true }, Validators.required],
-      city: [{ value: '', disabled: true }, Validators.required],
-      state: [{ value: '', disabled: true }, Validators.required],
+      neighborhood: ['', Validators.required],
+      city: ['', Validators.required],
+      state: ['', Validators.required],
     });
   }
 
@@ -154,7 +154,7 @@ export class PatientRegistrationComponent implements OnInit {
         listCare: this.patRegistration.value.listCare,
         healthInsurance: this.patRegistration.value.healthInsurance,
         healthInsuranceNumber: this.patRegistration.value.healthInsuranceNumber,
-        healthInsuranceVal: this.patRegistration.value.healthInsuranceVal ? 
+        healthInsuranceVal: this.patRegistration.value.healthInsuranceVal ?
             this.patRegistration.value.healthInsuranceVal : undefined,
         zipcode: this.dataTransformService.formatCep(this.patRegistration.value.zipcode),
         street: this.patRegistration.value.street,
@@ -180,7 +180,7 @@ export class PatientRegistrationComponent implements OnInit {
           if (err.status === 400 && err.error.errors) {
             const birthDateError = err.error.errors.find((e: any) => e.fieldName === 'birthDate');
             const healthInsValError = err.error.errors.find((e: any) => e.fieldName === 'healthInsuranceVal');
-            
+
             if (birthDateError) {
               this.dialog.openDialog("A data de nascimento precisa estar no passado.");
             } else if (healthInsValError) {
@@ -188,7 +188,7 @@ export class PatientRegistrationComponent implements OnInit {
             } else {
               this.dialog.openDialog('Preencha os campos obrigatórios corretamente.');
             }
-            
+
             } else if (err.status === 409) {
               const cpfAlreadyExists = err.status === 409 && err.error.error.includes("O CPF já está cadastrado");
               const emailAlreadyExists = err.status === 409 && err.error.error.includes("O Email já está cadastrado");
@@ -216,11 +216,11 @@ export class PatientRegistrationComponent implements OnInit {
           missingFields.push(controlName);
         }
       }
-  
+
       if (missingFields.length > 0) {
         this.dialog.openDialog('Preencha os campos obrigatórios corretamente.');
       }
-      
+
     }
   }
 
@@ -246,7 +246,7 @@ export class PatientRegistrationComponent implements OnInit {
         listCare: this.patRegistration.value.listCare,
         healthInsurance: this.patRegistration.value.healthInsurance,
         healthInsuranceNumber: this.patRegistration.value.healthInsuranceNumber,
-        healthInsuranceVal: this.patRegistration.value.healthInsuranceVal ? 
+        healthInsuranceVal: this.patRegistration.value.healthInsuranceVal ?
             this.patRegistration.value.healthInsuranceVal : undefined,
         zipcode: this.dataTransformService.formatCep(this.patRegistration.value.zipcode),
         street: this.patRegistration.value.street,
@@ -273,7 +273,7 @@ export class PatientRegistrationComponent implements OnInit {
           if (err.status === 400 && err.error.errors) {
             const birthDateError = err.error.errors.find((e: any) => e.fieldName === 'birthDate');
             const healthInsValError = err.error.errors.find((e: any) => e.fieldName === 'healthInsuranceVal');
-            
+
             if (birthDateError) {
               this.dialog.openDialog("A data de nascimento precisa estar no passado.");
             } else if (healthInsValError) {
@@ -281,7 +281,7 @@ export class PatientRegistrationComponent implements OnInit {
             } else {
               this.dialog.openDialog('Preencha os campos obrigatórios corretamente.');
             }
-            
+
             } else if (err.status === 409) {
               const cpfAlreadyExists = err.status === 409 && err.error.error.includes("O CPF já está cadastrado");
               const emailAlreadyExists = err.status === 409 && err.error.error.includes("O Email já está cadastrado");
@@ -301,7 +301,7 @@ export class PatientRegistrationComponent implements OnInit {
             }
           }
         });
-  
+
       } else {
         let missingFields = [];
         for (const controlName in this.patRegistration.controls) {
@@ -309,14 +309,14 @@ export class PatientRegistrationComponent implements OnInit {
             missingFields.push(controlName);
           }
         }
-    
+
         if (missingFields.length > 0) {
           this.dialog.openDialog('Preencha os campos obrigatórios corretamente.');
         }
-        
+
       }
     }
-  
+
 
   editPatient() {
     this.patRegistration.enable();
@@ -330,7 +330,7 @@ export class PatientRegistrationComponent implements OnInit {
           this.dialog.openDialog('O paciente tem exames ou consultas vinculadas a ele e não pode ser deletado.');
         } else {
           this.confirmDialog.openDialog("Tem certeza que deseja excluir o paciente? Essa ação não pode ser desfeita.");
-  
+
           const subscription = this.confirmDialog.confirm.subscribe(result => {
             if (result) {
               this.apiService.deletePatient(id).subscribe(() => {
@@ -358,7 +358,7 @@ export class PatientRegistrationComponent implements OnInit {
           const formattedInsuranceVal = patient.healthInsuranceVal ? this.convertDate(patient.healthInsuranceVal) : undefined;
 
           this.patRegistration.patchValue({
-            
+
             fullName: patient.fullName,
             gender: patient.gender,
             birthDate: formattedBirthdate,
