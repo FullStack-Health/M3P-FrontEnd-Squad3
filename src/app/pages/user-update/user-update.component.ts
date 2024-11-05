@@ -76,6 +76,18 @@ export class UserUpdateComponent implements OnInit {
     this.shareMenuStatusService.menuTrueFalse$.subscribe(value => {
       this.menuTrueFalse = value;
     });
+    this.callBackend();
+  }
+
+  callBackend(): void {
+    this.apiService.callBackend().subscribe({
+      next: (response) => {
+        console.log('Backend is alive!', response);
+      },
+      error: (error) => {
+        console.error('Error trying to call backend:', error);
+      }
+    });
   }
 
   getUserData() {
