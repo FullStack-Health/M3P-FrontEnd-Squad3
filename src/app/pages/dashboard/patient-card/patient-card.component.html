@@ -41,7 +41,7 @@
                     <p><strong>Telefone: </strong>{{ patient.phone }}</p>
                 </div>
                 <div class="card-content1" id="email">
-                    <p><strong>E-mail: </strong>{{ patient.email }}</p>
+                    <p><strong>E-mail: </strong>{{ patient.email | truncate:{ extraSmall: 30, small: 25, medium: 25, large: 35, extraLarge: 25, extraWide: 28 } }}</p>
                 </div>
                 <div class="card-content1" id="insurance">
                     <p><strong>Convênio: </strong>{{ patient.healthInsurance }}</p>
