@@ -4,7 +4,7 @@ export class User {
     email?: string = '';
     password?: string = '';
     phone?: string = '';
-    birthdate?: string = '';
+    birthDate?: string = '';
     cpf?: string = '';
     userId?: string = '';
   }
