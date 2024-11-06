@@ -59,7 +59,7 @@ export class UserUpdateComponent implements OnInit {
       userId: [{ value: '', disabled: true }, Validators.required],
       fullName: ['', [Validators.required, Validators.maxLength(64)]],
       email: ['', [Validators.required, Validators.email]],
-      birthdate: ['', Validators.required],
+      birthDate: ['', Validators.required],
       cpf: ['', [Validators.required]],
       phone: ['', [Validators.required]],
     });
@@ -99,7 +99,7 @@ export class UserUpdateComponent implements OnInit {
             roleName: user.roleName,
             fullName: user.fullName,
             email: user.email,
-            birthdate: user.birthdate,
+            birthDate: user.birthDate,
             cpf: user.cpf,
             phone: user.phone,
           });
@@ -119,7 +119,7 @@ export class UserUpdateComponent implements OnInit {
     this.saveDisabled = false;
     this.formSubmitted = true;
 
-    const birthdateValue = new Date(this.userForm.value.birthdate);
+    const birthdateValue = new Date(this.userForm.value.birthDate);
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     if (birthdateValue >= today) {
@@ -133,7 +133,7 @@ export class UserUpdateComponent implements OnInit {
       const updateUser: User = {
         fullName: this.userForm.value.fullName,
         email: this.userForm.value.email,
-        birthdate: this.dataTransformService.formatDate(this.userForm.value.birthdate),
+        birthDate: this.dataTransformService.formatDate(this.userForm.value.birthDate),
         cpf: this.dataTransformService.formatCpf(this.userForm.value.cpf),
         phone: this.dataTransformService.formatPhone(this.userForm.value.phone),
         roleName: this.userForm.value.roleName,
