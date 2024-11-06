@@ -9,11 +9,12 @@ import { FormsModule } from '@angular/forms';
 import { AgePipe } from '../../../shared/pipes/age.pipe';
 import { ShortenNamePipe } from '../../../shared/pipes/shorten-name.pipe';
 import { ShareMenuStatusService } from '../../../shared/services/share-menu-status.service';
+import { TruncatePipe } from '../../../shared/pipes/truncate.pipe';
 
 @Component({
   selector: 'app-patient-card',
   standalone: true,
-  imports: [HttpClientModule, CommonModule, FormsModule, AgePipe, ShortenNamePipe],
+  imports: [HttpClientModule, CommonModule, FormsModule, AgePipe, ShortenNamePipe, TruncatePipe],
   providers: [ApiService],
   templateUrl: './patient-card.component.html',
   styleUrl: './patient-card.component.scss'
