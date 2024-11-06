@@ -40,6 +40,7 @@ export class UserUpdateComponent implements OnInit {
   userId: any = '';
   userRole: string | null;
   menuTrueFalse: boolean | undefined;
+  formSubmitted = false;
 
   constructor(
     private router: Router,
@@ -58,7 +59,7 @@ export class UserUpdateComponent implements OnInit {
       userId: [{ value: '', disabled: true }, Validators.required],
       fullName: ['', [Validators.required, Validators.maxLength(64)]],
       email: ['', [Validators.required, Validators.email]],
-      birthdate: ['', Validators.required],
+      birthDate: ['', Validators.required],
       cpf: ['', [Validators.required]],
       phone: ['', [Validators.required]],
     });
@@ -75,6 +76,18 @@ export class UserUpdateComponent implements OnInit {
     this.shareMenuStatusService.menuTrueFalse$.subscribe(value => {
       this.menuTrueFalse = value;
     });
+    this.callBackend();
+  }
+
+  callBackend(): void {
+    this.apiService.callBackend().subscribe({
+      next: (response) => {
+        console.log('Backend is alive!', response);
+      },
+      error: (error) => {
+        console.error('Error trying to call backend:', error);
+      }
+    });
   }
 
   getUserData() {
@@ -86,7 +99,7 @@ export class UserUpdateComponent implements OnInit {
             roleName: user.roleName,
             fullName: user.fullName,
             email: user.email,
-            birthdate: user.birthdate,
+            birthDate: user.birthDate,
             cpf: user.cpf,
             phone: user.phone,
           });
@@ -104,13 +117,23 @@ export class UserUpdateComponent implements OnInit {
   saveEditUser() {
     this.userForm.enable();
     this.saveDisabled = false;
+    this.formSubmitted = true;
+
+    const birthdateValue = new Date(this.userForm.value.birthDate);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    if (birthdateValue >= today) {
+    this.dialog.openDialog('A data de nascimento deve estar no passado.');
+    this.formSubmitted = false;
+    return; }
 
     if (this.userForm.valid) {
+      this.formSubmitted = false;
 
       const updateUser: User = {
         fullName: this.userForm.value.fullName,
         email: this.userForm.value.email,
-        birthdate: this.dataTransformService.formatDate(this.userForm.value.birthdate),
+        birthDate: this.dataTransformService.formatDate(this.userForm.value.birthDate),
         cpf: this.dataTransformService.formatCpf(this.userForm.value.cpf),
         phone: this.dataTransformService.formatPhone(this.userForm.value.phone),
         roleName: this.userForm.value.roleName,
@@ -130,7 +153,7 @@ export class UserUpdateComponent implements OnInit {
           }, 1000);
         },
         error: (err) => {
-          if(err.status === 409 && err.error.fieldName === 'email') {
+          if (err.status === 409 && err.error.fieldName === 'email') {
             this.dialog.openDialog('Já existe um usuário com este e-mail.');
             this.userForm.get('userId')?.disable();
             this.userForm.get('roleName')?.disable();

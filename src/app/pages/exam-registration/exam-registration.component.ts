@@ -52,6 +52,7 @@ export class ExamRegistrationComponent implements OnInit {
   totalPatients: number = 0;
   noResults: boolean = false;
   menuTrueFalse: boolean | undefined;
+  formSubmitted = false;
 
   constructor(
     private dataTransformService: DataTransformService,
@@ -94,6 +95,18 @@ export class ExamRegistrationComponent implements OnInit {
 
     this.shareMenuStatusService.menuTrueFalse$.subscribe(value => {
       this.menuTrueFalse = value;
+    });
+    this.callBackend();
+  }
+
+  callBackend(): void {
+    this.apiService.callBackend().subscribe({
+      next: (response) => {
+        console.log('Backend is alive!', response);
+      },
+      error: (error) => {
+        console.error('Error trying to call backend:', error);
+      }
     });
   }
 
@@ -189,15 +202,22 @@ export class ExamRegistrationComponent implements OnInit {
   }
 
   examRegister() {
+    this.formSubmitted = true;
     const idPatientValue = this.examRegistration.getRawValue().id;
     const nameValue = this.examRegistration.getRawValue().fullName;
 
-    if (!this.examRegistration.valid || !idPatientValue || !nameValue) {
+    if(!idPatientValue || !nameValue) {
+      this.dialog.openDialog('Por favor, busque um paciente antes de salvar o exame.');
+      return;
+    }
+
+    if (!this.examRegistration.valid) {
       this.dialog.openDialog('Preencha todos os campos obrigatórios corretamente.');
       return;
     }
 
     if (this.examRegistration.valid) {
+      this.formSubmitted = false;
 
       const newExam: Exam = {
         id: this.examRegistration.getRawValue().id,
@@ -263,9 +283,11 @@ export class ExamRegistrationComponent implements OnInit {
   saveEditExam() {
     this.examRegistration.enable();
     this.saveDisabled = false;
+    this.formSubmitted = true;
 
     if (this.examRegistration.valid) {
-
+      this.formSubmitted = false;
+      
       const newExam: Exam = {
         id: this.examRegistration.getRawValue().id,
         examName: this.examRegistration.value.examName,

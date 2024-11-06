@@ -260,3 +260,10 @@ input:disabled {
   color: $colorFontDisable;
 }
 }
+
+input[readonly], select[readonly] {
+  background-color: #e0e0e0;
+  color: #6c757d;
+  border: 1px solid #ced4da;
+  pointer-events: none;
+}

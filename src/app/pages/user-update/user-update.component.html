@@ -1,5 +1,5 @@
 <div *ngIf="showMessage" class="checkmark">
-    <img src="../../../assets/images/check-save.webp" style="width: 100px;">
+    <img src="../../../assets/images/check-save.png" style="width: 100px;">
 </div>
 
 <app-dialog></app-dialog>
@@ -53,8 +53,8 @@
 
                     <div class="form-field1">
                         <label for="birthDate">Data de Nascimento*</label>
-                        <input type="date" name="birthDate" formControlName="birthdate">
-                        <mat-error *ngIf="userForm.get('birthdate')?.invalid && userForm.get('birthdate')?.touched">
+                        <input type="date" name="birthDate" formControlName="birthDate">
+                        <mat-error *ngIf="userForm.get('birthDate')?.invalid && userForm.get('birthDate')?.touched || (formSubmitted && userForm.get('birthDate')?.hasError('required'))">
                             Obrigatório
                         </mat-error>
                     </div>
@@ -62,7 +62,7 @@
                     <div class="form-field1">
                         <label for="cpf">CPF*</label>
                         <input matInput formControlName="cpf" mask="000.000.000-00" id="cpf-form-field" name="cpf">
-                        <mat-error *ngIf="userForm.get('cpf')?.invalid && userForm.get('cpf')?.touched">
+                        <mat-error *ngIf="userForm.get('cpf')?.invalid && userForm.get('cpf')?.touched || (formSubmitted && userForm.get('cpf')?.hasError('required'))">
                             Obrigatório
                         </mat-error>
                     </div>
@@ -70,7 +70,7 @@
                     <div class="form-field1">
                         <label for="phone">Telefone*</label>
                         <input matInput type="phone" formControlName="phone" mask="(00) 0 0000-0000" id="phone-form-field" name="phone">
-                        <mat-error *ngIf="userForm.get('phone')?.invalid && userForm.get('phone')?.touched">
+                        <mat-error *ngIf="userForm.get('phone')?.invalid && userForm.get('phone')?.touched || (formSubmitted && userForm.get('phone')?.hasError('required'))">
                             Obrigatório
                         </mat-error>
                     </div>

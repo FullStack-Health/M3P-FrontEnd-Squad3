@@ -4,19 +4,20 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../security/auth.service';
 import { ShareMenuStatusService } from '../../services/share-menu-status.service';
 import { CommonModule } from '@angular/common';
+import { ShortenNamePipe } from '../../pipes/shorten-name.pipe';
 
 @Component({
   selector: 'app-toolbar',
   standalone: true,
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, ShortenNamePipe],
   providers: [AuthService],
   templateUrl: './toolbar.component.html',
   styleUrl: './toolbar.component.scss'
 })
 export class ToolbarComponent implements OnInit {
   pageTitle: string | undefined;
-  userName: String | null = '';
-  userRole: String | null = '';
+  userName: string | null = '';
+  userRole: string | null = '';
   menuTrueFalse: boolean | undefined;
 
   constructor(

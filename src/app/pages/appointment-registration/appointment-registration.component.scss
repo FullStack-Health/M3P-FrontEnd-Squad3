@@ -90,6 +90,9 @@ select {
   background: $colorAreaBackground;
   border-radius: 4px;
   padding-bottom: 15px;
+  width: auto;
+  margin-top: 20px;
+  @include border-shadow();
 }
 
 .list-search-area ul {
@@ -104,10 +107,11 @@ select {
   font-weight: 500;
   color: $colorLabelForms;
   padding: 1%;
+  margin: 10px;
 }
 
 .list-search-area a {
-  padding-left: 1%;
+  padding-left: 15px;
   padding-right: 1%;
   padding-bottom: 15px;
   font-family: "Dosis", sans-serif;
@@ -121,10 +125,22 @@ select {
   cursor: pointer;
 }
 
+.line {
+  background: black;
+  width: 90%;
+  height: 1px;
+  margin: 10px;
+}
+
 .no-results {
-  background-color: $colorAreaBackground;
+  background: $colorAreaBackground;
   border-radius: 4px;
-  padding: 1%;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  padding-left: 15px;
+  width: auto;
+  margin-top: 20px;
+  @include border-shadow();
 }
 
 .no-results p {
