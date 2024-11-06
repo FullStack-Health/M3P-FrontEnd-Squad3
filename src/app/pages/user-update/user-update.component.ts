@@ -121,11 +121,11 @@ export class UserUpdateComponent implements OnInit {
 
     const birthdateValue = new Date(this.userForm.value.birthdate);
     const today = new Date();
-    if (birthdateValue.getDate() >= today.getDate()) {
-      this.dialog.openDialog('A data de nascimento precisa estar no passado.');
-      this.formSubmitted = false;
-      return;
-    }
+    today.setHours(0, 0, 0, 0);
+    if (birthdateValue >= today) {
+    this.dialog.openDialog('A data de nascimento deve estar no passado.');
+    this.formSubmitted = false;
+    return; }
 
     if (this.userForm.valid) {
       this.formSubmitted = false;
