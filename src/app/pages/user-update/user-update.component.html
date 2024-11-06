@@ -53,8 +53,8 @@
 
                     <div class="form-field1">
                         <label for="birthDate">Data de Nascimento*</label>
-                        <input type="date" name="birthDate" formControlName="birthdate">
-                        <mat-error *ngIf="userForm.get('birthdate')?.invalid && userForm.get('birthdate')?.touched || (formSubmitted && userForm.get('birthdate')?.hasError('required'))">
+                        <input type="date" name="birthDate" formControlName="birthDate">
+                        <mat-error *ngIf="userForm.get('birthDate')?.invalid && userForm.get('birthDate')?.touched || (formSubmitted && userForm.get('birthDate')?.hasError('required'))">
                             Obrigatório
                         </mat-error>
                     </div>

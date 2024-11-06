@@ -35,7 +35,7 @@ Disponibilidade de acesso: perfil Admin.
 Tela que permite editar ou excluir usuários. Usuários com perfil paciente não podem ser excluídos através desta tela, pois estão vinculados a um paciente.
 
 
-## Como usar :mag_right:
+## Como rodar localmente :mag_right:
 
 1. Faça o clone do projeto para sua máquina.
 2. Certifique-se de ter o Node.js, npm e Angular CLI instalados na sua máquina. Se não tiver, você precisará instalá-los.
