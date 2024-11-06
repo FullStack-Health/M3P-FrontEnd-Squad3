@@ -34,6 +34,12 @@ Lista com todos os usuários do sistema, com nº do registro, login de acesso, p
 Disponibilidade de acesso: perfil Admin.
 Tela que permite editar ou excluir usuários. Usuários com perfil paciente não podem ser excluídos através desta tela, pois estão vinculados a um paciente.
 
+## Acesse a aplicação:
+https://labinc.vercel.app/
+
+O deploy da API (backend) foi feito na versão gratuita do Render.
+
+Obs.: a versão gratuita do Render deixa a API inativa após algum tempo sem chamadas. Por isso, a aplicação pode ficar um pouco lenta ao iniciar e talvez precise de uma segunda chamada para reativar.
 
 ## Como rodar localmente :mag_right:
 
