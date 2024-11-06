@@ -3,13 +3,12 @@
     <h1 class="page-title">{{ pageTitle }}</h1>
 
     <div class="user-info">
-        <span class="logged-user">Usuário:<strong> {{ userName }}</strong></span>
+        <span class="logged-user">Usuário:<strong> {{ userName | shortenName }}</strong></span>
         <div class="profile-icon">
-            <img src="../../../../assets/images/user-icon.webp" alt="Foto de Perfil">
+            <img src="../../../../assets/images/user-icon.png" alt="Foto de Perfil">
         </div>
         <div id="logout-icon" (click)="cleanLoggedUser()">
             <i class="material-icons">logout</i>
         </div>
-
     </div>
 </div>

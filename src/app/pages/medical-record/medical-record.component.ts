@@ -57,7 +57,6 @@ export class MedicalRecordComponent implements OnInit {
     this.userRole = this.authService.getDecodedToken()?.scope || null;
 
     this.patientID = this.activatedRoute.snapshot.paramMap.get('id');
-    console.log(this.patientID, 'esse é o id do paciente');
 
     this.getPatient(this.patientID);
     this.getAppointments(this.patientID);
@@ -120,6 +119,18 @@ export class MedicalRecordComponent implements OnInit {
 
     this.shareMenuStatusService.menuTrueFalse$.subscribe(value => {
       this.menuTrueFalse = value;
+    });
+    this.callBackend();
+  }
+
+  callBackend(): void {
+    this.apiService.callBackend().subscribe({
+      next: (response) => {
+        console.log('Backend is alive!', response);
+      },
+      error: (error) => {
+        console.error('Error trying to call backend:', error);
+      }
     });
   }
 

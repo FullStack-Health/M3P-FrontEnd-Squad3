@@ -33,8 +33,8 @@ export class MedicalRecordListComponent implements OnInit {
   isScreenLarge: boolean | undefined;
 
   constructor(
-    private titleService: Title, 
-    private apiService: ApiService, 
+    private titleService: Title,
+    private apiService: ApiService,
     private router: Router,
     private shareMenuStatusService: ShareMenuStatusService
   ) { }
@@ -48,6 +48,18 @@ export class MedicalRecordListComponent implements OnInit {
     });
 
     this.checkWindowSize();
+    this.callBackend();
+  }
+
+  callBackend(): void {
+    this.apiService.callBackend().subscribe({
+      next: (response) => {
+        console.log('Backend is alive!', response);
+      },
+      error: (error) => {
+        console.error('Error trying to call backend:', error);
+      }
+    });
   }
 
   getPatients(page: number): void {
@@ -71,7 +83,7 @@ export class MedicalRecordListComponent implements OnInit {
 
             this.patientsList = response.content;
             this.medicalRecordPatientsList = this.patientsList;
-            
+
             if (this.patientsList.length === 0) {
                 this.noResults = true;
                 this.medicalRecordPatientsList = [];
@@ -82,7 +94,7 @@ export class MedicalRecordListComponent implements OnInit {
             this.totalPages = response.totalPages;
             this.hasMorePages = this.currentPage < this.totalPages - 1;
             console.log('Patients loaded successfully:', this.medicalRecordPatientsList);
-            
+
         },
         error: (error: HttpErrorResponse) => {
             console.error('Error loading patients:', error);
@@ -123,7 +135,7 @@ export class MedicalRecordListComponent implements OnInit {
       this.searchTerm = '';
       this.getPatients(this.currentPage);
   }
-  
+
   editPatient(id: string) {
     this.router.navigate(['/registro-paciente', id]);
   }
@@ -139,6 +151,10 @@ export class MedicalRecordListComponent implements OnInit {
     } else {
       this.isScreenLarge = false;
     }
+  }
+
+  medicalRecord(id: string) {
+    this.router.navigate(['/prontuario', id]);
   }
 
 }

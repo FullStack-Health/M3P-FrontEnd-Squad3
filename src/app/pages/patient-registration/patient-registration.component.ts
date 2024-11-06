@@ -45,6 +45,7 @@ export class PatientRegistrationComponent implements OnInit {
   isEditing: boolean = false;
   patRegistration: FormGroup;
   menuTrueFalse: boolean | undefined;
+  formSubmitted = false;
 
   constructor(
     private apiService: ApiService,
@@ -63,26 +64,24 @@ export class PatientRegistrationComponent implements OnInit {
       birthDate: ['', Validators.required],
       cpf: ['', Validators.required],
       rg: ['', [Validators.required, Validators.maxLength(20)]],
-      // issOrg: ['', Validators.required],
       maritalStatus: ['', Validators.required],
       phone: ['', Validators.required],
       email: ['', [Validators.email, Validators.required]],
-      placeOfBirth: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(64)]],
+      placeOfBirth: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(64)]],
       emergencyContact: ['', Validators.required],
-      // emergContNumber: ['', Validators.required],
       listOfAllergies: [''],
       listCare: [''],
       healthInsurance: ['', Validators.required],
       healthInsuranceNumber: [''],
       healthInsuranceVal: [''],
       zipcode: ['', Validators.required],
-      street: [{ value: '', disabled: true }, Validators.required],
+      street: ['', Validators.required],
       addressNumber: [''],
       complement: [''],
       referencePoint: [''],
-      neighborhood: [{ value: '', disabled: true }, Validators.required],
-      city: [{ value: '', disabled: true }, Validators.required],
-      state: [{ value: '', disabled: true }, Validators.required],
+      neighborhood: ['', Validators.required],
+      city: ['', Validators.required],
+      state: ['', Validators.required],
     });
   }
 
@@ -99,6 +98,18 @@ export class PatientRegistrationComponent implements OnInit {
 
     this.shareMenuStatusService.menuTrueFalse$.subscribe(value => {
       this.menuTrueFalse = value;
+    });
+    this.callBackend();
+  }
+
+  callBackend(): void {
+    this.apiService.callBackend().subscribe({
+      next: (response) => {
+        console.log('Backend is alive!', response);
+      },
+      error: (error) => {
+        console.error('Error trying to call backend:', error);
+      }
     });
   }
 
@@ -125,7 +136,9 @@ export class PatientRegistrationComponent implements OnInit {
   }
 
   patientRegister() {
+    this.formSubmitted = true;
     if (this.patRegistration.valid) {
+      this.formSubmitted = false;
 
       const newPatient: Patient = {
         fullName: this.patRegistration.value.fullName,
@@ -133,18 +146,16 @@ export class PatientRegistrationComponent implements OnInit {
         birthDate: this.patRegistration.value.birthDate,
         cpf: this.dataTransformService.formatCpf(this.patRegistration.value.cpf),
         rg: this.patRegistration.value.rg,
-        // issOrg: this.patRegistration.value.issOrg,
         maritalStatus: this.patRegistration.value.maritalStatus,
         phone: this.dataTransformService.formatPhone(this.patRegistration.value.phone),
         email: this.patRegistration.value.email,
         placeOfBirth: this.patRegistration.value.placeOfBirth,
         emergencyContact: this.dataTransformService.formatPhone(this.patRegistration.value.emergencyContact),
-        // emergContNumber: this.dataTransformService.formatPhone(this.patRegistration.value.emergContNumber),
         listOfAllergies: this.patRegistration.value.listOfAllergies,
         listCare: this.patRegistration.value.listCare,
         healthInsurance: this.patRegistration.value.healthInsurance,
         healthInsuranceNumber: this.patRegistration.value.healthInsuranceNumber,
-        healthInsuranceVal: this.patRegistration.value.healthInsuranceVal ? 
+        healthInsuranceVal: this.patRegistration.value.healthInsuranceVal ?
             this.patRegistration.value.healthInsuranceVal : undefined,
         zipcode: this.dataTransformService.formatCep(this.patRegistration.value.zipcode),
         street: this.patRegistration.value.street,
@@ -170,7 +181,7 @@ export class PatientRegistrationComponent implements OnInit {
           if (err.status === 400 && err.error.errors) {
             const birthDateError = err.error.errors.find((e: any) => e.fieldName === 'birthDate');
             const healthInsValError = err.error.errors.find((e: any) => e.fieldName === 'healthInsuranceVal');
-            
+
             if (birthDateError) {
               this.dialog.openDialog("A data de nascimento precisa estar no passado.");
             } else if (healthInsValError) {
@@ -178,7 +189,7 @@ export class PatientRegistrationComponent implements OnInit {
             } else {
               this.dialog.openDialog('Preencha os campos obrigatórios corretamente.');
             }
-            
+
             } else if (err.status === 409) {
               const cpfAlreadyExists = err.status === 409 && err.error.error.includes("O CPF já está cadastrado");
               const emailAlreadyExists = err.status === 409 && err.error.error.includes("O Email já está cadastrado");
@@ -199,14 +210,28 @@ export class PatientRegistrationComponent implements OnInit {
         }
       });
 
+    } else {
+      let missingFields = [];
+      for (const controlName in this.patRegistration.controls) {
+        if (this.patRegistration.controls[controlName].invalid && this.patRegistration.controls[controlName].hasError('required')) {
+          missingFields.push(controlName);
+        }
+      }
+
+      if (missingFields.length > 0) {
+        this.dialog.openDialog('Preencha os campos obrigatórios corretamente.');
+      }
+
     }
   }
 
   saveEditPatient() {
     this.patRegistration.enable();
     this.saveDisabled = false;
+    this.formSubmitted = true;
 
     if (this.patRegistration.valid) {
+      this.formSubmitted = false;
 
       const newPatient: Patient = {
         fullName: this.patRegistration.value.fullName,
@@ -214,18 +239,16 @@ export class PatientRegistrationComponent implements OnInit {
         birthDate: this.patRegistration.value.birthDate,
         cpf: this.dataTransformService.formatCpf(this.patRegistration.value.cpf),
         rg: this.patRegistration.value.rg,
-        // issOrg: this.patRegistration.value.issOrg,
         maritalStatus: this.patRegistration.value.maritalStatus,
         phone: this.dataTransformService.formatPhone(this.patRegistration.value.phone),
         email: this.patRegistration.value.email,
         placeOfBirth: this.patRegistration.value.placeOfBirth,
         emergencyContact: this.dataTransformService.formatPhone(this.patRegistration.value.emergencyContact),
-        // emergContNumber: this.patRegistration.value.emergContNumber,
         listOfAllergies: this.patRegistration.value.listOfAllergies,
         listCare: this.patRegistration.value.listCare,
         healthInsurance: this.patRegistration.value.healthInsurance,
         healthInsuranceNumber: this.patRegistration.value.healthInsuranceNumber,
-        healthInsuranceVal: this.patRegistration.value.healthInsuranceVal ? 
+        healthInsuranceVal: this.patRegistration.value.healthInsuranceVal ?
             this.patRegistration.value.healthInsuranceVal : undefined,
         zipcode: this.dataTransformService.formatCep(this.patRegistration.value.zipcode),
         street: this.patRegistration.value.street,
@@ -252,7 +275,7 @@ export class PatientRegistrationComponent implements OnInit {
           if (err.status === 400 && err.error.errors) {
             const birthDateError = err.error.errors.find((e: any) => e.fieldName === 'birthDate');
             const healthInsValError = err.error.errors.find((e: any) => e.fieldName === 'healthInsuranceVal');
-            
+
             if (birthDateError) {
               this.dialog.openDialog("A data de nascimento precisa estar no passado.");
             } else if (healthInsValError) {
@@ -260,7 +283,7 @@ export class PatientRegistrationComponent implements OnInit {
             } else {
               this.dialog.openDialog('Preencha os campos obrigatórios corretamente.');
             }
-            
+
             } else if (err.status === 409) {
               const cpfAlreadyExists = err.status === 409 && err.error.error.includes("O CPF já está cadastrado");
               const emailAlreadyExists = err.status === 409 && err.error.error.includes("O Email já está cadastrado");
@@ -277,12 +300,25 @@ export class PatientRegistrationComponent implements OnInit {
                 console.error('Error saving patient:', err);
                 this.dialog.openDialog('Ocorreu um erro ao salvar o paciente.');
               }
+            }
+          }
+        });
+
+      } else {
+        let missingFields = [];
+        for (const controlName in this.patRegistration.controls) {
+          if (this.patRegistration.controls[controlName].invalid && this.patRegistration.controls[controlName].hasError('required')) {
+            missingFields.push(controlName);
           }
         }
-      });
+
+        if (missingFields.length > 0) {
+          this.dialog.openDialog('Preencha os campos obrigatórios corretamente.');
+        }
+
+      }
     }
-  }
-  
+
 
   editPatient() {
     this.patRegistration.enable();
@@ -296,7 +332,7 @@ export class PatientRegistrationComponent implements OnInit {
           this.dialog.openDialog('O paciente tem exames ou consultas vinculadas a ele e não pode ser deletado.');
         } else {
           this.confirmDialog.openDialog("Tem certeza que deseja excluir o paciente? Essa ação não pode ser desfeita.");
-  
+
           const subscription = this.confirmDialog.confirm.subscribe(result => {
             if (result) {
               this.apiService.deletePatient(id).subscribe(() => {
@@ -324,19 +360,17 @@ export class PatientRegistrationComponent implements OnInit {
           const formattedInsuranceVal = patient.healthInsuranceVal ? this.convertDate(patient.healthInsuranceVal) : undefined;
 
           this.patRegistration.patchValue({
-            
+
             fullName: patient.fullName,
             gender: patient.gender,
             birthDate: formattedBirthdate,
             cpf: patient.cpf,
             rg: patient.rg,
-            // issOrg: patient.issOrg,
             maritalStatus: patient.maritalStatus,
             phone: patient.phone,
             email: patient.email,
             placeOfBirth: patient.placeOfBirth,
             emergencyContact: patient.emergencyContact,
-            // emergContNumber: patient.emergContNumber,
             listOfAllergies: patient.listOfAllergies,
             listCare: patient.listCare,
             healthInsurance: patient.healthInsurance,
