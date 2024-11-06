@@ -119,6 +119,14 @@ export class UserUpdateComponent implements OnInit {
     this.saveDisabled = false;
     this.formSubmitted = true;
 
+    const birthdateValue = new Date(this.userForm.value.birthdate);
+    const today = new Date();
+    if (birthdateValue.getDate() >= today.getDate()) {
+      this.dialog.openDialog('A data de nascimento precisa estar no passado.');
+      this.formSubmitted = false;
+      return;
+    }
+
     if (this.userForm.valid) {
       this.formSubmitted = false;
 
@@ -145,7 +153,7 @@ export class UserUpdateComponent implements OnInit {
           }, 1000);
         },
         error: (err) => {
-          if(err.status === 409 && err.error.fieldName === 'email') {
+          if (err.status === 409 && err.error.fieldName === 'email') {
             this.dialog.openDialog('Já existe um usuário com este e-mail.');
             this.userForm.get('userId')?.disable();
             this.userForm.get('roleName')?.disable();
